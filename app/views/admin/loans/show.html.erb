@@ -8,10 +8,94 @@
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title  mg-b-20">订单详情</h6>
+      <h6 class="card-body-title  mg-b-20">网审信息</h6>
 
       <%=render 'form'%>
+
     </div>
+
+    <%if @loan.first_verify==Loan::VERIFYPASS%>
+        <%=render 'basic'%>
+    <%end%>
+
+    <%if @loan.basic_verify==Loan::VERIFYPASS %>
+        <%=render 'customer'%>
+        <%=render 'car'%>
+    <%end%>
+
   </div><!-- sl-page-title -->
 
 </div><!-- sl-pagebody -->
+<%content_for :js do%>
+    <script>
+        $('.loan-file').change(function () {
+            var form = new FormData();
+            console.log($(this).attr('id'));
+            form.append('img',$(this)[0].files[0]);
+            form.append('type',$(this).attr('id'));
+            form.append('id','<%=@loan.id%>');
+
+            $.ajax({
+                url:"<%=img_upload_admin_loans_path%>",
+                type:"post",
+                data:form,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        alert('上传成功')
+                        id='#table-loan-'+data.data.type;
+                        html='<tr> <td><a href="'+data.data.url+'" target="_blank">'+data.data.name+'</a></td> \
+                            <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
+                            data-method="delete" href="/admin/loan_images/'+data.data.id+'">删除</a></td></tr>'
+                        $(id).append(html);
+                    }
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            });
+        });
+        $('.customer-file').change(function () {
+            var form = new FormData();
+            form.append('img',$(this)[0].files[0]);
+            form.append('id','<%=@loan.id%>');
+
+            $.ajax({
+                url:"<%=img_upload_admin_customer_messages_path%>",
+                type:"post",
+                data:form,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        alert('上传成功')
+                        html='<tr> <td><a href="'+data.data.url+'" target="_blank">'+data.data.name+'</a></td> \
+                            <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
+                            data-method="delete" href="/admin/customer_images/'+data.data.id+'">删除</a></td></tr>'
+                        $('#table-customer').append(html);
+                    }
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            });
+        });
+        function upload(name) {
+            name='#'+name
+            $(name).click()
+        }
+
+        $('.fc-datepicker').datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            dateFormat:'yy-mm-dd'
+        });
+
+        $('.select2').select2({
+            minimumResultsForSearch: Infinity
+        });
+    </script>
+<%end%>

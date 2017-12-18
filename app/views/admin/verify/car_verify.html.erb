@@ -1,1 +1,301 @@
-shenhe
+<%content_for :css do%>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
+  <a class="breadcrumb-item" href="<%=first_admin_verify_index_path%>">待审名单</a>
+  <span class="breadcrumb-item active">车辆审核</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+      <h6 class="card-body-title">网审信息</h6>
+      <%=render 'loan_form'%>
+    </div>
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+      <h6 class="card-body-title">初审信息</h6>
+      <%=render 'basic_form'%>
+    </div>
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+
+      <h6 class="card-body-title">车辆信息审核</h6>
+      <%= form_tag('/admin/verify/car_verify', class:'stdform') do %>
+          <%= hidden_field_tag 'id', params[:id] %>
+          <div class="form-layout">
+            <div class="row ">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品编码: </label>
+                  <%= text_field_tag('source', @car.no,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">质/抵押人: </label>
+                  <%= text_field_tag('source', @car.name,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估日期: </label>
+                  <%= text_field_tag('source', @car.pgrq,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估价值: </label>
+                  <%= text_field_tag('source', @car.pgjz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">起始日: </label>
+                  <%= text_field_tag('source', @car.qsr,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">终止日: </label>
+                  <%= text_field_tag('source', @car.zzr,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">存放地址: </label>
+                  <%= text_field_tag('source', @car.cfdz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品备注: </label>
+                  <%= text_field_tag('source', @car.ypbz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品单位: </label>
+                  <%= text_field_tag('source', @car.ypdw,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">质抵押率: </label>
+                  <%= text_field_tag('source', @car.zdyl,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">可押价值: </label>
+                  <%= text_field_tag('source', @car.kdjz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">已押价值: </label>
+                  <%= text_field_tag('source', @car.yyjz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品数量: </label>
+                  <%= text_field_tag('source', @car.ypsl,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">地区: </label>
+                  <%= text_field_tag('source', @car.dq,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估单位: </label>
+                  <%= text_field_tag('source', @car.pgdw,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估人员: </label>
+                  <%= text_field_tag('source', @car.pgry,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">移动GPS数量: </label>
+                  <%= text_field_tag('source', @car.ydgps,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">固定GPS数量: </label>
+                  <%= text_field_tag('source', @car.gdgps,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-12" style="border-top: 1px solid #888888">
+
+                <h6 class="card-body-title  mg-b-20" style="margin-top: 15px;color: #888888">车辆信息</h6>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">车辆识别码: </label>
+                  <%= text_field_tag('source', @car.clsbm,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">汽车品牌: </label>
+                  <%= text_field_tag('source', @car.qcpp,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">汽车型号: </label>
+                  <%= text_field_tag('source', @car.qcxh,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">全部型号信息: </label>
+                  <%= text_field_tag('source', @car.qbxhxx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">城市标识: </label>
+                  <%= text_field_tag('source', @car.csbs,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">上牌时间: </label>
+                  <%= text_field_tag('source', @car.spsj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">出厂日期: </label>
+                  <%= text_field_tag('source', @car.ccrq,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">行驶公里(万公里): </label>
+                  <%= text_field_tag('source', @car.xsgl,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">车辆颜色: </label>
+                  <%= text_field_tag('source', @car.clys,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">内饰状况: </label>
+                  <%= text_field_tag('source', @car.nsqk,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">漆面状况: </label>
+                  <%= text_field_tag('source', @car.qmqk,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">工况状况: </label>
+                  <%= text_field_tag('source', @car.gkzk,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">过户次数: </label>
+                  <%= text_field_tag('source', @car.ghcs,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">系统评估价: </label>
+                  <%= text_field_tag('source', @car.xtpgj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">平均评估价: </label>
+                  <%= text_field_tag('source', @car.pjpgj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">汽车牌照: </label>
+                  <%= text_field_tag('source', @car.qcpz,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">付款方式: </label>
+                  <%= text_field_tag('source', @car.fkfs,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">发动机号码: </label>
+                  <%= text_field_tag('source', @car.fdjhm,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">国产/进口: </label>
+                  <%= text_field_tag('source', @car.gcjk,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">购买时间: </label>
+                  <%= text_field_tag('source', @car.gmsj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">购买价格: </label>
+                  <%= text_field_tag('source', @car.gmjg,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">使用年限: </label>
+                  <%= text_field_tag('source', @car.synx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">排量: </label>
+                  <%= text_field_tag('source', @car.pl,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+
+            <% if @car.status==Loan::UNVERIFIED %>
+                <div>
+                  <div class="form-group">
+                    <label class="form-control-label">是否审核通过: </label>
+                    <div class="controls">
+                      <%= radio_button_tag('car[status]', Loan::VERIFYPASS, @car.status==Loan::VERIFYPASS ? '1' : nil) %>
+                      通过
+                      <%= radio_button_tag('car[status]', Loan::VERIFYFAIL, @car.status==Loan::VERIFYFAIL ? '1' : nil) %>
+                      不通过
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-layout-footer">
+                  <button class="btn btn-info mg-r-5">保存</button>
+                </div><!-- form-layout-footer -->
+            <% end %>
+          </div><!-- form-layout -->
+      <% end %>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

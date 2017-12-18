@@ -55,7 +55,7 @@ Rails.application.configure do
 
   config.after_initialize do
     CarrierWave.configure do |config|
-      config.aliyun_bucket = "lianghaodai02"
+      config.aliyun_bucket = "yunzhidai"
       config.aliyun_internal = false
     end
   end

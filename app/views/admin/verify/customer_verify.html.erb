@@ -1,0 +1,75 @@
+<%content_for :css do%>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
+  <a class="breadcrumb-item" href="<%=first_admin_verify_index_path%>">待审名单</a>
+  <span class="breadcrumb-item active">车辆审核</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+      <h6 class="card-body-title">网审信息</h6>
+      <%=render 'loan_form'%>
+    </div>
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+      <h6 class="card-body-title">初审信息</h6>
+      <%=render 'basic_form'%>
+    </div>
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+
+      <h6 class="card-body-title">个人信息审核</h6>
+      <%= form_tag('/admin/verify/customer_verify', class:'stdform') do %>
+          <%= hidden_field_tag 'id', params[:id] %>
+          <div class="form-layout">
+            <div class="row ">
+
+              <div class="col-lg-12">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">资料列表: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-zx">
+                      <% @customer.customer_images.each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+
+            <% if @customer.status==Loan::UNVERIFIED %>
+                <div>
+                  <div class="form-group">
+                    <label class="form-control-label">是否审核通过: </label>
+                    <div class="controls">
+                      <%= radio_button_tag('customer[status]', Loan::VERIFYPASS, @customer.status==Loan::VERIFYPASS ? '1' : nil) %>
+                      通过
+                      <%= radio_button_tag('customer[status]', Loan::VERIFYFAIL, @customer.status==Loan::VERIFYFAIL ? '1' : nil) %>
+                      不通过
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-layout-footer">
+                  <button class="btn btn-info mg-r-5">保存</button>
+                </div><!-- form-layout-footer -->
+            <% end %>
+          </div><!-- form-layout -->
+      <% end %>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

@@ -1,0 +1,71 @@
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
+  <a class="breadcrumb-item" href="index.html">用户管理</a>
+  <span class="breadcrumb-item active">新建用户</span>
+</nav>
+
+<div class="sl-pagebody">
+  <%= form_for([:admin, @user], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+      <div class="sl-page-title" style="margin-bottom: 0">
+        <div class="card pd-20 pd-sm-40">
+          <h6 class="card-body-title">新建用户</h6>
+
+          <div class="form-layout">
+            <div class="row mg-b-15">
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label class="form-control-label">账号: </label>
+                  <%= text_field_tag('user[login]', @user.login, {class: 'form-control'}) %>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label">密码: </label>
+                  <%= text_field_tag('user[password]', @user.password, {class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+            <div class="form-layout-footer">
+              <button class="btn btn-info mg-r-5">保存</button>
+            </div><!-- form-layout-footer -->
+          </div>
+
+        </div>
+      </div><!-- sl-page-title -->
+  <% end %>
+
+</div><!-- sl-pagebody -->
+
+
+<%content_for :js do%>
+    <script>
+        $(".area").change(function () {
+            area={};
+            area[$(this).attr('id')]=$(this).is(":checked")
+            $.ajax({
+                url:'<%=update_area_admin_users_path%>',
+                type:'post',
+                data:{
+                    id:<%=@user.id%>,
+                    area:area
+                },
+                success:function (data) {
+
+                }
+            })
+        })
+        $(".power").change(function () {
+            power={};
+            power[$(this).attr('id')]=$(this).is(":checked")
+            $.ajax({
+                url:'<%=update_power_admin_users_path%>',
+                type:'post',
+                data:{
+                    id:<%=@user.id%>,
+                    power:power
+                },
+                success:function (data) {
+
+                }
+            })
+        })
+    </script>
+<%end%>

@@ -1,0 +1,99 @@
+
+    <div class="form-layout">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label">姓名: </label>
+            <%= text_field_tag('name',@loan.name, {class: 'form-control',disabled:''}) %>
+          </div>
+        </div><!-- col-4 -->
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label">身份证: </label>
+            <%= text_field_tag('idcard', @loan.idcard,{class: 'form-control',disabled:''}) %>
+          </div>
+        </div><!-- col-4 -->
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label">手机号: </label>
+            <%= text_field_tag('phone', @loan.phone,{class: 'form-control',disabled:''}) %>
+          </div>
+        </div><!-- col-4 -->
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label">借款来源: </label>
+            <%= text_field_tag('source', @loan.source,{class: 'form-control',disabled:''}) %>
+          </div>
+        </div><!-- col-4 -->
+
+        <div class="col-lg-12">
+          <div class="form-group" style="overflow: auto">
+            <label class="form-control-label">征信: <span class="tx-danger">*</span></label>
+            <div class="table-responsive">
+              <table class="table mg-b-0">
+                <thead>
+                <tr>
+                  <th>文件名</th>
+                  <th style="width: 200px">日期</th>
+                </tr>
+                </thead>
+                <tbody id="table-loan-zx">
+                <% @loan.loan_images.where(style:'zx').each do |ele| %>
+                    <tr>
+                      <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                      <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- col-4 -->
+        <div class="col-lg-12">
+          <div class="form-group" style="overflow: auto">
+            <label class="form-control-label">行驶证: <span class="tx-danger">*</span></label>
+            <div class="table-responsive">
+              <table class="table mg-b-0">
+                <thead>
+                <tr>
+                  <th>文件名</th>
+                  <th style="width: 200px">日期</th>
+                </tr>
+                </thead>
+                <tbody id="table-loan-xsz">
+                <% @loan.loan_images.where(style:'xsz').each do |ele| %>
+                    <tr>
+                      <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                      <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- col-4 -->
+        <div class="col-lg-12">
+          <div class="form-group" style="overflow: auto">
+            <label class="form-control-label">实际公里数: <span class="tx-danger">*</span></label>
+            <div class="table-responsive">
+              <table class="table mg-b-0">
+                <thead>
+                <tr>
+                  <th>文件名</th>
+                  <th style="width: 200px">日期</th>
+                </tr>
+                </thead>
+                <tbody id="table-loan-sjgls">
+                <% @loan.loan_images.where(style:'sjgls').each do |ele| %>
+                    <tr>
+                      <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                      <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- col-4 -->
+      </div><!-- row -->
+    </div><!-- form-layout -->

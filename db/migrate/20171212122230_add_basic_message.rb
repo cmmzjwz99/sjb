@@ -1,7 +1,7 @@
 class AddBasicMessage < ActiveRecord::Migration[5.1]
   def change
     create_table :basic_messages do |t|
-      t.string :status,default: "unverified"
+      t.string :status,default: "verifyfail"
       t.integer :verify_user
       t.references :loan, index: true, foreign_key: true
 

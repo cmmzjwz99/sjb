@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   #belongs_to :text_filter
   has_one :resource , as: :file, dependent: :destroy
 
+
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true
 
@@ -18,8 +19,9 @@ class User < ActiveRecord::Base
   # has_many :articles
 
 
-  has_many :posts, dependent: :destroy
 
+  has_one :user_area
+  has_one :user_power
   serialize :settings, Hash
 
   STATUS = %w(active inactive black white)
@@ -195,12 +197,6 @@ class User < ActiveRecord::Base
     save
   end
 
-  def update_location(lat,long)
-    self.latitude = lat
-    self.longitude = long
-    save
-  end
-
   def update_password(pass)
     @password = pass
     save
@@ -211,20 +207,23 @@ class User < ActiveRecord::Base
     save
   end
 
-  def local
-    begin
-      location = Location.new
-      address = location.address(self.latitude,self.longitude)
-      Rails.logger.info("#{address.inspect}")
-      address["GeocoderSearchResponse"]["result"]["formatted_address"]
-      Location.new.address(self.latitude,self.longitude)["GeocoderSearchResponse"]["result"]["formatted_address"]
-    rescue
-      return nil
-    end
-  end
-
   def self.password_hash(pass)
     Digest::SHA1.hexdigest("#{salt}--#{pass}--")
+  end
+
+  def have_power(name)
+    return self.user_power[name]
+  end
+
+  def get_locations
+    arr=[]
+    (arr << 'zjwz')if self.user_area.zjwz
+    (arr << 'zjsxsz')if self.user_area.zjsxsz
+    (arr << 'zjsxkq')if self.user_area.zjsxkq
+    (arr << 'zjsxyc')if self.user_area.zjsxyc
+    (arr << 'zjhz')if self.user_area.zjhz
+    (arr << 'ahhf')if self.user_area.ahhf
+    return arr
   end
 
   protected

@@ -1,0 +1,81 @@
+<%content_for :css do%>
+    <style>
+      .form-group{
+        overflow: auto;
+        margin-bottom: 10px;
+      }
+      .form-group .form-control{
+        float: left;
+        width: auto;
+      }
+      .form-group .form-control-label{
+        float: left;
+        line-height: 39px;
+        margin-bottom: 0;
+        padding: 0 10px;
+        width: auto;
+      }
+    </style>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a>
+  <a class="breadcrumb-item" href="index.html">Pages</a-->
+  <span class="breadcrumb-item active">人员审核</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">待审名单</h6>
+      <div class="form-layout pd-b-10 pd-t-10">
+        <div class="row" style="margin: 0">
+          <div class="form-group">
+            <label class="form-control-label">姓名: </label>
+            <input class="form-control" type="text" name="firstname">
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">手机号: </label>
+            <input class="form-control" type="text" name="firstname">
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">借款来源: </label>
+            <input class="form-control" type="text" name="firstname">
+          </div>
+          <div class="form-layout-footer" style="padding-left: 10px">
+            <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
+          </div><!-- form-layout-footer -->
+        </div><!-- row -->
+
+      </div><!-- form-layout -->
+      <table class="table table-hover table-bordered mg-b-0">
+        <thead class="bg-info">
+        <tr>
+          <th>id</th>
+          <th>姓名</th>
+          <th>手机号</th>
+          <th>编号</th>
+          <!--th>初审状态</th>
+          <th>用户审核状态</th>
+          <th>车辆审核状态</th-->
+        </tr>
+        </thead>
+        <tbody>
+        <%@customers.each do |ele|%>
+            <tr>
+              <td><%=ele.id%></td>
+              <td><a href="<%="#{customer_admin_verify_index_path}/#{ele.id}"%>"><%=ele.loan.name%></a></td>
+              <td><%=ele.loan.phone%></td>
+              <td><%=ele.company%></td>
+            </tr>
+        <%end%>
+        </tbody>
+      </table>
+      <div class="dataTables_wrapper no-footer">
+        <%= paginate @customers %>
+      </div>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

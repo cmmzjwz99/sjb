@@ -1,0 +1,89 @@
+
+<%content_for :css do%>
+
+    <style>
+      .form-group{
+        overflow: auto;
+        margin-bottom: 10px;
+      }
+      .form-group .form-control{
+        float: left;
+        width: auto;
+      }
+      .form-group .form-control-label{
+        float: left;
+        line-height: 39px;
+        margin-bottom: 0;
+        padding: 0 10px;
+        width: auto;
+      }
+    </style>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a>
+  <a class="breadcrumb-item" href="index.html">Pages</a-->
+  <span class="breadcrumb-item active">审核成功未打款</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">订单列表</h6>
+      <div class="form-layout pd-b-10 pd-t-10">
+        <div class="row" style="margin: 0">
+          <div class="form-group">
+            <label class="form-control-label">姓名: </label>
+            <input class="form-control" type="text" name="firstname" >
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">手机号: </label>
+            <input class="form-control" type="text" name="firstname" >
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">借款来源: </label>
+            <input class="form-control" type="text" name="firstname" >
+          </div>
+          <div class="form-layout-footer" style="padding-left: 10px">
+            <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
+            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_loan_url%>">新建</a>
+          </div><!-- form-layout-footer -->
+        </div><!-- row -->
+
+      </div><!-- form-layout -->
+      <table class="table table-hover table-bordered mg-b-0">
+        <thead class="bg-info">
+        <tr>
+          <th>id</th>
+          <th>姓名</th>
+          <th>手机号</th>
+          <th>初审状态</th>
+          <th>用户审核状态</th>
+          <th>车辆审核状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%@loans.each do |ele|%>
+            <tr>
+              <td><%=ele.id%></td>
+              <td><%=ele.name%></td>
+              <td><%=ele.phone%></td>
+              <td><%=ele.first_verify%></td>
+              <td><%=ele.customer_verify%></td>
+              <td><%=ele.car_verify%></td>
+              <td>
+                <%= link_to '打款', pay_admin_bills_path(ele), data: {confirm: '确定打款?'} %> &nbsp;
+              </td>
+            </tr>
+        <%end%>
+        </tbody>
+      </table>
+      <div class="dataTables_wrapper no-footer">
+        <%= paginate @loans %>
+      </div>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

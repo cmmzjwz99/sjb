@@ -3,6 +3,6 @@ class PortalController <  ApplicationController
   layout :false
 
   def index
-    redirect_to "http://a.app.qq.com/o/simple.jsp?pkgname=net.amaze.program"
+    redirect_to login_admin_accounts_path
   end
 end

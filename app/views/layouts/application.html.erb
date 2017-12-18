@@ -1,14 +1,197 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ServerYzd</title>
-    <%= csrf_meta_tags %>
+<html lang="zh">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <meta property="og:image" content="http://themepixels.me/starlight/img/starlight-social.png">
+  <meta property="og:image:secure_url" content="http://themepixels.me/starlight/img/starlight-social.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Meta -->
+  <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="author" content="ThemePixels">
+
+  <title>云指贷</title>
+
+
+  <!-- vendor css -->
+  <link href="/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/ionicons.css" rel="stylesheet">
+  <link href="/css/perfect-scrollbar.css" rel="stylesheet">
+  <link href="/css/github.css" rel="stylesheet">
+  <link href="/css/jquery.datatables.css" rel="stylesheet">
+  <link href="/css/select2.min.css" rel="stylesheet">
+
+
+  <!-- Starlight CSS -->
+  <link rel="stylesheet" href="/css/starlight.css">
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+
+  <% if content_for?(:css) %>
+      <%= yield :css %>
+  <% end %>
+</head>
+
+<body>
+
+<!-- ########## START: LEFT PANEL ########## -->
+<div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> 云指贷</a></div>
+<div class="sl-sideleft">
+
+  <label class="sidebar-label">菜单</label>
+  <div class="sl-sideleft-menu">
+    <a href="<%= admin_root_path %>" class="sl-menu-link">
+      <div class="sl-menu-item">
+        <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+        <span class="menu-item-label">首页</span>
+      </div><!-- menu-item -->
+    </a><!-- sl-menu-link -->
+    <a href="#" class="sl-menu-link">
+      <div class="sl-menu-item">
+        <i class="menu-item-icon fa fa-user-o tx-18"></i>
+        <span class="menu-item-label">用户</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a><!-- sl-menu-link -->
+    <ul class="sl-menu-sub nav flex-column">
+      <li class="nav-item"><a href="<%= admin_users_path %>" class="nav-link">用户列表</a></li>
+    </ul>
+    <a href="#" class="sl-menu-link">
+      <div class="sl-menu-item">
+        <i class="menu-item-icon icon ion-ios-paper-outline tx-24"></i>
+        <span class="menu-item-label">订单</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a><!-- sl-menu-link -->
+    <ul class="sl-menu-sub nav flex-column">
+      <li class="nav-item"><a href="<%= admin_loans_path %>" class="nav-link">订单管理</a></li>
+      <li class="nav-item"><a href="<%= first_admin_verify_index_path %>" class="nav-link">网络审核</a></li>
+      <li class="nav-item"><a href="<%= basic_admin_verify_index_path %>" class="nav-link">初次审核</a></li>
+      <li class="nav-item"><a href="<%= customer_admin_verify_index_path %>" class="nav-link">客户信息审核</a></li>
+      <li class="nav-item"><a href="<%= car_admin_verify_index_path %>" class="nav-link">车辆信息审核</a></li>
+    </ul>
+    <a href="#" class="sl-menu-link">
+      <div class="sl-menu-item">
+        <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+        <span class="menu-item-label">统计</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a><!-- sl-menu-link -->
+    <ul class="sl-menu-sub nav flex-column">
+      <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
+      <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
+      <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
+      <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
+    </ul>
+    <a href="#" class="sl-menu-link">
+      <div class="sl-menu-item">
+        <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+        <span class="menu-item-label">报表</span>
+        <i class="menu-item-arrow fa fa-angle-down"></i>
+      </div><!-- menu-item -->
+    </a><!-- sl-menu-link -->
+    <ul class="sl-menu-sub nav flex-column">
+      <li class="nav-item"><a href="<%= not_pay_admin_bills_path %>" class="nav-link">审核成功未打款</a></li>
+      <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+    </ul>
+  </div><!-- sl-sideleft-menu -->
+
+  <br>
+</div><!-- sl-sideleft -->
+<!-- ########## END: LEFT PANEL ########## -->
+
+<!-- ########## START: HEAD PANEL ########## -->
+<div class="sl-header">
+  <div class="sl-header-left">
+    <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a>
+    </div>
+    <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a>
+    </div>
+  </div><!-- sl-header-left -->
+  <div class="sl-header-right">
+    <nav class="nav">
+      <div class="dropdown">
+        <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+          <span class="logged-name"><%= current_user.login %></span>
+          <!--img src="picture/img3.jpg" class="wd-32 rounded-circle" alt=""-->
+        </a>
+        <div class="dropdown-menu dropdown-menu-header wd-200">
+          <ul class="list-unstyled user-profile-nav">
+            <li><a href="<%= logout_admin_accounts_path %>"><i class="icon ion-power"></i> 退出登陆</a></li>
+          </ul>
+        </div><!-- dropdown-menu -->
+      </div><!-- dropdown -->
+    </nav>
+    <!--div class="navicon-right">
+      <a id="btnRightMenu" href="" class="pos-relative">
+        <i class="icon ion-ios-bell-outline"></i>
+        <span class="square-8 bg-danger"></span>
+      </a>
+    </div--><!-- navicon-right -->
+  </div><!-- sl-header-right -->
+</div><!-- sl-header -->
+<!-- ########## END: HEAD PANEL ########## -->
+
+<!-- ########## START: RIGHT PANEL ########## -->
+<div class="sl-sideright">
+  <ul class="nav nav-tabs nav-fill sidebar-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" role="tab" href="#messages">Messages (2)</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" role="tab" href="#notifications">Notifications (8)</a>
+    </li>
+  </ul><!-- sidebar-tabs -->
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  </div><!-- tab-content -->
+</div><!-- sl-sideright -->
+<!-- ########## END: RIGHT PANEL ########## --->
+
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="sl-mainpanel">
+
+  <%= yield %>
+</div><!-- sl-mainpanel -->
+
+<!-- ########## END: MAIN PANEL ########## -->
+
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/perfect-scrollbar.jquery.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script src="/js/jquery.datatables.js"></script>
+<script src="/js/datatables.responsive.js"></script>
+<script src="/js/select2.min.js"></script>
+
+<script src="/js/starlight.js"></script>
+<script>
+    $('.sl-menu-link').each(function () {
+        if ($(this).attr('href') == window.location.pathname) {
+            $(this).addClass('active');
+        }
+    })
+    $('.nav-link').each(function () {
+        if ($(this).attr('href') == window.location.pathname) {
+            $(this).addClass('active');
+            $(this).parents('.sl-menu-sub').prev('.sl-menu-link').addClass('active');
+            $(this).parents('.sl-menu-sub').prev('.sl-menu-link').addClass('show-sub');
+        }
+    })
+</script>
+
+<% if content_for?(:js) %>
+    <%= yield :js %>
+<% end %>
+</body>
 </html>
+

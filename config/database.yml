@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: headlines_production
-  username: headlines
-  password: <%= ENV['HEADLINES_DATABASE_PASSWORD'] %>
+  database: yzd_production
