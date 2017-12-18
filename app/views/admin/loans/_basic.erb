@@ -1,0 +1,150 @@
+
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+
+      <h6 class="card-body-title  mg-b-20">基本信息</h6>
+
+
+      <%= form_tag('/admin/loans/car', class:'stdform') do %>
+          <%= hidden_field_tag 'car[loan_id]', params[:id] %>
+          <div class="form-layout">
+            <div class="row mg-b-25">
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">编码: </label>
+                  <%= text_field_tag('car[no]',@car.no, {class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">质/抵押人: </label>
+                  <%= text_field_tag('car[name]', @car.name,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估日期: </label>
+                  <%= text_field_tag('car[pgrq]', @car.pgrq,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估价值: </label>
+                  <%= text_field_tag('car[pgjz]', @car.pgjz,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">起始日: </label>
+                  <%= text_field_tag('car[qsr]', @car.qsr,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">终止日: </label>
+                  <%= text_field_tag('car[zzr]', @car.zzr,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">存放地址: </label>
+                  <%= text_field_tag('car[cfdz]', @car.cfdz,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品备注: </label>
+                  <%= text_field_tag('car[ypbz]', @car.ypbz,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品单位: </label>
+                  <%= text_field_tag('car[ypdw]', @car.ypdw,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">质抵押率: </label>
+                  <%= text_field_tag('car[zdyl]', @car.zdyl,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">可押价值: </label>
+                  <%= text_field_tag('car[kdjz]', @car.kdjz,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">已押价值: </label>
+                  <%= text_field_tag('car[yyjz]', @car.yyjz,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">押品数量: </label>
+                  <%= text_field_tag('car[ypsl]', @car.ypsl,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">地区: </label>
+                  <%= text_field_tag('car[dq]', @car.dq,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估单位: </label>
+                  <%= text_field_tag('car[pgdw]', @car.pgdw,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">评估人员: </label>
+                  <%= text_field_tag('car[pgry]', @car.pgry,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">移动GPS数: </label>
+                  <%= text_field_tag('car[ydgps]', @car.ydgps,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">固定GPS: </label>
+                  <%= text_field_tag('car[gdgps]', @car.gdgps,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-12" style="border-top: 1px solid #5e5e5e">
+
+                <h6 class="card-body-title  mg-b-20" style="margin-top: 15px">车辆信息</h6>
+              </div>
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">质抵押人: </label>
+                  <%= text_field_tag('car[name]', @car.name,{class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <!--div class="col-lg-4">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
+                  <select class="form-control select2" data-placeholder="Choose country">
+                    <option label="Choose country"></option>
+                    <option value="USA">United States of America</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                  </select>
+                </div>
+              </div--><!-- col-4 -->
+            </div><!-- row -->
+
+            <div class="form-layout-footer">
+              <button class="btn btn-info mg-r-5">保存</button>
+              <a class="btn btn-secondary" onclick="window.history.go(-1)" style="color: white">返回</a>
+            </div><!-- form-layout-footer -->
+          </div><!-- form-layout -->
+      <%end%>
+    </div>
+  </div><!-- sl-page-title -->

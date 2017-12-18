@@ -1,0 +1,3 @@
+
+class UserPower
+end
