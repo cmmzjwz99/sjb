@@ -33,7 +33,7 @@
             console.log($(this).attr('id'));
             form.append('img',$(this)[0].files[0]);
             form.append('type',$(this).attr('id'));
-            form.append('id','<%=@loan.id%>');
+            form.append('loan_id','<%=@loan.id%>');
 
             $.ajax({
                 url:"<%=img_upload_admin_loans_path%>",

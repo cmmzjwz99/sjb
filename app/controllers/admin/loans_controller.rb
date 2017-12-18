@@ -1,6 +1,6 @@
 class Admin::LoansController < Admin::BaseController
 
-  before_action :set_loan, only: [:show, :edit, :update, :destroy, :img_upload]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy]
 
   def index
     #status=['verifyfail','verifypass']
@@ -24,7 +24,7 @@ class Admin::LoansController < Admin::BaseController
   end
 
   def img_upload
-    p params
+    @loan=Loan.find(params[:loan_id])
     img=LoanImage.new(loan:@loan)
     img.img=params[:img]
     img.style=params[:type]
