@@ -16,7 +16,7 @@ class Admin::LoanImagesController< Admin::BaseController
   end
 
 
-  def img_upload
+  def uploadimg
     @loan=Loan.find(params[:loan_id])
     img=LoanImage.new(loan:@loan)
     img.img=params[:img]

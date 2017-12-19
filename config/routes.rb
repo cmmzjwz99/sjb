@@ -85,7 +85,7 @@ Rails.application.routes.draw do
     end
     resources :loan_images do
       collection do
-        post 'img_upload'
+        post 'uploadimg'
       end
     end
     resources :customer_images
