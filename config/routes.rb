@@ -83,7 +83,7 @@ Rails.application.routes.draw do
         post 'img_upload'
       end
     end
-    resources :loan_images do
+    resources :loan_images, only: [:destroy] do
       collection do
         post 'uploadimg'
       end
