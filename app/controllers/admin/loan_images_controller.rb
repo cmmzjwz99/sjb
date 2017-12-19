@@ -20,7 +20,7 @@ class Admin::LoanImagesController< Admin::BaseController
     @loan=Loan.find(params[:loan_id])
     img=LoanImage.new(loan:@loan)
     img.img=params[:img]
-    img.style=params[:type]
+    img.style=params[:typename]
     if img.save
       render json: {code:0,data:{url:img.img.url,name:img.img.url.split('/').last,date:img.created_at.strftime('%Y-%m-%d %H:%M:%S'),id:img.id,type:img.style}}
     end
