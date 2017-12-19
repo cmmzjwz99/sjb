@@ -60,11 +60,12 @@
             var form = new FormData();
             form.append('img',$(this)[0].files[0]);
             form.append('typename',$(this).attr('id'));
-            form.append('id','<%=@loan.id%>');
+            form.append('loan_id','<%=@loan.id%>');
 
             $.ajax({
                 url:"<%=uploadimg_admin_loan_images_path%>",
                 method:"post",
+                typle:'post',
                 data:form,
                 processData:false,
                 contentType:false,
