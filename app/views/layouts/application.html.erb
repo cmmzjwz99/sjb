@@ -30,7 +30,7 @@
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="http://yunzhidai.oss-cn-shanghai.aliyuncs.com/public/starlight.css">
 
-  <!--= javascript_include_tag 'application', 'data-turbolinks-track' => true %-->
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 
   <% if content_for?(:css) %>
@@ -100,6 +100,7 @@
     <ul class="sl-menu-sub nav flex-column">
       <li class="nav-item"><a href="<%= not_pay_admin_bills_path %>" class="nav-link">审核成功未打款</a></li>
       <li class="nav-item"><a href="<%=has_pay_admin_bills_path%>" class="nav-link">审核成功详单</a></li>
+      <li class="nav-item"><a href="<%=totle_loan_admin_loans_path%>" class="nav-link">地区订单统计</a></li>
     </ul>
   </div><!-- sl-sideleft-menu -->
 
@@ -129,12 +130,6 @@
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
     </nav>
-    <!--div class="navicon-right">
-      <a id="btnRightMenu" href="" class="pos-relative">
-        <i class="icon ion-ios-bell-outline"></i>
-        <span class="square-8 bg-danger"></span>
-      </a>
-    </div--><!-- navicon-right -->
   </div><!-- sl-header-right -->
 </div><!-- sl-header -->
 <!-- ########## END: HEAD PANEL ########## -->
