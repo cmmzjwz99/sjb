@@ -28,35 +28,6 @@
 </div><!-- sl-pagebody -->
 <%content_for :js do%>
     <script>
-        $('.loan-file').change(function () {
-            var form = new FormData();
-            console.log($(this).attr('id'));
-            form.append('img',$(this)[0].files[0]);
-            form.append('type',$(this).attr('id'));
-            form.append('loan_id','<%=@loan.id%>');
-
-            $.ajax({
-                url:"<%=uploadimg_admin_loan_images_path%>",
-                type:"post",
-                data:form,
-                processData:false,
-                contentType:false,
-                success:function(data){
-                    console.log(data);
-                    if(data.code==0){
-                        alert('上传成功')
-                        id='#table-loan-'+data.data.type;
-                        html='<tr> <td><a href="'+data.data.url+'" target="_blank">'+data.data.name+'</a></td> \
-                            <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
-                            data-method="delete" href="/admin/loan_images/'+data.data.id+'">删除</a></td></tr>'
-                        $(id).append(html);
-                    }
-                },
-                error:function(e){
-                    alert("错误！！");
-                }
-            });
-        });
         $('.customer-file').change(function () {
             var form = new FormData();
             form.append('img',$(this)[0].files[0]);
@@ -76,6 +47,36 @@
                             <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
                             data-method="delete" href="/admin/customer_images/'+data.data.id+'">删除</a></td></tr>'
                         $('#table-customer').append(html);
+                    }
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            });
+        });
+
+
+        $('.loan-file').change(function () {
+            var form = new FormData();
+            form.append('img',$(this)[0].files[0]);
+            form.append('type',$(this).attr('id'));
+            form.append('loan_id','<%=@loan.id%>');
+
+            $.ajax({
+                url:"<%=uploadimg_admin_loan_images_path%>",
+                type:"post",
+                data:form,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    console.log(data);
+                    if(data.code==0){
+                        alert('上传成功')
+                        id='#table-loan-'+data.data.type;
+                        html='<tr> <td><a href="'+data.data.url+'" target="_blank">'+data.data.name+'</a></td> \
+                            <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
+                            data-method="delete" href="/admin/loan_images/'+data.data.id+'">删除</a></td></tr>'
+                        $(id).append(html);
                     }
                 },
                 error:function(e){
