@@ -36,8 +36,8 @@
             form.append('loan_id','<%=@loan.id%>');
 
             $.ajax({
-                url:"<%=img_upload_admin_loan_images_path%>",
-                type:"POST",
+                url:"<%=uploadimg_admin_loan_images_path%>",
+                type:"post",
                 data:form,
                 processData:false,
                 contentType:false,
@@ -63,7 +63,7 @@
             form.append('id','<%=@loan.id%>');
 
             $.ajax({
-                url:"<%=uploadimg_admin_loan_images_path%>",
+                url:"<%=img_upload_admin_customer_messages_path%>",
                 type:"post",
                 data:form,
                 processData:false,
