@@ -40,7 +40,6 @@ Rails.application.routes.draw do
         post 'car'
         post 'customer'
         post 'basic'
-        post 'img_upload'
       end
     end
     resources :repay_logs do
@@ -84,7 +83,11 @@ Rails.application.routes.draw do
         post 'img_upload'
       end
     end
-    resources :loan_images
+    resources :loan_images do
+      collection do
+        post 'img_upload'
+      end
+    end
     resources :customer_images
     resources :bills do
       collection do

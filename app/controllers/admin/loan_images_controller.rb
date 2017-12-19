@@ -14,6 +14,19 @@ class Admin::LoanImagesController< Admin::BaseController
       format.json { head :no_content }
     end
   end
+
+
+  def img_upload
+    @loan=Loan.find(params[:loan_id])
+    img=LoanImage.new(loan:@loan)
+    img.img=params[:img]
+    img.style=params[:type]
+    if img.save
+      render json: {code:0,data:{url:img.img.url,name:img.img.url.split('/').last,date:img.created_at.strftime('%Y-%m-%d %H:%M:%S'),id:img.id,type:img.style}}
+    end
+  end
+
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_img
