@@ -1,10 +1,16 @@
 class Admin::BillsController < Admin::BaseController
   def not_pay
+    if !current_user.have_power('financial')
+      redirect_to power_admin_dashboard_index_path
+    end
     conditions={first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: false}
     @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 
   def pay
+    if !current_user.have_power('financial')
+      redirect_to power_admin_dashboard_index_path
+    end
     loan=Loan.find(params[:id])
 
     respond_to do |format|
@@ -17,10 +23,19 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def has_pay
-
+    if !current_user.have_power('financial')
+      redirect_to power_admin_dashboard_index_path
+    end
+    conditions={first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
+    @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 
   def instalment
+    if !current_user.have_power('financial')
+      redirect_to power_admin_dashboard_index_path
+    end
+
+    @loan=Loan.find(params[:id])
 
   end
 end

@@ -1,0 +1,85 @@
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
+  <a class="breadcrumb-item" href="<%=has_pay_admin_bills_path%>">审核成功详单</a>
+  <span class="breadcrumb-item active">订单详情</span>
+</nav>
+
+<div class="sl-pagebody">
+      <div class="sl-page-title" style="margin-bottom: 0">
+        <div class="card pd-20 pd-sm-40">
+          <h6 class="card-body-title">订单详情</h6>
+
+          <div class="form-layout">
+            <div class="col-7">
+              <div class="form-group">
+                <label class="form-control-label">姓名: </label>
+                <%= text_field_tag('', @loan.name,{class: 'form-control',disabled:''}) %>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <label class="form-control-label">手机号: </label>
+                <%= text_field_tag('', @loan.phone,{class: 'form-control',disabled:''}) %>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <label class="form-control-label">身份证: </label>
+                <%= text_field_tag('', @loan.idcard,{class: 'form-control',disabled:''}) %>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <label class="form-control-label">身份证: </label>
+                <%= text_field_tag('', @loan.basic_message.dkcp,{class: 'form-control',disabled:''}) %>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="form-group" style="overflow: auto">
+                <label class="form-control-label">行驶证: <span class="tx-danger">*</span></label>
+                <div class="table-responsive">
+                  <table class="table mg-b-0 table-bordered">
+                    <thead>
+                    <tr>
+                      <th>期数</th>
+                      <th>到期时间</th>
+                      <th>本金</th>
+                      <th>利息</th>
+                      <th>gps费用</th>
+                      <th>gps流量费</th>
+                      <th>进件费</th>
+                      <th>中介返点</th>
+                      <th>服务费</th>
+                      <th>总计费用</th>
+                      <th>贷款余额</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-loan-xsz">
+                    <% @loan.instalments.each do |ele| %>
+                        <tr>
+                          <td><%= (ele.periods-1) %></td>
+                          <td><%=ele.overdue_time.strftime('%Y-%m-%d')%></td>
+                          <td><%= ele.bj %></td>
+                          <td><%= ele.lx %></td>
+                          <td><%= ele.gpsfy %></td>
+                          <td><%= ele.gpsllf %></td>
+                          <td><%= ele.jjf %></td>
+                          <td><%= ele.zjfd %></td>
+                          <td><%= ele.fwf %></td>
+                          <td><%= ele.balance %></td>
+                          <td><%= ele.dkye %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- col-4 -->
+          </div>
+
+        </div>
+      </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->
+

@@ -45,6 +45,7 @@ class Admin::AccountsController < Admin::BaseController
     end
   end
 
+
   # def recover_password
   #   return unless request.post?
   #   @user = User.where('login = ? or email = ?', params[:user][:login], params[:user][:login]).first

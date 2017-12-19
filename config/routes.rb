@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       collection do
         post 'update_area'
         post 'update_power'
+        post 'recover_password'
+        get 'recover_password'
       end
     end
     resources :loans do
@@ -93,6 +95,8 @@ Rails.application.routes.draw do
       collection do
         get 'not_pay'
         get "pay/:id",action:"pay",id:/\d{1,}/,as: :pay
+        get 'has_pay'
+        get "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
       end
     end
   end
