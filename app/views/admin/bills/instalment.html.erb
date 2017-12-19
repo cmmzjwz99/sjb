@@ -37,7 +37,7 @@
 
             <div class="col-lg-12">
               <div class="form-group" style="overflow: auto">
-                <label class="form-control-label">行驶证: <span class="tx-danger">*</span></label>
+                <label class="form-control-label">分期详情: <span class="tx-danger">*</span></label>
                 <div class="table-responsive">
                   <table class="table mg-b-0 table-bordered">
                     <thead>
@@ -53,6 +53,7 @@
                       <th>服务费</th>
                       <th>总计费用</th>
                       <th>贷款余额</th>
+                      <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="table-loan-xsz">
@@ -69,6 +70,11 @@
                           <td><%= ele.fwf %></td>
                           <td><%= ele.balance %></td>
                           <td><%= ele.dkye %></td>
+                          <td><%= ele.has_repay ? '已还款' : '' %>
+                            <% if !ele.has_repay %>
+                                <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}", onclick:"if(confirm('确认提交还款吗？')==false)return false;" %>
+                            <% end %>
+                          </td>
                         </tr>
                     <% end %>
                     </tbody>

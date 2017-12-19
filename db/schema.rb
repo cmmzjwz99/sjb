@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "totle_loan", default: false
     t.index ["user_id"], name: "index_user_powers_on_user_id"
   end
 

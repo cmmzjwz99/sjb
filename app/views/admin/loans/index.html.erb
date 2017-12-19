@@ -70,10 +70,10 @@
               <td><%=ele.id%></td>
               <td><a href="<%=admin_loan_path(ele)%>"><%=ele.name%></a></td>
               <td><%=ele.phone%></td>
-              <td><%=ele.first_verify%></td>
-              <td><%=ele.basic_verify%></td>
-              <td><%=ele.customer_verify%></td>
-              <td><%=ele.car_verify%></td>
+              <td><%=ele.get_status(ele.first_verify)%></td>
+              <td><%=ele.get_status(ele.basic_verify)%></td>
+              <td><%=ele.get_status(ele.customer_verify)%></td>
+              <td><%=ele.get_status(ele.car_verify)%></td>
             </tr>
         <%end%>
         </tbody>

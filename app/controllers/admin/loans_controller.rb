@@ -3,9 +3,18 @@ class Admin::LoansController < Admin::BaseController
   before_action :set_loan, only: [:show, :edit, :update, :destroy]
 
   def index
-    #status=['verifyfail','verifypass']
-    #conditions={location:current_user.get_locations,first_verify:status,customer_verify:status,car_verify:status,basic_verify:status}
-    conditions={}
+    if !current_user.have_power('input')
+      redirect_to power_admin_dashboard_index_path
+    end
+    conditions={user:current_user}
+    @loans=Loan.where(conditions).page(params[:page]).per(10)
+  end
+
+  def totle_loan
+    if !current_user.have_power('totle_loan')
+      redirect_to power_admin_dashboard_index_path
+    end
+    conditions={location:current_user.get_locations}
     @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 
@@ -126,6 +135,4 @@ class Admin::LoansController < Admin::BaseController
   def basic_params
     params.require(:basic).permit!
   end
-
-
 end

@@ -36,6 +36,24 @@ class Admin::BillsController < Admin::BaseController
     end
 
     @loan=Loan.find(params[:id])
+  end
 
+  def repay
+
+    if !current_user.have_power('financial')
+      redirect_to redirect_back(fallback_location: root_path)
+    end
+
+    instalment=Instalment.find(params[:id])
+
+
+    instalment.has_repay=true
+    respond_to do |format|
+      if instalment.save
+        format.html { redirect_back(fallback_location: root_path) }
+      else
+        format.html { redirect_back(fallback_location: root_path) }
+      end
+    end
   end
 end

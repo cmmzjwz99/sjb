@@ -23,14 +23,14 @@
 <nav class="breadcrumb sl-breadcrumb">
   <!--a class="breadcrumb-item" href="index.html">Starlight</a>
   <a class="breadcrumb-item" href="index.html">Pages</a-->
-  <span class="breadcrumb-item active">审核成功未打款</span>
+  <span class="breadcrumb-item active">订单管理</span>
 </nav>
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title">订单列表</h6>
+      <h6 class="card-body-title">订单管理</h6>
       <div class="form-layout pd-b-10 pd-t-10">
         <div class="row" style="margin: 0">
           <div class="form-group">
@@ -58,24 +58,24 @@
           <th>id</th>
           <th>姓名</th>
           <th>手机号</th>
+          <th>网审状态</th>
           <th>初审状态</th>
           <th>用户审核状态</th>
           <th>车辆审核状态</th>
-          <th>操作</th>
+          <th>录入员</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
             <tr>
               <td><%=ele.id%></td>
-              <td><%=ele.name%></td>
+              <td><a href="<%=admin_loan_path(ele)%>"><%=ele.name%></a></td>
               <td><%=ele.phone%></td>
-              <td><%=ele.first_verify%></td>
-              <td><%=ele.customer_verify%></td>
-              <td><%=ele.car_verify%></td>
-              <td>
-                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款吗？')==false)return false;" %> &nbsp;
-              </td>
+              <td><%=ele.get_status(ele.first_verify)%></td>
+              <td><%=ele.get_status(ele.basic_verify)%></td>
+              <td><%=ele.get_status(ele.customer_verify)%></td>
+              <td><%=ele.get_status(ele.car_verify)%></td>
+              <td><%=ele.user.name%></td>
             </tr>
         <%end%>
         </tbody>

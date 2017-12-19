@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         post 'car'
         post 'customer'
         post 'basic'
+        get 'totle_loan'
       end
     end
     resources :repay_logs do
@@ -97,6 +98,7 @@ Rails.application.routes.draw do
         get "pay/:id",action:"pay",id:/\d{1,}/,as: :pay
         get 'has_pay'
         get "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
+        get "repay/:id",action:"repay",id:/\d{1,}/,as: :repay
       end
     end
   end

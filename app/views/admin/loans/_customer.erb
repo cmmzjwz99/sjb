@@ -35,7 +35,7 @@
                         <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
                         <% if @customer.status==Loan::VERIFYFAIL %>
                             <td>
-                              <%= link_to '删除', admin_customer_image_path(ele), method: :delete, data: {confirm: '确定删除?'} %>
+                              <%= link_to '删除', admin_customer_image_path(ele), method: :delete, onclick:"if(confirm('确认删除？')==false)return false;" %>
                             </td>
                         <% end %>
                       </tr>
