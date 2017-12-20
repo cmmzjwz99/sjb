@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         post 'update_power'
         post 'recover_password'
         get 'recover_password'
+        get "freeze/:id",action:"freeze",id:/\d{1,}/,as: :freeze
       end
     end
     resources :loans do
@@ -86,12 +87,17 @@ Rails.application.routes.draw do
         post 'img_upload'
       end
     end
-    resources :loan_images, only: [:destroy] do
+    resources :loan_images do
       collection do
         post 'uploadimg'
+        get "destroyimg/:id",action:"destroyimg",id:/\d{1,}/,as: :destroyimg
       end
     end
-    resources :customer_images
+    resources :customer_images do
+      collection do
+        get "destroyimg/:id",action:"destroyimg",id:/\d{1,}/,as: :destroyimg
+      end
+    end
     resources :bills do
       collection do
         get 'not_pay'

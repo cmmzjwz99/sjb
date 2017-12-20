@@ -6,7 +6,7 @@ class Admin::UsersController < Admin::BaseController
     if !current_user.have_power('user_manage')
       redirect_to power_admin_dashboard_index_path
     end
-    @users=User.where('1=1').page(params[:page]).per(10)
+    @users=User.where(profile_id:1).page(params[:page]).per(10)
   end
 
 
@@ -34,7 +34,20 @@ class Admin::UsersController < Admin::BaseController
         if UserPower.new(user:@user).save && UserArea.new(user:@user).save
           redirect_to admin_user_path(@user)
         end
+      else
+        redirect_to '/admin/users/new?msg=zhycz'
       end
+    end
+  end
+
+  def freeze
+    @user=User.find(params[:id])
+    @user.profile_id=3
+
+    if @user.save
+      redirect_to admin_users_path
+    else
+      redirect_to admin_users_path
     end
   end
 

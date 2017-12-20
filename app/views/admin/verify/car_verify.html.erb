@@ -9,14 +9,6 @@
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
-    <div class="card pd-20 pd-sm-40">
-      <h6 class="card-body-title">网审信息</h6>
-      <%=render 'loan_form'%>
-    </div>
-    <div class="card pd-20 pd-sm-40 mg-t-20">
-      <h6 class="card-body-title">初审信息</h6>
-      <%=render 'basic_form'%>
-    </div>
     <div class="card pd-20 pd-sm-40 mg-t-20">
 
       <h6 class="card-body-title">车辆信息审核</h6>
@@ -276,6 +268,12 @@
               </div><!-- col-4 -->
             </div><!-- row -->
 
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">审核不通过原因: </label>
+                <%= text_field_tag('comment','', {class: 'form-control'}) %>
+              </div>
+            </div><!-- col-4 -->
             <% if @car.status==Loan::UNVERIFIED %>
                 <div>
                   <div class="form-group">

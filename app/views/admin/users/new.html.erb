@@ -37,35 +37,17 @@
 
 <%content_for :js do%>
     <script>
-        $(".area").change(function () {
-            area={};
-            area[$(this).attr('id')]=$(this).is(":checked")
-            $.ajax({
-                url:'<%=update_area_admin_users_path%>',
-                type:'post',
-                data:{
-                    id:<%=@user.id%>,
-                    area:area
-                },
-                success:function (data) {
 
-                }
-            })
+        $(function () {
+            if(GetQueryString('msg')=='zhycz'){
+                alert('账号已存在')
+            }
         })
-        $(".power").change(function () {
-            power={};
-            power[$(this).attr('id')]=$(this).is(":checked")
-            $.ajax({
-                url:'<%=update_power_admin_users_path%>',
-                type:'post',
-                data:{
-                    id:<%=@user.id%>,
-                    power:power
-                },
-                success:function (data) {
-
-                }
-            })
-        })
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
     </script>
 <%end%>

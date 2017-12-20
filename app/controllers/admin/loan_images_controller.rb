@@ -26,6 +26,15 @@ class Admin::LoanImagesController< Admin::BaseController
     end
   end
 
+  def destroyimg
+    @loanimg=LoanImage.find(params[:id])
+    @loanimg.destroy
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.json { head :no_content }
+    end
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

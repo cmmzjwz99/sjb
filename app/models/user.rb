@@ -240,6 +240,12 @@ class User < ActiveRecord::Base
 
   before_create :crypt_verify_password
 
+  before_create :set_default_location
+
+  def set_default_location
+    self.location='zjwz'
+  end
+
   # Before saving the record to database we will crypt the password
   # using SHA1.
   # We never store the actual password in the DB.

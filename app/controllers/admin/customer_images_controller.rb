@@ -10,6 +10,15 @@ class Admin::CustomerImagesController < Admin::BaseController
       format.json { head :no_content }
     end
   end
+
+  def destroyimg
+    @img=CustomerImage.find(params[:id])
+    @img.destroy
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.json { head :no_content }
+    end
+  end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_img

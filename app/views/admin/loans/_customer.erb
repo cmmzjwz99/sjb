@@ -1,7 +1,7 @@
 
 <div class="card pd-20 pd-sm-40 mg-t-20">
 
-  <h6 class="card-body-title  mg-b-20">个人信息</h6>
+  <h6 class="card-body-title  mg-b-20">人审信息</h6>
 
 
   <%= form_tag('/admin/loans/customer', class:'stdform') do %>
@@ -35,7 +35,7 @@
                         <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
                         <% if @customer.status==Loan::VERIFYFAIL %>
                             <td>
-                              <%= link_to '删除', admin_customer_image_path(ele), method: :delete, onclick:"if(confirm('确认删除？')==false)return false;" %>
+                              <%= link_to '删除', "/admin/customer_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
                             </td>
                         <% end %>
                       </tr>
@@ -50,12 +50,12 @@
           <% if @customer.status==Loan::VERIFYFAIL %>
               <div class="col-12">
                 <div class="form-group">
-                  <label class="form-control-label">是否提交初审: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">是否提交审核: <span class="tx-danger">*</span></label>
                   <div class="controls">
                     <%= radio_button_tag('customer[status]', Loan::VERIFYFAIL, @customer.status==Loan::VERIFYFAIL ? '1' : nil) %>
-                    暂不提交初审
+                    暂不提交审核
                     <%= radio_button_tag('customer[status]', Loan::UNVERIFIED, @customer.status==Loan::UNVERIFIED ? '1' : nil) %>
-                    提交初审
+                    提交审核
                   </div>
                 </div>
               </div>

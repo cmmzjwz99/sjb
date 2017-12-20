@@ -267,12 +267,12 @@
             <% if @car.status==Loan::VERIFYFAIL %>
                 <div>
                   <div class="form-group">
-                    <label class="form-control-label">是否提交初审: <span class="tx-danger">*</span></label>
+                    <label class="form-control-label">是否提交审核: <span class="tx-danger">*</span></label>
                     <div class="controls">
                       <%= radio_button_tag('car[status]', Loan::VERIFYFAIL, @car.status==Loan::VERIFYFAIL ? '1' : nil) %>
-                      暂不提交初审
+                      暂不提交审核
                       <%= radio_button_tag('car[status]', Loan::UNVERIFIED, @car.status==Loan::UNVERIFIED ? '1' : nil) %>
-                      提交初审
+                      提交审核
                     </div>
                   </div>
                 </div>
@@ -295,4 +295,3 @@
           </div><!-- form-layout -->
       <%end%>
     </div>
-  </div><!-- sl-page-title -->

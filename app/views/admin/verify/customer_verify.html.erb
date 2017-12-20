@@ -50,6 +50,12 @@
               </div><!-- col-4 -->
             </div><!-- row -->
 
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">审核不通过原因: </label>
+                <%= text_field_tag('comment','', {class: 'form-control'}) %>
+              </div>
+            </div><!-- col-4 -->
             <% if @customer.status==Loan::UNVERIFIED %>
                 <div>
                   <div class="form-group">

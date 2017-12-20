@@ -19,6 +19,9 @@ class Admin::VerifyController < Admin::BaseController
           if @loan.first_verify==Loan::VERIFYPASS
             @loan.verify_pass(current_user)
           end
+          if @loan.first_verify==Loan::VERIFYFAIL
+            LoanComment.create({loan:@loan,status:'网审',content:params[:comment],verify_user:current_user.id})
+          end
           @loan.save
         end
         format.html { redirect_to first_admin_verify_index_path , notice: 'successfully updated.' }
@@ -44,6 +47,9 @@ class Admin::VerifyController < Admin::BaseController
         if params[:basic][:status].present? && @basic.status==Loan::UNVERIFIED
           @basic.status=params[:basic][:status]
           @basic.verify_pass(current_user) if @basic.status==Loan::VERIFYPASS
+          if @basic.status==Loan::VERIFYFAIL
+            LoanComment.create({loan:@loan,status:'初审',content:params[:comment],verify_user:current_user.id})
+          end
           @basic.save
         end
         format.html { redirect_to basic_admin_verify_index_path , notice: 'successfully updated.' }
@@ -72,6 +78,10 @@ class Admin::VerifyController < Admin::BaseController
         if params[:customer][:status].present? && @customer.status==Loan::UNVERIFIED
           @customer.status=params[:customer][:status]
           @customer.verify_pass(current_user) if @customer.status==Loan::VERIFYPASS
+
+          if @customer.status==Loan::VERIFYFAIL
+            LoanComment.create({loan:@loan,status:'人审',content:params[:comment],verify_user:current_user.id})
+          end
           @customer.save
         end
         format.html { redirect_to customer_admin_verify_index_path , notice: 'successfully updated.' }
@@ -99,6 +109,10 @@ class Admin::VerifyController < Admin::BaseController
         if params[:car][:status].present? && @car.status==Loan::UNVERIFIED
           @car.status=params[:car][:status]
           @car.verify_pass(current_user) if @car.status==Loan::VERIFYPASS
+
+          if @car.status==Loan::VERIFYFAIL
+            LoanComment.create({loan:@loan,status:'车审',content:params[:comment],verify_user:current_user.id})
+          end
           @car.save
         end
         format.html { redirect_to car_admin_verify_index_path , notice: 'successfully updated.' }

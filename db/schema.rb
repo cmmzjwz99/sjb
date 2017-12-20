@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.bigint "loan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content"
     t.index ["loan_id"], name: "index_loan_comments_on_loan_id"
   end
 
@@ -256,6 +257,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "longitude", limit: 24, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "userno"
     t.index ["idcard"], name: "USER_IDCARD"
     t.index ["login"], name: "USER_LOGIN"
     t.index ["phone"], name: "USER_PHONE"
