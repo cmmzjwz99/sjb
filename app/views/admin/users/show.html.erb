@@ -57,12 +57,12 @@
           </div><!-- col-3 -->
           <div class="col-lg-3">
             <label class="ckbox">
-              <input class="power" type="checkbox" id="online_verify" <%=@user.user_power.online_verify ? 'checked' :''%>><span>订单网审</span>
+              <input class="power" type="checkbox" id="online_verify" <%=@user.user_power.first_verify ? 'checked' :''%>><span>订单网审</span>
             </label>
           </div><!-- col-3 -->
           <div class="col-lg-3">
             <label class="ckbox">
-              <input class="power" type="checkbox" id="first_verify" <%=@user.user_power.first_verify ? 'checked' :''%>><span>订单初审</span>
+              <input class="power" type="checkbox" id="first_verify" <%=@user.user_power.online_verify ? 'checked' :''%>><span>订单初审</span>
             </label>
           </div><!-- col-3 -->
           <div class="col-lg-3">
