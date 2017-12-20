@@ -101,7 +101,7 @@ class Admin::VerifyController < Admin::BaseController
           @car.verify_pass(current_user) if @car.status==Loan::VERIFYPASS
           @car.save
         end
-        format.html { redirect_to customer_admin_verify_index_path , notice: 'successfully updated.' }
+        format.html { redirect_to car_admin_verify_index_path , notice: 'successfully updated.' }
       end
     end
   end
