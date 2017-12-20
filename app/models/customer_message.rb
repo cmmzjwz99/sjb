@@ -9,4 +9,10 @@ class CustomerMessage < ActiveRecord::Base
     loan.customer_verify=self.status
     loan.save
   end
+
+
+  def verify_pass(user)
+    self.verify_user=user.id
+    self.verify_time=Time.now
+  end
 end

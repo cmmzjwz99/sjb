@@ -17,8 +17,7 @@ class Admin::VerifyController < Admin::BaseController
         if params[:first_verify].present? && @loan.first_verify==Loan::UNVERIFIED
           @loan.first_verify=params[:first_verify]
           if @loan.first_verify==Loan::VERIFYPASS
-            basic=@loan.basic_message || BasicMessage.new(loan:@loan)
-            basic.save
+            @loan.verify_pass(current_user)
           end
           @loan.save
         end
@@ -44,6 +43,7 @@ class Admin::VerifyController < Admin::BaseController
       respond_to do |format|
         if params[:basic][:status].present? && @basic.status==Loan::UNVERIFIED
           @basic.status=params[:basic][:status]
+          @basic.verify_pass(current_user) if @basic.status==Loan::VERIFYPASS
           @basic.save
         end
         format.html { redirect_to basic_admin_verify_index_path , notice: 'successfully updated.' }
@@ -71,6 +71,7 @@ class Admin::VerifyController < Admin::BaseController
       respond_to do |format|
         if params[:customer][:status].present? && @customer.status==Loan::UNVERIFIED
           @customer.status=params[:customer][:status]
+          @customer.verify_pass(current_user) if @customer.status==Loan::VERIFYPASS
           @customer.save
         end
         format.html { redirect_to customer_admin_verify_index_path , notice: 'successfully updated.' }
@@ -97,6 +98,7 @@ class Admin::VerifyController < Admin::BaseController
       respond_to do |format|
         if params[:car][:status].present? && @car.status==Loan::UNVERIFIED
           @car.status=params[:car][:status]
+          @car.verify_pass(current_user) if @car.status==Loan::VERIFYPASS
           @car.save
         end
         format.html { redirect_to customer_admin_verify_index_path , notice: 'successfully updated.' }

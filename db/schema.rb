@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "cljcb"
     t.string "yybspb"
     t.string "csb"
+    t.datetime "verify_time"
     t.index ["loan_id"], name: "index_basic_messages_on_loan_id"
   end
 
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "gmjg"
     t.string "synx"
     t.string "pl"
+    t.datetime "verify_time"
     t.index ["loan_id"], name: "index_car_messages_on_loan_id"
   end
 
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.datetime "jsrq"
     t.string "zdr"
     t.datetime "zdrq"
+    t.datetime "verify_time"
     t.index ["loan_id"], name: "index_customer_messages_on_loan_id"
   end
 
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "bj", limit: 24, default: 0.0
     t.float "lx", limit: 24, default: 0.0
     t.float "dkye", limit: 24, default: 0.0
+    t.integer "repay_user_id"
     t.index ["loan_id"], name: "index_instalments_on_loan_id"
   end
 
@@ -184,6 +188,9 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "source"
     t.string "location"
     t.string "basic_verify", default: "verifyfail"
+    t.datetime "pay_time"
+    t.integer "pay_user_id"
+    t.datetime "verify_time"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
@@ -218,6 +225,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "totle_loan", default: false
+    t.datetime "repay_time"
     t.index ["user_id"], name: "index_user_powers_on_user_id"
   end
 

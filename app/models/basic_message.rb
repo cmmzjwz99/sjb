@@ -21,4 +21,9 @@ class BasicMessage < ActiveRecord::Base
       car.save
     end
   end
+
+  def verify_pass(user)
+    self.verify_user=user.id
+    self.verify_time=Time.now
+  end
 end

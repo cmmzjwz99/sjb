@@ -89,4 +89,11 @@ class Loan  < ActiveRecord::Base
       return '审核中'
     end
   end
+
+  def verify_pass(user)
+    basic=self.basic_message || BasicMessage.new(loan:self)
+    basic.save
+    self.verify_time=Time.now
+    self.verify_user=user.id
+  end
 end
