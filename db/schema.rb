@@ -192,6 +192,10 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.datetime "pay_time"
     t.integer "pay_user_id"
     t.datetime "verify_time"
+    t.boolean "first_submit", default: false
+    t.boolean "basic_submit", default: false
+    t.boolean "customer_submit", default: false
+    t.boolean "car_submit", default: false
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
@@ -199,6 +203,17 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "label"
     t.string "nicename"
     t.text "modules"
+  end
+
+  create_table "repay_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "no"
+    t.float "balance", limit: 24
+    t.string "status", default: "unverified"
+    t.bigint "instalment_id"
+    t.datetime "verify_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instalment_id"], name: "index_repay_logs_on_instalment_id"
   end
 
   create_table "user_areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -226,7 +241,6 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "totle_loan", default: false
-    t.datetime "repay_time"
     t.index ["user_id"], name: "index_user_powers_on_user_id"
   end
 
@@ -272,6 +286,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
   add_foreign_key "loan_comments", "loans"
   add_foreign_key "loan_images", "loans"
   add_foreign_key "loans", "users"
+  add_foreign_key "repay_logs", "instalments"
   add_foreign_key "user_areas", "users"
   add_foreign_key "user_powers", "users"
 end

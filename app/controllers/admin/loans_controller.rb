@@ -7,6 +7,18 @@ class Admin::LoansController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     conditions={user:current_user}
+
+    start_date = '2016-01-01'
+    end_date = DateTime.now
+
+    params[:starttime].present? &&
+        start_date = params[:starttime].to_datetime.beginning_of_day
+
+    params[:endtime].present? &&
+        end_date = params[:endtime].to_datetime.end_of_day
+
+    conditions.merge!({created_at: start_date..end_date})
+
     @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 

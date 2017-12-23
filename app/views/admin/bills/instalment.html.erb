@@ -70,9 +70,15 @@
                           <td><%= ele.fwf %></td>
                           <td><%= ele.balance %></td>
                           <td><%= ele.dkye %></td>
-                          <td><%= ele.has_repay ? '已还款' : '' %>
-                            <% if !ele.has_repay %>
-                                <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}", onclick:"if(confirm('确认提交还款吗？')==false)return false;" %>
+                          <td>
+                            <% if ele.can_repay && !ele.has_repay && current_user.have_power('input') %>
+                                <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}", onclick: "if(confirm('确认提交还款吗？')==false)return false;" %>
+                            <% elsif !ele.can_repay %>
+                                还款审核中
+                            <% elsif ele.has_repay %>
+                                已还款
+                            <% else %>
+                                未还款
                             <% end %>
                           </td>
                         </tr>

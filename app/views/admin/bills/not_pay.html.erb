@@ -68,13 +68,13 @@
         <%@loans.each do |ele|%>
             <tr>
               <td><%=ele.id%></td>
-              <td><%=ele.name%></td>
+              <td><a href="<%=admin_loan_path(ele)%>"><%=ele.name%></a></td>
               <td><%=ele.phone%></td>
               <td><%=ele.first_verify%></td>
               <td><%=ele.customer_verify%></td>
               <td><%=ele.car_verify%></td>
               <td>
-                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款吗？')==false)return false;" %> &nbsp;
+                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款#{ele.basic_message.zjkje.to_f.round(2)}元吗？')==false)return false;" %> &nbsp;
               </td>
             </tr>
         <%end%>

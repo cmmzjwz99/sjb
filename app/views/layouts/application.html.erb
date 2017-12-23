@@ -77,30 +77,28 @@
       <li class="nav-item"><a href="<%= customer_admin_verify_index_path %>" class="nav-link">客户信息审核</a></li>
       <li class="nav-item"><a href="<%= car_admin_verify_index_path %>" class="nav-link">车辆信息审核</a></li>
     </ul>
-    <!--a href="#" class="sl-menu-link">
+    <a href="#" class="sl-menu-link">
       <div class="sl-menu-item">
         <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-        <span class="menu-item-label">统计</span>
+        <span class="menu-item-label">报表</span>
         <i class="menu-item-arrow fa fa-angle-down"></i>
       </div>
     </a>
     <ul class="sl-menu-sub nav flex-column">
-      <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-      <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
-      <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-      <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-    </ul-->
+      <li class="nav-item"><a href="<%=has_pay_admin_bills_path%>" class="nav-link">审核成功详单(录入)</a></li>
+      <li class="nav-item"><a href="<%=totle_loan_admin_loans_path%>" class="nav-link">地区订单统计</a></li>
+    </ul>
     <a href="#" class="sl-menu-link">
       <div class="sl-menu-item">
         <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-        <span class="menu-item-label">报表</span>
+        <span class="menu-item-label">财务</span>
         <i class="menu-item-arrow fa fa-angle-down"></i>
       </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
     <ul class="sl-menu-sub nav flex-column">
-      <li class="nav-item"><a href="<%= not_pay_admin_bills_path %>" class="nav-link">审核成功未打款</a></li>
-      <li class="nav-item"><a href="<%=has_pay_admin_bills_path%>" class="nav-link">审核成功详单</a></li>
-      <li class="nav-item"><a href="<%=totle_loan_admin_loans_path%>" class="nav-link">地区订单统计</a></li>
+      <li class="nav-item"><a href="<%=not_pay_admin_bills_path %>" class="nav-link">审核成功未打款</a></li>
+      <li class="nav-item"><a href="<%=has_pay_financial_admin_bills_path%>" class="nav-link">审核成功详单(财务)</a></li>
+      <li class="nav-item"><a href="<%=admin_repay_logs_path%>" class="nav-link">还款审核</a></li>
     </ul>
   </div><!-- sl-sideleft-menu -->
 

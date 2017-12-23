@@ -27,6 +27,7 @@
                   <select name="basic[dklx]" class="form-control select2" data-placeholder="Choose Browser">
                     <option value="全款车"<%=@basic.dklx=='全款车' ? 'selected' : ''%>>全款车</option>
                     <option value="按揭车"<%=@basic.dklx=='按揭车' ? 'selected' : ''%>>按揭车</option>
+                    <option value="房贷"<%=@basic.dklx=='房贷' ? 'selected' : ''%>>房贷</option>
                   </select>
                 </div>
               </div><!-- col-4 -->
@@ -56,12 +57,6 @@
                 <div class="form-group">
                   <label class="form-control-label">担保方式: </label>
                   <%= text_field_tag('basic[dbfs]', @basic.dbfs,{class: 'form-control'}) %>
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-3">
-                <div class="form-group">
-                  <label class="form-control-label">担保类型: </label>
-                  <%= text_field_tag('basic[dblx]', @basic.dblx,{class: 'form-control'}) %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -100,7 +95,7 @@
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
-                  <label class="form-control-label">贷款种类: </label>
+                  <label class="form-control-label">合同编号: </label>
                   <%= text_field_tag('basic[hkzl]', @basic.hkzl,{class: 'form-control'}) %>
                 </div>
               </div><!-- col-4 -->
@@ -148,6 +143,10 @@
                 <div class="form-group">
                   <label class="form-control-label">制单日期: </label>
                   <%= text_field_tag('basic[zdrq]',(@basic.zdrq.present? ? @basic.zdrq : Time.now).strftime("%Y-%m-%d"), {class: 'form-control fc-datepicker'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">

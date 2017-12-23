@@ -105,8 +105,10 @@ Rails.application.routes.draw do
         get 'has_pay'
         get "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
         get "repay/:id",action:"repay",id:/\d{1,}/,as: :repay
+        get 'has_pay_financial'
       end
     end
+    resources :repay_logs
   end
 
   root "portal#index"

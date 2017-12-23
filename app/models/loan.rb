@@ -80,11 +80,15 @@ class Loan  < ActiveRecord::Base
     end
   end
 
-  def get_status(name)
+  def get_status(name,type)
     if name=='verifypass'
       return '审核通过'
     elsif name=='verifyfail'
-      return '审核失败'
+      if type
+        return '审核失败'
+      else
+        return '未提交'
+      end
     elsif name=='unverified'
       return '审核中'
     end

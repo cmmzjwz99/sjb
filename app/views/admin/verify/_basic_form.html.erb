@@ -37,12 +37,6 @@
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
-        <label class="form-control-label">担保类型: </label>
-        <%= text_field_tag('source', @basic.dblx,{class: 'form-control',disabled:''}) %>
-      </div>
-    </div><!-- col-4 -->
-    <div class="col-3">
-      <div class="form-group">
         <label class="form-control-label">还款方式: </label>
         <%= text_field_tag('source', @basic.hkfs,{class: 'form-control',disabled:''}) %>
       </div>
@@ -73,7 +67,7 @@
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
-        <label class="form-control-label">贷款种类: </label>
+        <label class="form-control-label">合同编号: </label>
         <%= text_field_tag('source', @basic.hkzl,{class: 'form-control',disabled:''}) %>
       </div>
     </div><!-- col-4 -->
@@ -117,6 +111,10 @@
       <div class="form-group">
         <label class="form-control-label">制单日期: </label>
         <%= text_field_tag('source', @basic.zdrq.strftime('%Y-%m-%d'),{class: 'form-control',disabled:''}) %>
+      </div>
+    </div><!-- col-4 -->
+    <div class="col-3">
+      <div class="form-group">
       </div>
     </div><!-- col-4 -->
     <div class="col-3">

@@ -23,6 +23,14 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def has_pay
+    if !current_user.have_power('input')
+      redirect_to power_admin_dashboard_index_path
+    end
+    conditions={user:current_user,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
+    @loans=Loan.where(conditions).page(params[:page]).per(10)
+  end
+
+  def has_pay_financial
     if !current_user.have_power('financial')
       redirect_to power_admin_dashboard_index_path
     end
@@ -46,14 +54,15 @@ class Admin::BillsController < Admin::BaseController
 
     instalment=Instalment.find(params[:id])
 
-
     instalment.has_repay=true
     respond_to do |format|
-      if instalment.save
+      if instalment.can_repay
+        RepayLog.create({instalment:instalment,balance:instalment.balance,no:'后台提交'})
         format.html { redirect_back(fallback_location: root_path) }
       else
         format.html { redirect_back(fallback_location: root_path) }
       end
     end
   end
+
 end

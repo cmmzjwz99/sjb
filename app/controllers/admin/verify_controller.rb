@@ -12,6 +12,9 @@ class Admin::VerifyController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     @loan=Loan.find(params[:id])
+    #标记审过
+    @loan.first_submit=true
+    @loan.save
     if request.post?
       respond_to do |format|
         if params[:first_verify].present? && @loan.first_verify==Loan::UNVERIFIED
@@ -42,6 +45,9 @@ class Admin::VerifyController < Admin::BaseController
     end
     @basic=BasicMessage.find(params[:id])
     @loan=@basic.loan
+    #标记审过
+    @loan.basic_submit=true
+    @loan.save
     if request.post?
       respond_to do |format|
         if params[:basic][:status].present? && @basic.status==Loan::UNVERIFIED
@@ -73,6 +79,9 @@ class Admin::VerifyController < Admin::BaseController
     @customer=CustomerMessage.find(params[:id])
     @loan=@customer.loan
     @basic=@loan.basic_message
+    #标记审过
+    @loan.customer_submit=true
+    @loan.save
     if request.post?
       respond_to do |format|
         if params[:customer][:status].present? && @customer.status==Loan::UNVERIFIED
@@ -104,6 +113,9 @@ class Admin::VerifyController < Admin::BaseController
     @car=CarMessage.find(params[:id])
     @loan=@car.loan
     @basic=@loan.basic_message
+    #标记审过
+    @loan.car_submit=true
+    @loan.save
     if request.post?
       respond_to do |format|
         if params[:car][:status].present? && @car.status==Loan::UNVERIFIED

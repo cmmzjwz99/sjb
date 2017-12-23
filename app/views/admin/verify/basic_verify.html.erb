@@ -57,12 +57,6 @@
               </div><!-- col-4 -->
               <div class="col-lg-3">
                 <div class="form-group">
-                  <label class="form-control-label">担保类型: </label>
-                  <%= text_field_tag('basic[dblx]', @basic.dblx,{class: 'form-control',disabled:''}) %>
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-3">
-                <div class="form-group">
                   <label class="form-control-label">还款方式: </label>
                   <%= text_field_tag('basic[hkfs]', @basic.hkfs,{class: 'form-control',disabled:''}) %>
                 </div>
@@ -93,7 +87,7 @@
               </div><!-- col-4 -->
               <div class="col-lg-3">
                 <div class="form-group">
-                  <label class="form-control-label">货款种类: </label>
+                  <label class="form-control-label">合同编号: </label>
                   <%= text_field_tag('basic[hkzl]', @basic.hkzl,{class: 'form-control',disabled:''}) %>
                 </div>
               </div><!-- col-4 -->
@@ -141,6 +135,10 @@
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
                   <label class="form-control-label">申请表: </label>
                   <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
                     <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
@@ -184,7 +182,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label class="form-control-label">审核不通过原因: </label>
-                <%= text_field_tag('comment','', {class: 'form-control'}) %>
+                <input type="text" name="comment" id="comment" value="" class="form-control" required>
               </div>
             </div><!-- col-4 -->
             <% if @basic.status==Loan::UNVERIFIED %>

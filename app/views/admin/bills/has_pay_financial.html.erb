@@ -23,14 +23,14 @@
 <nav class="breadcrumb sl-breadcrumb">
   <!--a class="breadcrumb-item" href="index.html">Starlight</a>
   <a class="breadcrumb-item" href="index.html">Pages</a-->
-  <span class="breadcrumb-item active">订单管理</span>
+  <span class="breadcrumb-item active">审核成功详单</span>
 </nav>
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title">订单管理</h6>
+      <h6 class="card-body-title">审核成功详单</h6>
       <div class="form-layout pd-b-10 pd-t-10">
         <div class="row" style="margin: 0">
           <div class="form-group">
@@ -42,7 +42,7 @@
             <input class="form-control" type="text" name="firstname" >
           </div>
           <div class="form-group">
-            <label class="form-control-label">借款来源: </label>
+            <label class="form-control-label">身份证: </label>
             <input class="form-control" type="text" name="firstname" >
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
@@ -58,24 +58,14 @@
           <th>id</th>
           <th>姓名</th>
           <th>手机号</th>
-          <th>网审状态</th>
-          <th>初审状态</th>
-          <th>用户审核状态</th>
-          <th>车辆审核状态</th>
-          <th>录入员</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
             <tr>
               <td><%=ele.id%></td>
-              <td><a href="<%=admin_loan_path(ele)%>"><%=ele.name%></a></td>
+              <td><a href="<%=instalment_admin_bills_path(ele)%>"><%=ele.name%></td>
               <td><%=ele.phone%></td>
-              <td><%=ele.get_status(ele.first_verify,ele.first_submit)%></td>
-              <td><%=ele.get_status(ele.basic_verify,ele.basic_submit)%></td>
-              <td><%=ele.get_status(ele.customer_verify,ele.customer_submit)%></td>
-              <td><%=ele.get_status(ele.car_verify,ele.car_submit)%></td>
-              <td><%=ele.user.name%></td>
             </tr>
         <%end%>
         </tbody>
