@@ -12010,7 +12010,7 @@
 	
 	
 	/*
-	 * Developer note - See note in model.defaults.js about the use of Hungarian
+	 * Developer note - See note in model.application.js about the use of Hungarian
 	 * notation and camel case.
 	 */
 	
