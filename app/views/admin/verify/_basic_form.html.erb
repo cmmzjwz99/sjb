@@ -92,13 +92,13 @@
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">开始日期: </label>
-        <%= text_field_tag('source', @basic.ksrq.strftime('%Y-%m-%d'),{class: 'form-control',disabled:''}) %>
+        <%= text_field_tag('source',( @basic.ksrq.present? ? @basic.ksrq.strftime('%Y-%m-%d') : ''),{class: 'form-control',disabled:''}) %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">结束日期: </label>
-        <%= text_field_tag('source', @basic.jsrq.strftime('%Y-%m-%d'),{class: 'form-control',disabled:''}) %>
+        <%= text_field_tag('source',( @basic.jsrq.present? ? @basic.jsrq.strftime('%Y-%m-%d') : ''),{class: 'form-control',disabled:''}) %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
@@ -110,7 +110,7 @@
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">制单日期: </label>
-        <%= text_field_tag('source', @basic.zdrq.strftime('%Y-%m-%d'),{class: 'form-control',disabled:''}) %>
+        <%= text_field_tag('source',( @basic.zdrq.present? ? @basic.zdrq.strftime('%Y-%m-%d') : ''),{class: 'form-control',disabled:''}) %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
