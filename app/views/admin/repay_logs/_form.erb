@@ -8,12 +8,24 @@
           <div class="row ">
             <div class="col-lg-5">
               <div class="form-group">
-                <label class="form-control-label">aa: </label>
-                <%= text_field_tag('repaylog[no]', @repaylog.no, {class: 'form-control',disabled:''}) %>
+                <label class="form-control-label">姓名: </label>
+                <%= text_field_tag('aa', @repaylog.instalment.loan.name, {class: 'form-control',disabled:''}) %>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">身份证: </label>
+                <%= text_field_tag('aa', @repaylog.instalment.loan.idcard, {class: 'form-control',disabled:''}) %>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">期数: </label>
+                <%= text_field_tag('aa', @repaylog.instalment.periods, {class: 'form-control',disabled:''}) %>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">到期时间: </label>
+                <%= text_field_tag('aa', @repaylog.instalment.overdue_time.strftime('%Y-%m-%d'), {class: 'form-control',disabled:''}) %>
               </div>
               <div class="form-group">
                 <label class="form-control-label">金额: </label>
-                <%= text_field_tag('repaylog[balance]', @repaylog.balance, {class: 'form-control',disabled:''}) %>
+                <%= text_field_tag('aa', @repaylog.balance, {class: 'form-control',disabled:''}) %>
               </div>
 
               <div>
