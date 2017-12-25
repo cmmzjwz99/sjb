@@ -36,6 +36,7 @@
         <tr>
           <th>id</th>
           <th>姓名</th>
+          <th>订单号</th>
           <th>手机号</th>
         </tr>
         </thead>
@@ -43,6 +44,7 @@
         <%@repaylogs.each do |ele|%>
             <tr>
               <td><%=ele.id%></td>
+              <td><%=ele.instalment.loan.name%></td>
               <td><a href="<%=admin_repay_log_path(ele)%>"><%=ele.no%></a></td>
               <td><%=ele.balance%></td>
             </tr>
