@@ -89,6 +89,8 @@
               <td>jiexiri</td>
               <td><%=ele.basic_message.ksrq.strftime('%Y-%m-%d')%></td>
               <td><%=ele.basic_message.jsrq.strftime('%Y-%m-%d')%></td>
+              <td><%=(ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
+              <td><%=(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
             </tr>
         <%end%>
         </tbody>
