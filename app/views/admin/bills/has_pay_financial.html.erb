@@ -1,16 +1,17 @@
-
-<%content_for :css do%>
+<% content_for :css do %>
 
     <style>
-      .form-group{
+      .form-group {
         overflow: auto;
         margin-bottom: 10px;
       }
-      .form-group .form-control{
+
+      .form-group .form-control {
         float: left;
         width: auto;
       }
-      .form-group .form-control-label{
+
+      .form-group .form-control-label {
         float: left;
         line-height: 39px;
         margin-bottom: 0;
@@ -18,7 +19,7 @@
         width: auto;
       }
     </style>
-<%end%>
+<% end %>
 
 <nav class="breadcrumb sl-breadcrumb">
   <!--a class="breadcrumb-item" href="index.html">Starlight</a>
@@ -35,41 +36,65 @@
         <div class="row" style="margin: 0">
           <div class="form-group">
             <label class="form-control-label">姓名: </label>
-            <input class="form-control" type="text" name="firstname" >
+            <input class="form-control" type="text" name="firstname">
           </div>
           <div class="form-group">
             <label class="form-control-label">手机号: </label>
-            <input class="form-control" type="text" name="firstname" >
+            <input class="form-control" type="text" name="firstname">
           </div>
           <div class="form-group">
             <label class="form-control-label">身份证: </label>
-            <input class="form-control" type="text" name="firstname" >
+            <input class="form-control" type="text" name="firstname">
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
-            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_loan_url%>">新建</a>
+            <a class="btn btn-secondary" style="line-height: 1" href="<%= new_admin_loan_url %>">新建</a>
           </div><!-- form-layout-footer -->
         </div><!-- row -->
 
       </div><!-- form-layout -->
-      <table class="table table-hover table-bordered mg-b-0">
-        <thead class="bg-info">
-        <tr>
-          <th>id</th>
-          <th>姓名</th>
-          <th>手机号</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%@loans.each do |ele|%>
-            <tr>
-              <td><%=ele.id%></td>
-              <td><a href="<%=instalment_admin_bills_path(ele)%>"><%=ele.name%></td>
-              <td><%=ele.phone%></td>
-            </tr>
-        <%end%>
-        </tbody>
-      </table>
+      <div style="overflow: auto;width: 100%;">
+        <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
+          <thead class="bg-info">
+          <tr>
+            <th>合同编号</th>
+            <th>地区</th>
+            <th>合同金额</th>
+            <th>借款人姓名</th>
+            <th>手机号</th>
+            <th>担保方式</th>
+            <th>贷款形式</th>
+            <th>还款方式</th>
+            <th>贷款利率</th>
+            <th>贷款期限</th>
+            <th>期限单位</th>
+            <th>结息日</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @loans.each do |ele| %>
+              <tr>
+                <td><%= ele.basic_message.hkzl %></td>
+                <td><%= ele.get_location %></td>
+                <td><%= ele.basic_message.zjkje %></td>
+                <td><a href="<%= instalment_admin_bills_path(ele) %>"><%= ele.name %></td>
+                <td><%= ele.phone %></td>
+                <td><%= ele.basic_message.dbfs %></td>
+                <td><%= ele.basic_message.dkxs %></td>
+                <td><%= ele.basic_message.hkfs %></td>
+                <td><%= ele.get_lx %></td>
+                <td><%= ele.basic_message.dkqx %></td>
+                <td><%= ele.basic_message.dkqxdw %></td>
+                <td>jiexiri</td>
+                <td><%= ele.basic_message.ksrq.strftime('%Y-%m-%d') %></td>
+                <td><%= ele.basic_message.jsrq.strftime('%Y-%m-%d') %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
       <div class="dataTables_wrapper no-footer">
         <%= paginate @loans %>
       </div>

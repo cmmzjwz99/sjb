@@ -16,62 +16,96 @@ class Loan  < ActiveRecord::Base
 
   def pay
     if self.has_pay==false
-      if self.basic_message.dkcp=='标准分期' &&  self.basic_message.dkqxdw=='月'
-        balance=self.basic_message.zjkje.to_f
-        periods=self.basic_message.dkqx.to_i
-        start_time=Time.now.end_of_day
+      product=Product.find_by_name(self.basic_message.dkcp)
+      lx=product.lx
+      balance=self.basic_message.zjkje.to_f
+      periods=self.basic_message.dkqx.to_i
+      start_time=Time.now.end_of_day
+
+      if product.fqlx==1
+        #先息后本
         (0..periods).each do |i|
-          condition={loan:self,periods:i+1,overdue_time:(start_time+i.months)}
-          condition[:balance]=balance/periods + balance*0.01 + 100
-          condition[:bj]=balance/periods
-          condition[:lx]=balance*0.01
-          condition[:gpsllf]=100
-          condition[:dkye]=balance*(periods-i)/periods
+          condition={loan:self,periods:i,overdue_time:(start_time+i.months)}
+          condition[:overdue_time]=condition[:overdue_time]-1.days if i>0
+
+          condition[:lx]=balance*lx/100
+          condition[:dkye]=balance
+          condition[:bj]=0
+          condition[:gpsllf]=product.gpsllf
+          condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           if i==0
-            condition[:gpsfy]=1500
-            condition[:jjf]=300
-            condition[:fwf]=3600
-            condition[:balance]=balance*0.01 +5500
-            condition[:bj]=0
+            condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+product.ffw
+            condition[:fwf]=product.ffw
+            condition[:gpsfy]=product.gpsfy
+            condition[:jjf]=product.jjf
           end
-          if i==(periods)
+          if i==periods
             condition[:gpsllf]=0
-            condition[:balance]=balance/periods
+            condition[:lx]=0
+            condition[:bj]=balance
+            condition[:balance]=balance
+            condition[:dkye]=0
+          end
+          Instalment.create(condition)
+        end
+      elsif product.fqlx==2
+        #等额本息
+        (0..periods).each do |i|
+          condition={loan:self,periods:i,overdue_time:(start_time+i.months)}
+          condition[:overdue_time]=condition[:overdue_time]-1.days if i>0
+
+          condition[:lx]=balance*lx/100
+          condition[:dkye]=balance*(periods-i)/periods
+          condition[:bj]=balance/periods
+          condition[:gpsllf]=product.gpsllf
+          condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
+          if i==0
+            condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+product.ffw
+            condition[:bj]=0
+            condition[:fwf]=product.ffw
+            condition[:gpsfy]=product.gpsfy
+            condition[:jjf]=product.jjf
+          end
+          if i==periods
+            condition[:gpsllf]=0
             condition[:lx]=0
           end
           Instalment.create(condition)
         end
-      elsif self.basic_message.dkcp=='第一期还两期' &&  self.basic_message.dkqxdw=='月'
-        balance=self.basic_message.zjkje.to_f
-        periods=self.basic_message.dkqx.to_i
-        start_time=Time.now.end_of_day
+      elsif product.fqlx==3
+        #一期还两期
+        dkye=balance
         (0..periods-1).each do |i|
-          condition={loan:self,periods:i+1,overdue_time:(start_time+i.months)}
-          condition[:balance]=balance/periods + balance*0.01 + 100
+          condition={loan:self,periods:i,overdue_time:(start_time+i.months)}
+          condition[:overdue_time]=condition[:overdue_time]-1.days if i>0
+          condition[:lx]=balance*lx/100
           condition[:bj]=balance/periods
-          condition[:lx]=balance*0.01
-          condition[:gpsllf]=100
-          condition[:dkye]=balance*(periods-i-1)/periods
+          condition[:gpsllf]=product.gpsllf
+          condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           if i==0
-            condition[:gpsfy]=1500
-            condition[:jjf]=300
-            condition[:fwf]=3600
-            condition[:balance]=balance*0.01 +5500
+            condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+product.ffw
             condition[:bj]=0
-            condition[:dkye]=balance
+            condition[:fwf]=product.ffw
+            condition[:gpsfy]=product.gpsfy
+            condition[:jjf]=product.jjf
           end
-          if i==1
-            condition[:balance]=(balance/periods + balance*0.01)*2 + 100
-            condition[:bj]=(balance/periods)*2
-            condition[:lx]=(balance*0.01)*2
+          if i==product.sbqs
+            condition[:bj]=condition[:bj]*2
+            condition[:lx]=condition[:lx]*2
+            condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           end
-          if i==(periods-1)
-            condition[:balance]=balance/periods+100
+          if i==periods-1
+            condition[:gpsllf]=0
             condition[:lx]=0
           end
+          condition[:dkye]=dkye-condition[:bj]
+          dkye=dkye-condition[:bj]
           Instalment.create(condition)
         end
       end
+
+
+
       self.has_pay=true
       self.save
       return true
@@ -99,5 +133,24 @@ class Loan  < ActiveRecord::Base
     basic.save
     self.verify_time=Time.now
     self.verify_user=user.id
+  end
+
+  def get_location
+    location=''
+    location='浙江温州' if self.location=='zjwz'
+    location='绍兴嵊州' if self.location=='zjsxsz'
+    location='绍兴柯桥' if self.location=='zjsxkq'
+    location='绍兴越城' if self.location=='zjsxyc'
+    location='浙江杭州' if self.location=='zjhz'
+    location='安徽合肥' if self.location=='ahhf'
+    return location
+  end
+
+  def get_lx
+    begin
+      return Product.find_by_name(self.basic_message.dkcp).lx
+    rescue
+      return ''
+    end
   end
 end

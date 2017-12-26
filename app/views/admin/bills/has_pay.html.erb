@@ -52,24 +52,48 @@
         </div><!-- row -->
 
       </div><!-- form-layout -->
-      <table class="table table-hover table-bordered mg-b-0">
+      <div style="overflow: auto;width: 100%;">
+      <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
         <thead class="bg-info">
         <tr>
-          <th>id</th>
-          <th>姓名</th>
+          <th>合同编号</th>
+          <th>地区</th>
+          <th>合同金额</th>
+          <th>借款人姓名</th>
           <th>手机号</th>
+          <th>担保方式</th>
+          <th>贷款形式</th>
+          <th>还款方式</th>
+          <th>贷款利率</th>
+          <th>贷款期限</th>
+          <th>期限单位</th>
+          <th>结息日</th>
+          <th>开始日期</th>
+          <th>结束日期</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
             <tr>
-              <td><%=ele.id%></td>
+              <td><%=ele.basic_message.hkzl%></td>
+              <td><%=ele.get_location%></td>
+              <td><%=ele.basic_message.zjkje%></td>
               <td><a href="<%=instalment_admin_bills_path(ele)%>"><%=ele.name%></td>
               <td><%=ele.phone%></td>
+              <td><%=ele.basic_message.dbfs%></td>
+              <td><%=ele.basic_message.dkxs%></td>
+              <td><%=ele.basic_message.hkfs%></td>>
+              <td><%=ele.get_lx %></td>
+              <td><%=ele.basic_message.dkqx%></td>
+              <td><%=ele.basic_message.dkqxdw%></td>
+              <td>jiexiri</td>
+              <td><%=ele.basic_message.ksrq.strftime('%Y-%m-%d')%></td>
+              <td><%=ele.basic_message.jsrq.strftime('%Y-%m-%d')%></td>
             </tr>
         <%end%>
         </tbody>
       </table>
+      </div>
       <div class="dataTables_wrapper no-footer">
         <%= paginate @loans %>
       </div>

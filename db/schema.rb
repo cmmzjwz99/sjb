@@ -199,6 +199,19 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.float "lx", limit: 24, default: 1.0
+    t.integer "fqlx", default: 1
+    t.integer "sbqs"
+    t.float "gpsfy", limit: 24, default: 0.0
+    t.float "jjf", limit: 24, default: 0.0
+    t.float "ffw", limit: 24, default: 0.0
+    t.float "gpsllf", limit: 24, default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "label"
     t.string "nicename"

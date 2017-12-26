@@ -1,0 +1,73 @@
+<%= form_for([:admin, @product], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+    <div class="sl-page-title" style="margin-bottom: 0">
+      <div class="card pd-20 pd-sm-40">
+        <h6 class="card-body-title">产品</h6>
+
+        <div class="form-layout">
+          <div class="row ">
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">名称: </label>
+                <%= text_field_tag('product[name]', @product.name, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">利息(%): </label>
+                <%= text_field_tag('product[lx]', @product.lx, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">双倍期数(不是一期还两期不用填): </label>
+                <%= text_field_tag('product[sbqs]', @product.sbqs, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">GPS费用: </label>
+                <%= text_field_tag('product[gpsfy]', @product.gpsfy, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">进件费: </label>
+                <%= text_field_tag('product[jjf]', @product.jjf, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">服务费: </label>
+                <%= text_field_tag('product[ffw]', @product.ffw, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">GPS流量费: </label>
+                <%= text_field_tag('product[gpsllf]', @product.gpsllf, {class: 'form-control'}) %>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-6">
+
+              <div class="form-group">
+                <label class="form-control-label">产品类型: <span class="tx-danger">*</span></label>
+                <div class="controls" style="line-height: 40px">
+                  <%= radio_button_tag('product[fqlx]', 1, @product.fqlx==1 ? '1' : nil) %>
+                  先息后本
+                  <%= radio_button_tag('product[fqlx]', 2, @product.fqlx==2 ? '1' : nil) %>
+                  等额本息
+                  <%= radio_button_tag('product[fqlx]', 3, @product.fqlx==3 ? '1' : nil) %>
+                  一期还两期
+                </div>
+              </div>
+            </div>
+
+          </div><!-- row -->
+          <div class="form-layout-footer">
+            <button class="btn btn-info mg-r-5">保存</button>
+          </div><!-- form-layout-footer -->
+        </div>
+
+      </div>
+    </div><!-- sl-page-title -->
+<% end %>

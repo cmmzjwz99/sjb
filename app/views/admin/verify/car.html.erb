@@ -30,6 +30,7 @@
 
       <h6 class="card-body-title">待审名单</h6>
       <div class="form-layout pd-b-10 pd-t-10">
+        <form>
         <div class="row" style="margin: 0">
           <div class="form-group">
             <label class="form-control-label">姓名: </label>
@@ -43,11 +44,19 @@
             <label class="form-control-label">借款来源: </label>
             <input class="form-control" type="text" name="firstname">
           </div>
+          <div class="form-group">
+            <label class="form-control-label">开始日期: </label>
+            <input class="form-control fc-datepicker" type="text" name="starttime" value="<%=(params[:starttime]||'2017-01-01')%>">
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">结束日期: </label>
+            <input class="form-control fc-datepicker" type="text" name="endtime" value="<%=(params[:endtime]||Time.now.strftime('%Y-%m-%d'))%>" >
+          </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
           </div><!-- form-layout-footer -->
         </div><!-- row -->
-
+        </form>
       </div><!-- form-layout -->
       <table class="table table-hover table-bordered mg-b-0">
         <thead class="bg-info">
@@ -56,9 +65,7 @@
           <th>姓名</th>
           <th>手机号</th>
           <th>编号</th>
-          <!--th>初审状态</th>
-          <th>用户审核状态</th>
-          <th>车辆审核状态</th-->
+          <th>订单录入时间</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +75,7 @@
               <td><a href="<%="#{car_admin_verify_index_path}/#{ele.id}"%>"><%=ele.loan.name%></a></td>
               <td><%=ele.loan.phone%></td>
               <td><%=ele.no%></td>
+              <td><%=ele.loan.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
             </tr>
         <%end%>
         </tbody>
@@ -79,3 +87,13 @@
   </div><!-- sl-page-title -->
 
 </div><!-- sl-pagebody -->
+
+<%content_for :js do%>
+    <script>
+        $('.fc-datepicker').datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            dateFormat:'yy-mm-dd'
+        });
+    </script>
+<%end%>

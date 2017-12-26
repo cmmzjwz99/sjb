@@ -4,6 +4,18 @@ class Admin::VerifyController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     conditions ={first_verify:Loan::UNVERIFIED}
+
+    start_date = '2016-01-01'
+    end_date = DateTime.now
+
+    params[:starttime].present? &&
+        start_date = params[:starttime].to_datetime.beginning_of_day
+
+    params[:endtime].present? &&
+        end_date = params[:endtime].to_datetime.end_of_day
+
+    conditions.merge!({created_at:start_date..end_date})
+
     @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 
@@ -31,11 +43,24 @@ class Admin::VerifyController < Admin::BaseController
       end
     end
   end
+
   def basic
     if !current_user.have_power('online_verify')
       redirect_to power_admin_dashboard_index_path
     end
     conditions ={status:Loan::UNVERIFIED}
+
+    start_date = '2016-01-01'
+    end_date = DateTime.now
+
+    params[:starttime].present? &&
+        start_date = params[:starttime].to_datetime.beginning_of_day
+
+    params[:endtime].present? &&
+        end_date = params[:endtime].to_datetime.end_of_day
+
+    conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
+
     @basics=BasicMessage.where(conditions).page(params[:page]).per(10)
   end
 
@@ -63,12 +88,23 @@ class Admin::VerifyController < Admin::BaseController
     end
   end
 
-
   def customer
     if !current_user.have_power('customer_verify')
       redirect_to power_admin_dashboard_index_path
     end
     conditions ={status:Loan::UNVERIFIED}
+
+    start_date = '2016-01-01'
+    end_date = DateTime.now
+
+    params[:starttime].present? &&
+        start_date = params[:starttime].to_datetime.beginning_of_day
+
+    params[:endtime].present? &&
+        end_date = params[:endtime].to_datetime.end_of_day
+
+    conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
+
     @customers=CustomerMessage.where(conditions).page(params[:page]).per(10)
   end
 
@@ -103,6 +139,18 @@ class Admin::VerifyController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     conditions ={status:Loan::UNVERIFIED}
+
+    start_date = '2016-01-01'
+    end_date = DateTime.now
+
+    params[:starttime].present? &&
+        start_date = params[:starttime].to_datetime.beginning_of_day
+
+    params[:endtime].present? &&
+        end_date = params[:endtime].to_datetime.end_of_day
+
+    conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
+
     @cars=CarMessage.where(conditions).page(params[:page]).per(10)
   end
 

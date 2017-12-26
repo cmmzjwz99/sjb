@@ -30,7 +30,7 @@
             </div>
             <div class="col-7">
               <div class="form-group">
-                <label class="form-control-label">身份证: </label>
+                <label class="form-control-label">贷款产品: </label>
                 <%= text_field_tag('', @loan.basic_message.dkcp,{class: 'form-control',disabled:''}) %>
               </div>
             </div>
@@ -59,7 +59,7 @@
                     <tbody id="table-loan-xsz">
                     <% @loan.instalments.each do |ele| %>
                         <tr>
-                          <td><%= (ele.periods-1) %></td>
+                          <td><%= ele.periods%></td>
                           <td><%=ele.overdue_time.strftime('%Y-%m-%d')%></td>
                           <td><%= ele.bj %></td>
                           <td><%= ele.lx %></td>

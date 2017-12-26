@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <label class="form-control-label">开始日期: </label>
-              <input class="form-control fc-datepicker" type="text" name="starttime" value="<%=(params[:starttime]||Time.now.strftime('%Y-%m-%d'))%>">
+              <input class="form-control fc-datepicker" type="text" name="starttime" value="<%=(params[:starttime]||'2017-01-01')%>">
             </div>
             <div class="form-group">
               <label class="form-control-label">结束日期: </label>
@@ -60,34 +60,59 @@
 
         </div><!-- form-layout -->
       </form>
-      <table class="table table-hover table-bordered mg-b-0">
+      <div style="overflow: auto;width: 100%;">
+      <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
         <thead class="bg-info">
         <tr>
-          <th>id</th>
-          <th>姓名</th>
-          <th>手机号</th>
+          <th>申请编码</th>
+          <th>合同编号</th>
+          <th>地区</th>
+          <th>合同金额</th>
+          <th>借款人姓名</th>
+          <th>手机号码</th>
+          <th>担保方式</th>
+          <th>贷款形式</th>
+          <th>还款方式</th>
+          <th>贷款利率</th>
+          <th>贷款期限</th>
+          <th>期限单位</th>
+          <th>结息日</th>
+          <th>开始时间</th>
+          <th>结束时间</th>
           <th>网审状态</th>
           <th>初审状态</th>
           <th>用户审核状态</th>
-          <th>车辆审核状态</th>
-          <th>订单创建时间</th>
+          <th>车审状态</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
+          <%basic_message=ele.basic_message || BasicMessage.new%>
             <tr>
-              <td><%=ele.id%></td>
+              <td>申请编码</td>
+              <td><%=basic_message.hkzl%></td>
+              <td><%=ele.get_location%></td>
+              <td><%=basic_message.zjkje%></td>
               <td><a href="<%=admin_loan_path(ele)%>"><%=ele.name%></a></td>
               <td><%=ele.phone%></td>
+              <td><%=basic_message.dbfs%></td>
+              <td><%=basic_message.dkxs%></td>
+              <td><%=basic_message.hkfs%></td>
+              <td><%=ele.get_lx%></td>
+              <td><%=basic_message.dkqx%></td>
+              <td><%=basic_message.dkqxdw%></td>
+              <td>结息日</td>
+              <td><%=(basic_message.ksrq.present? ? basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
+              <td><%=(basic_message.jsrq.present? ? basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
               <td><%=ele.get_status(ele.first_verify,ele.first_submit)%></td>
               <td><%=ele.get_status(ele.basic_verify,ele.basic_submit)%></td>
               <td><%=ele.get_status(ele.customer_verify,ele.customer_submit)%></td>
               <td><%=ele.get_status(ele.car_verify,ele.car_submit)%></td>
-              <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
             </tr>
         <%end%>
         </tbody>
       </table>
+      </div>
       <div class="dataTables_wrapper no-footer">
         <%= paginate @loans %>
       </div>

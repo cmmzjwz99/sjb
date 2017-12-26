@@ -70,8 +70,10 @@
                   <label class="form-control-label">贷款产品: </label>
                   <!--= text_field_tag('basic[dkcp]', @basic.dkcp,{class: 'form-control'}) %-->
                   <select name="basic[dkcp]" class="form-control select2" data-placeholder="Choose Browser">
-                    <option value="标准分期"<%=@basic.dkcp=='标准分期' ? 'selected' : ''%>>标准分期</option>
-                    <option value="第一期还两期"<%=@basic.dkcp=='第一期还两期' ? 'selected' : ''%>>第一期还两期</option>
+                    <%Product.where({}).each do |ele|%>
+
+                        <option value="<%=ele.name%>"<%=@basic.dkcp==ele.name ? 'selected' : ''%>><%=ele.name%></option>
+                        <%end%>
                   </select>
                 </div>
               </div><!-- col-4 -->

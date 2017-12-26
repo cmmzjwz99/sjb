@@ -109,6 +109,7 @@ Rails.application.routes.draw do
       end
     end
     resources :repay_logs
+    resources :products
   end
 
   root "portal#index"
