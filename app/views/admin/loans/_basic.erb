@@ -158,9 +158,11 @@
                       <%= file_field_tag('basic[sqb]') %>
                       <%= hidden_field_tag('basic[sqb_cache]') %>
                   <% end %>
-                  <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
-                    <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
-                  </a>
+                  <% if @basic.sqb.present? %>
+                      <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -170,9 +172,11 @@
                       <%= file_field_tag('basic[clxxb]') %>
                       <%= hidden_field_tag('basic[clxxb_cache]') %>
                   <% end %>
-                  <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
-                    <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
-                  </a>
+                  <% if @basic.clxxb.present? %>
+                      <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -182,9 +186,11 @@
                       <%= file_field_tag('basic[cljcb]') %>
                       <%= hidden_field_tag('basic[cljcb_cache]') %>
                   <% end %>
-                  <a href="<%= @basic.cljcb_url.to_s %>" target="_blank">
-                    <%= image_tag(@basic.cljcb_url.to_s, class: 'col-12') %>
-                  </a>
+                  <% if @basic.cljcb.present? %>
+                      <a href="<%= @basic.cljcb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.cljcb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -194,9 +200,11 @@
                       <%= file_field_tag('basic[yybspb]') %>
                       <%= hidden_field_tag('basic[yybspb_cache]') %>
                   <% end %>
-                  <a href="<%= @basic.yybspb_url.to_s %>" target="_blank">
-                    <%= image_tag(@basic.yybspb_url.to_s, class: 'col-12') %>
-                  </a>
+                  <% if @basic.yybspb.present? %>
+                      <a href="<%= @basic.yybspb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.yybspb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -206,9 +214,11 @@
                       <%= file_field_tag('basic[csb]') %>
                       <%= hidden_field_tag('basic[csb_cache]') %>
                   <% end %>
-                  <a href="<%=@basic.csb_url.to_s%>" target="_blank">
-                    <%= image_tag(@basic.csb_url.to_s,class: 'col-12') %>
-                  </a>
+                  <% if @basic.csb.present? %>
+                      <a href="<%= @basic.csb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.csb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
             </div><!-- row -->

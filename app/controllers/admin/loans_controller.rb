@@ -19,7 +19,7 @@ class Admin::LoansController < Admin::BaseController
 
     conditions.merge!({created_at: start_date..end_date})
 
-    @loans=Loan.where(conditions).page(params[:page]).per(10)
+    @loans=Loan.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def totle_loan

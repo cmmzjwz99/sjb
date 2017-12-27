@@ -120,41 +120,51 @@
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">申请表: </label>
-        <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
-          <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
-        </a>
+        <% if @basic.sqb.present? %>
+            <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
+              <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
+            </a>
+        <% end %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">车辆信息表: </label>
-        <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
-          <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
-        </a>
+        <% if @basic.clxxb.present? %>
+            <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
+              <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
+            </a>
+        <% end %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">车辆检测表: </label>
-        <a href="<%= @basic.cljcb_url.to_s %>" target="_blank">
-          <%= image_tag(@basic.cljcb_url.to_s, class: 'col-12') %>
-        </a>
+        <% if @basic.cljcb.present? %>
+            <a href="<%= @basic.cljcb_url.to_s %>" target="_blank">
+              <%= image_tag(@basic.cljcb_url.to_s, class: 'col-12') %>
+            </a>
+        <% end %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">营业部审批表: </label>
-        <a href="<%= @basic.yybspb_url.to_s %>" target="_blank">
-          <%= image_tag(@basic.yybspb_url.to_s, class: 'col-12') %>
-        </a>
+        <% if @basic.yybspb.present? %>
+            <a href="<%= @basic.yybspb_url.to_s %>" target="_blank">
+              <%= image_tag(@basic.yybspb_url.to_s, class: 'col-12') %>
+            </a>
+        <% end %>
       </div>
     </div><!-- col-4 -->
     <div class="col-3">
       <div class="form-group">
         <label class="form-control-label">车300: </label>
-        <a href="<%=@basic.csb_url.to_s%>" target="_blank">
-          <%= image_tag(@basic.csb_url.to_s,class: 'col-12') %>
-        </a>
+        <% if @basic.csb.present? %>
+            <a href="<%= @basic.csb_url.to_s %>" target="_blank">
+              <%= image_tag(@basic.csb_url.to_s, class: 'col-12') %>
+            </a>
+        <% end %>
       </div>
     </div><!-- col-4 -->
   </div><!-- row -->

@@ -54,6 +54,7 @@
                       <th>总计费用</th>
                       <th>贷款余额</th>
                       <th>操作</th>
+                      <th>备注</th>
                     </tr>
                     </thead>
                     <tbody id="table-loan-xsz">
@@ -80,6 +81,11 @@
                             <% else %>
                                 未还款
                             <% end %>
+                          </td>
+                          <td>
+                            <%RepayLog.where(instalment: ele,status:Loan::VERIFYFAIL).each do |ele|%>
+                            <%=ele.remark%>;
+                            <%end%>
                           </td>
                         </tr>
                     <% end %>

@@ -27,7 +27,7 @@ class Admin::BillsController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     conditions={user:current_user,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
-    @loans=Loan.where(conditions).page(params[:page]).per(10)
+    @loans=Loan.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def has_pay_financial
@@ -35,7 +35,7 @@ class Admin::BillsController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
     conditions={location:current_user.get_locations,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
-    @loans=Loan.where(conditions).page(params[:page]).per(10)
+    @loans=Loan.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def instalment

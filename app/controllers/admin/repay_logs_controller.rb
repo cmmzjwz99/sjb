@@ -14,6 +14,9 @@ class Admin::RepayLogsController < Admin::BaseController
             instalment.has_repay=true
             instalment.save
           end
+          @repaylog.verify_user_id=current_user.id
+          @repaylog.verify_time=Time.now
+          @repaylog.save
           format.html {redirect_to admin_repay_logs_path, notice: 'successfully updated'}
           format.json {render :show, status: :ok, location: @repaylog}
         else

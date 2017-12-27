@@ -87,7 +87,7 @@
                 <td><%= ele.get_lx %></td>
                 <td><%= ele.basic_message.dkqx %></td>
                 <td><%= ele.basic_message.dkqxdw %></td>
-                <td>jiexiri</td>
+                <td><%=(ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
                 <td><%=(ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
                 <td><%=(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
               </tr>

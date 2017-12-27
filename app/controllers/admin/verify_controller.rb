@@ -16,7 +16,7 @@ class Admin::VerifyController < Admin::BaseController
 
     conditions.merge!({created_at:start_date..end_date})
 
-    @loans=Loan.where(conditions).page(params[:page]).per(10)
+    @loans=Loan.where(conditions).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def first_verify
@@ -61,7 +61,7 @@ class Admin::VerifyController < Admin::BaseController
 
     conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
 
-    @basics=BasicMessage.where(conditions).page(params[:page]).per(10)
+    @basics=BasicMessage.where(conditions).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def basic_verify
@@ -105,7 +105,7 @@ class Admin::VerifyController < Admin::BaseController
 
     conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
 
-    @customers=CustomerMessage.where(conditions).page(params[:page]).per(10)
+    @customers=CustomerMessage.where(conditions).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def customer_verify
@@ -151,7 +151,7 @@ class Admin::VerifyController < Admin::BaseController
 
     conditions.merge!({loan:(Loan.where(created_at:start_date..end_date) )})
 
-    @cars=CarMessage.where(conditions).page(params[:page]).per(10)
+    @cars=CarMessage.where(conditions).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def car_verify

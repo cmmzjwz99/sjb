@@ -226,6 +226,8 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.datetime "verify_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remark"
+    t.integer "verify_user_id"
     t.index ["instalment_id"], name: "index_repay_logs_on_instalment_id"
   end
 

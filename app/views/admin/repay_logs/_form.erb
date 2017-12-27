@@ -27,6 +27,10 @@
                 <label class="form-control-label">金额: </label>
                 <%= text_field_tag('aa', @repaylog.balance, {class: 'form-control',disabled:''}) %>
               </div>
+              <div class="form-group">
+                <label class="form-control-label">备注: </label>
+                <%= text_field_tag('repaylog[remark]', @repaylog.remark, {class: 'form-control'}) %>
+              </div>
 
               <div>
                 <div class="form-group">
