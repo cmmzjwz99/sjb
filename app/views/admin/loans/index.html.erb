@@ -45,6 +45,43 @@
               <input class="form-control" type="text" name="phone" >
             </div>
             <div class="form-group">
+              <label class="form-control-label">网审状态: </label>
+
+              <select name="first" class="form-control select2">
+                <option value="">全部</option>
+                <option value="verifyfail">审核失败或未提交</option>
+                <option value="verifypass">审核成功</option>
+                <option value="unverified">审核中</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">初审状态: </label>
+              <select name="basic" class="form-control select2">
+                <option value="">全部</option>
+                <option value="verifyfail">审核失败或未提交</option>
+                <option value="verifypass">审核成功</option>
+                <option value="unverified">审核中</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">人审状态: </label>
+              <select name="customer" class="form-control select2">
+                <option value="">全部</option>
+                <option value="verifyfail">审核失败或未提交</option>
+                <option value="verifypass">审核成功</option>
+                <option value="unverified">审核中</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">车审状态: </label>
+              <select name="car" class="form-control select2">
+                <option value="">全部</option>
+                <option value="verifyfail">审核失败或未提交</option>
+                <option value="verifypass">审核成功</option>
+                <option value="unverified">审核中</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label class="form-control-label">开始日期: </label>
               <input class="form-control fc-datepicker" type="text" name="starttime" value="<%=(params[:starttime]||'2017-01-01')%>">
             </div>
@@ -84,6 +121,7 @@
           <th>结息日</th>
           <th>开始时间</th>
           <th>结束时间</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -110,6 +148,9 @@
               <td><%=(ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
               <td><%=(basic_message.ksrq.present? ? basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
               <td><%=(basic_message.jsrq.present? ? basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
+              <td>
+                <a href='/admin/loans/instalment/<%=ele.id%>'  target="_blank">分期预览</a>
+              </td>
             </tr>
         <%end%>
         </tbody>
@@ -131,5 +172,6 @@
             selectOtherMonths: true,
             dateFormat:'yy-mm-dd'
         });
+
     </script>
 <%end%>

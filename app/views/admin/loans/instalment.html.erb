@@ -1,0 +1,81 @@
+<!DOCTYPE html><html>
+
+<head>
+  <meta charset="utf-8"/>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=1"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <title>还款明细清单</title>
+  <style>
+    table, th, td {
+      border: 1px solid #00000f;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<div style="width: 1000px;margin-left: auto;margin-right: auto;position: relative">
+    <div style="text-align: center;font-size: 30px;line-height: 60px">
+      还款明细清单
+    </div>
+    <table style="width: 100%;max-width: 1000px;border: 1px solid #cccccc;margin-top: 20px">
+      <thead class="bg-info">
+      <tr>
+        <th>期数</th>
+        <th>还款日期</th>
+        <th>本金</th>
+        <th>利息</th>
+        <th>gps费用</th>
+        <th>gps流量费</th>
+        <th>进件费</th>
+        <th>服务费</th>
+        <th>违章押金</th>
+        <th>保险押金</th>
+        <th>保证金</th>
+        <th>其他费用</th>
+        <th>风险金</th>
+        <th>应付金额</th>
+      </tr>
+      </thead>
+      <tbody style="text-align: center;">
+      <% @instalments.each do |ele| %>
+          <tr>
+            <td><%=ele[:periods]%></td>
+            <td><%=ele[:overdue_time].strftime('%Y-%m-%d')%></td>
+            <td><%=ele[:bj]%></td>
+            <td><%=ele[:lx].round(2)%></td>
+            <td><%=ele[:gpsfy]%></td>
+            <td><%=ele[:gpsllf]%></td>
+            <td><%=ele[:jjf]%></td>
+            <td><%=ele[:fwf]%></td>
+            <td><%=ele[:wzyj]%></td>
+            <td><%=ele[:bxyj]%></td>
+            <td><%=ele[:bzj]%></td>
+            <td><%=ele[:qt]%></td>
+            <td><%=ele[:fxj]%></td>
+            <td><%=ele[:balance].round(2)%></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 40px">客户姓名：___________________________________________     <span style="position: absolute;right: 0">手机号码：___________________________________________</span></div>
+    <div style="margin-top: 30px">身份证号：___________________________________________     <span style="position: absolute;right: 0">开 户 行：___________________________________________</span></div>
+    <div style="margin-top: 30px">银行卡号：___________________________________________    </div>
+
+    <div style="margin-top: 30px">
+      声明：<br />
+      本人已xxxxxxxxxxxxxxxx
+    </div>
+    <div style="margin-top: 20px;text-align: right;padding-right: 100px">客户签名：</div>
+    <div style="margin-top: 20px;text-align: right;padding-right: 100px">签订日期：</div>
+
+
+</div>
+
+</body>
+
+</html>

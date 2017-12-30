@@ -137,7 +137,7 @@
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
-                  <label class="form-control-label">制单人: </label>
+                  <label class="form-control-label">业务员姓名: </label>
                   <%= text_field_tag('basic[zdr]', @basic.zdr,{class: 'form-control'}) %>
                 </div>
               </div><!-- col-4 -->
@@ -145,6 +145,28 @@
                 <div class="form-group">
                   <label class="form-control-label">制单日期: </label>
                   <%= text_field_tag('basic[zdrq]',(@basic.zdrq.present? ? @basic.zdrq : Time.now).strftime("%Y-%m-%d"), {class: 'form-control fc-datepicker'}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">服务费: </label>
+                  <input type="text" name="basic[fwf]" id="basic[fwf]" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" value="<%=@basic.fwf%>">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">违章押金: </label>
+                  <input type="text" name="basic[wzyj]" id="basic[wzyj]" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" value="<%=@basic.wzyj%>">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">保险押金: </label>
+                  <input type="text" name="basic[bxyj]" id="basic[bxyj]" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" value="<%=@basic.bxyj%>">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-3">
+                <div class="form-group">
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">

@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "yybspb"
     t.string "csb"
     t.datetime "verify_time"
+    t.float "fwf", limit: 24, default: 0.0
+    t.float "wzyj", limit: 24, default: 0.0
+    t.float "bxyj", limit: 24, default: 0.0
     t.index ["loan_id"], name: "index_basic_messages_on_loan_id"
   end
 
@@ -152,6 +155,11 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "lx", limit: 24, default: 0.0
     t.float "dkye", limit: 24, default: 0.0
     t.integer "repay_user_id"
+    t.float "wzyj", limit: 24, default: 0.0
+    t.float "bxyj", limit: 24, default: 0.0
+    t.float "bzj", limit: 24, default: 0.0
+    t.float "qt", limit: 24, default: 0.0
+    t.float "fxj", limit: 24, default: 0.0
     t.index ["loan_id"], name: "index_instalments_on_loan_id"
   end
 
@@ -206,10 +214,12 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.integer "sbqs"
     t.float "gpsfy", limit: 24, default: 0.0
     t.float "jjf", limit: 24, default: 0.0
-    t.float "ffw", limit: 24, default: 0.0
     t.float "gpsllf", limit: 24, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "bzj", limit: 24, default: 0.0
+    t.float "qt", limit: 24, default: 0.0
+    t.float "fxj", limit: 24, default: 0.0
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

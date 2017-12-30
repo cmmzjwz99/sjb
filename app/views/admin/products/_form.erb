@@ -37,8 +37,20 @@
             </div>
             <div class="col-6">
               <div class="form-group">
-                <label class="form-control-label">服务费: </label>
-                <%= text_field_tag('product[ffw]', @product.ffw, {class: 'form-control'}) %>
+                <label class="form-control-label">保证金: </label>
+                <%= text_field_tag('product[bzj]', @product.bzj, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">其他: </label>
+                <%= text_field_tag('product[qt]', @product.qt, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label class="form-control-label">风险金: </label>
+                <%= text_field_tag('product[fxj]', @product.fxj, {class: 'form-control'}) %>
               </div>
             </div>
             <div class="col-6">

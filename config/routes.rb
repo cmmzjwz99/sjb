@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         post 'customer'
         post 'basic'
         get 'totle_loan'
+        get   "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
       end
     end
     resources :repay_logs do

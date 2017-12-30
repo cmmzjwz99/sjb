@@ -1,6 +1,6 @@
 class Admin::LoansController < Admin::BaseController
 
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy ,:instalment]
 
   def index
     if !current_user.have_power('input')
@@ -16,6 +16,20 @@ class Admin::LoansController < Admin::BaseController
 
     params[:endtime].present? &&
         end_date = params[:endtime].to_datetime.end_of_day
+
+
+    params[:name].present? &&
+        conditions.merge!({name:params[:name]})
+    params[:phone].present? &&
+        conditions.merge!({phone:params[:phone]})
+    params[:first].present? &&
+        conditions.merge!({first_verify:params[:first]})
+    params[:basic].present? &&
+        conditions.merge!({basic_verify:params[:basic]})
+    params[:customer].present? &&
+        conditions.merge!({customer_verify:params[:customer]})
+    params[:car].present? &&
+        conditions.merge!({car_verify:params[:car]})
 
     conditions.merge!({created_at: start_date..end_date})
 
@@ -128,6 +142,11 @@ class Admin::LoansController < Admin::BaseController
         end
       end
     end
+  end
+
+  def instalment
+    @instalments=@loan.get_instalment
+    render :instalment ,layout: false
   end
 
   private
