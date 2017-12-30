@@ -83,6 +83,7 @@ class Loan  < ActiveRecord::Base
           if i==periods
             condition[:gpsllf]=0
             condition[:lx]=0
+            condition[:balance]=condition[:bj]
           end
           Instalment.create(condition)
         end
@@ -118,6 +119,7 @@ class Loan  < ActiveRecord::Base
           if i==periods-1
             condition[:gpsllf]=0
             condition[:lx]=0
+            condition[:balance]=condition[:bj]
           end
           condition[:dkye]=dkye-condition[:bj]
           dkye=dkye-condition[:bj]
@@ -228,6 +230,7 @@ class Loan  < ActiveRecord::Base
           if i==periods
             condition[:gpsllf]=0
             condition[:lx]=0
+            condition[:balance]=condition[:bj]
           end
           instalments << condition
         end
@@ -274,6 +277,7 @@ class Loan  < ActiveRecord::Base
           if i==periods-1
             condition[:gpsllf]=0
             condition[:lx]=0
+            condition[:balance]=condition[:bj]
           end
           condition[:dkye]=dkye-condition[:bj]
           dkye=dkye-condition[:bj]
