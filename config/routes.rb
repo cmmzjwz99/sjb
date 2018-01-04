@@ -107,10 +107,14 @@ Rails.application.routes.draw do
         get "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
         get "repay/:id",action:"repay",id:/\d{1,}/,as: :repay
         get 'has_pay_financial'
+        get 'salesman_report'
+        get 'performance_report'
+        post 'performance_report'
       end
     end
     resources :repay_logs
     resources :products
+    resources :teams
   end
 
   root "portal#index"

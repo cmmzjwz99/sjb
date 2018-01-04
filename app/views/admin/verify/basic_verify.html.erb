@@ -41,6 +41,8 @@
               </div><!-- col-4 -->
               <div class="col-lg-3">
                 <div class="form-group">
+                  <label class="form-control-label">抵押质押: </label>
+                  <%= text_field_tag('basic[dyzy]', @basic.dyzy,{class: 'form-control',disabled:''}) %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-lg-3">
@@ -129,8 +131,32 @@
               </div><!-- col-4 -->
               <div class="col-lg-3">
                 <div class="form-group">
+                  <label class="form-control-label">业务员团队: </label>
+                  <%= text_field_tag('basic[zdr]', @basic.team,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
                   <label class="form-control-label">制单日期: </label>
                   <%= text_field_tag('basic[zdrq]',(@basic.zdrq.present? ? @basic.zdrq : Time.now).strftime("%Y-%m-%d"), {class: 'form-control fc-datepicker',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">服务费: </label>
+                  <%= text_field_tag('basic[fwf]', @basic.fwf,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">违章押金: </label>
+                  <%= text_field_tag('basic[wzyj]', @basic.wzyj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">保险押金: </label>
+                  <%= text_field_tag('basic[bxyj]', @basic.bxyj,{class: 'form-control',disabled:''}) %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -140,41 +166,51 @@
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">申请表: </label>
+                  <% if @basic.sqb.present? %>
                   <a href="<%= @basic.sqb_url.to_s %>" target="_blank">
                     <%= image_tag(@basic.sqb_url.to_s, class: 'col-12') %>
                   </a>
+                      <%end%>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">车辆信息表: </label>
-                  <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
-                    <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
-                  </a>
+                  <% if @basic.clxxb.present? %>
+                      <a href="<%= @basic.clxxb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.clxxb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">车辆检测表: </label>
+                  <% if @basic.cljcb.present? %>
                   <a href="<%= @basic.cljcb_url.to_s %>" target="_blank">
                     <%= image_tag(@basic.cljcb_url.to_s, class: 'col-12') %>
                   </a>
+                      <%end%>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">营业部审批表: </label>
+                  <% if @basic.yybspb.present? %>
                   <a href="<%= @basic.yybspb_url.to_s %>" target="_blank">
                     <%= image_tag(@basic.yybspb_url.to_s, class: 'col-12') %>
                   </a>
+                      <%end%>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">车300: </label>
-                  <a href="<%=@basic.csb_url.to_s%>" target="_blank">
-                    <%= image_tag(@basic.csb_url.to_s,class: 'col-12') %>
-                  </a>
+                  <% if @basic.csb.present? %>
+                      <a href="<%= @basic.csb_url.to_s %>" target="_blank">
+                        <%= image_tag(@basic.csb_url.to_s, class: 'col-12') %>
+                      </a>
+                  <% end %>
                 </div>
               </div><!-- col-4 -->
             </div><!-- row -->
@@ -197,7 +233,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="form-layout-footer">
                   <button class="btn btn-info mg-r-5">保存</button>
                 </div><!-- form-layout-footer -->

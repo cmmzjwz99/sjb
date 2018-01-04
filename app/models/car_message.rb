@@ -13,5 +13,10 @@ class CarMessage < ActiveRecord::Base
   def verify_pass(user)
     self.verify_user=user.id
     self.verify_time=Time.now
+    loan=self.loan
+    if loan.customer_message.status==Loan::VERIFYPASS
+      loan.pass_time=Time.now
+      loan.save
+    end
   end
 end

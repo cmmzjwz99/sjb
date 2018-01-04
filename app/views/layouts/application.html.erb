@@ -29,12 +29,14 @@
 
   <!-- Starlight CSS -->
   <link rel="stylesheet" href="http://yunzhidai.oss-cn-shanghai.aliyuncs.com/public/starlight.css">
+  <!--link rel="stylesheet" href="/css/starlight.css"-->
 
 
   <%= javascript_include_tag :'application', 'data-turbolinks-track' => true %>
 
   <% if content_for?(:css) %>
       <%= yield :css %>
+
   <% end %>
 </head>
 
@@ -68,6 +70,7 @@
     <ul class="sl-menu-sub nav flex-column">
       <li class="nav-item"><a href="<%= admin_users_path %>" class="nav-link">用户列表</a></li>
       <li class="nav-item"><a href="<%= recover_password_admin_users_path %>" class="nav-link">修改密码</a></li>
+      <li class="nav-item"><a href="<%= admin_teams_path %>" class="nav-link">团队</a></li>
     </ul>
     <a href="#" class="sl-menu-link">
       <div class="sl-menu-item">
@@ -93,6 +96,8 @@
     <ul class="sl-menu-sub nav flex-column">
       <li class="nav-item"><a href="<%=has_pay_admin_bills_path%>" class="nav-link">审核成功详单(录入)</a></li>
       <li class="nav-item"><a href="<%=totle_loan_admin_loans_path%>" class="nav-link">地区订单统计</a></li>
+      <li class="nav-item"><a href="<%=salesman_report_admin_bills_path%>" class="nav-link">业务员报表</a></li>
+      <li class="nav-item"><a href="<%=performance_report_admin_bills_path%>" class="nav-link">业绩报表</a></li>
     </ul>
     <a href="#" class="sl-menu-link">
       <div class="sl-menu-item">

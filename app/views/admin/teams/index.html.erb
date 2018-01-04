@@ -1,0 +1,71 @@
+
+<%content_for :css do%>
+
+    <style>
+      .form-group{
+        overflow: auto;
+        margin-bottom: 10px;
+      }
+      .form-group .form-control{
+        float: left;
+        width: auto;
+      }
+      .form-group .form-control-label{
+        float: left;
+        line-height: 39px;
+        margin-bottom: 0;
+        padding: 0 10px;
+        width: auto;
+      }
+    </style>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a>
+  <a class="breadcrumb-item" href="index.html">Pages</a-->
+  <span class="breadcrumb-item active">团队列表</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">团队列表</h6>
+
+      <div class="form-layout pd-b-10 pd-t-10">
+        <div class="row" style="margin: 0">
+          <div class="form-layout-footer" >
+            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_team_path%>">新建</a>
+          </div><!-- form-layout-footer -->
+        </div><!-- row -->
+
+      </div><!-- form-layout -->
+      <table class="table table-hover table-bordered mg-b-0 mg-t-20">
+        <thead class="bg-info">
+        <tr>
+          <th>id</th>
+          <th>团队名称</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%@teams.each do |ele|%>
+            <tr>
+              <td><%=ele.id%></td>
+              <td><%=ele.name%></td>
+              <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+              <td class="centeralign">
+                <%= link_to '删除', admin_team_path(ele), method: :delete, data: { confirm: '确定删除?' } ,class: "icon-trash"%>
+              </td>
+            </tr>
+        <%end%>
+        </tbody>
+      </table>
+      <div class="dataTables_wrapper no-footer">
+        <%= paginate @teams %>
+      </div>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

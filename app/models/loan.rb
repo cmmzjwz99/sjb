@@ -130,6 +130,7 @@ class Loan  < ActiveRecord::Base
 
 
       self.has_pay=true
+      self.pay_time=Time.now
       self.save
       return true
     else

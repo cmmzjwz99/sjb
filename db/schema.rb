@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "fwf", limit: 24, default: 0.0
     t.float "wzyj", limit: 24, default: 0.0
     t.float "bxyj", limit: 24, default: 0.0
+    t.string "dyzy"
+    t.string "team", default: "无团队"
     t.index ["loan_id"], name: "index_basic_messages_on_loan_id"
   end
 
@@ -204,6 +206,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.boolean "basic_submit", default: false
     t.boolean "customer_submit", default: false
     t.boolean "car_submit", default: false
+    t.datetime "pass_time"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
@@ -239,6 +242,12 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.string "remark"
     t.integer "verify_user_id"
     t.index ["instalment_id"], name: "index_repay_logs_on_instalment_id"
+  end
+
+  create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

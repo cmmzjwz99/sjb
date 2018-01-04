@@ -1,0 +1,123 @@
+<%content_for :css do%>
+
+    <style>
+      .form-group{
+        overflow: auto;
+        margin-bottom: 10px;
+      }
+      .form-group .form-control{
+        float: left;
+        width: auto;
+      }
+      .form-group .form-control-label{
+        float: left;
+        line-height: 39px;
+        margin-bottom: 0;
+        padding: 0 10px;
+        width: auto;
+      }
+    </style>
+<%end%>
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a>
+  <a class="breadcrumb-item" href="index.html">Pages</a-->
+  <span class="breadcrumb-item active">业务员报表</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">业务员报表</h6>
+
+      <form>
+
+        <div class="form-layout pd-b-10 pd-t-10">
+          <div class="row" style="margin: 0">
+            <div class="form-group">
+              <label class="form-control-label">业务员: </label>
+              <input class="form-control" type="text" name="name" >
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">开始日期: </label>
+              <input class="form-control fc-datepicker" type="text" name="starttime" value="<%=(params[:starttime]||'2017-01-01')%>">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">结束日期: </label>
+              <input class="form-control fc-datepicker" type="text" name="endtime" value="<%=(params[:endtime]||Time.now.strftime('%Y-%m-%d'))%>" >
+            </div>
+            <div class="form-layout-footer" style="padding-left: 10px">
+              <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
+            </div><!-- form-layout-footer -->
+          </div><!-- row -->
+
+        </div><!-- form-layout -->
+      </form>
+      <div style="overflow: auto;width: 100%;">
+        <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
+          <thead class="bg-info">
+          <tr>
+            <th>合同编号</th>
+            <th>地区</th>
+            <th>团队名称</th>
+            <th>业务员</th>
+            <th>借款人</th>
+            <th>还款方式</th>
+            <th>贷款期限</th>
+            <th>抵押类型</th>
+            <th>借款类型</th>
+            <th>产品类型</th>
+
+            <th>状态</th>
+            <th>贷款金额</th>
+            <th>放款金额</th>
+            <th>服务费金额</th>
+            <th>复审时间</th>
+            <th>放款时间</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%@loans.each do |ele|%>
+              <%basic_message=ele.basic_message || BasicMessage.new%>
+              <tr>
+                <td><%=basic_message.hkzl %></td>
+                <td><%=ele.get_location%></td>
+                <td><%=basic_message.team%></td>
+                <td><%=basic_message.zdr%></td>
+                <td><%=ele.name%></td>
+                <td><%=basic_message.hkfs%></td>
+                <td><%=basic_message.dkqx%></td>
+                <td><%=basic_message.dyzy%></td>
+                <td><%=basic_message.dklx%></td>
+                <td><%=basic_message.dkcp%></td>
+                <td>执行中</td>
+                <td><%=basic_message.zjkje%></td>
+                <td><%=basic_message.zjkje%></td>
+                <td><%=basic_message.fwf%></td>
+                <td><%=ele.pass_time.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                <td><%=(ele.pay_time.present? ? ele.pay_time.strftime('%Y-%m-%d %H:%M:%S') : '')%></td>
+              </tr>
+          <%end%>
+          </tbody>
+        </table>
+      </div>
+      <div class="dataTables_wrapper no-footer">
+        <%= paginate @loans %>
+      </div>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->
+
+<%content_for :js do%>
+    <script>
+
+        $('.fc-datepicker').datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            dateFormat:'yy-mm-dd'
+        });
+
+    </script>
+<%end%>
