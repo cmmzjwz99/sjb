@@ -67,6 +67,9 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def salesman_report
+    if !current_user.have_power('totle_loan')
+      redirect_to power_admin_dashboard_index_path
+    end
     conditions={}
 
     start_date = '2016-01-01'
@@ -79,14 +82,21 @@ class Admin::BillsController < Admin::BaseController
         end_date = params[:endtime].to_datetime.end_of_day
 
     conditions.merge!({pass_time: start_date..end_date})
-    @loans=Loan.where(conditions).page(params[:page]).per(10)
+
+    loans=Loan.where(conditions)
 
 
-    loansa=Loan.select(' sum(id) as aaa , count(*) as bbb')[0]
-      p loansa.aaa
+    params[:name].present? &&
+        loans=loans.where("id in (select loan_id from basic_messages where zdr='"+params[:name]+"')")
+
+
+    @loans=loans.page(params[:page]).per(10)
   end
 
   def performance_report
+    if !current_user.have_power('totle_loan')
+      redirect_to power_admin_dashboard_index_path
+    end
     if request.post?
       conditions={}
 
@@ -103,7 +113,7 @@ class Admin::BillsController < Admin::BaseController
           conditions.merge!({location:params[:yyb]})
 
       conditions.merge!({pass_time: start_date..end_date})
-      conditions.merge!({has_pay: true})
+      conditions.merge!({has_pay: true,location:current_user.get_locations})
 
       loans=Loan.where(conditions)
 
