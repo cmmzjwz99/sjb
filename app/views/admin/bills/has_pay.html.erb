@@ -31,6 +31,7 @@
     <div class="card pd-20 pd-sm-40">
 
       <h6 class="card-body-title">审核成功详单</h6>
+      <form>
       <div class="form-layout pd-b-10 pd-t-10">
         <div class="row" style="margin: 0">
           <div class="form-group">
@@ -47,11 +48,12 @@
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
-            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_loan_url%>">新建</a>
+            <button name="export" value="export" class="btn btn-secondary mg-r-5" >导出文件</button>
           </div><!-- form-layout-footer -->
         </div><!-- row -->
 
       </div><!-- form-layout -->
+      </form>
       <div style="overflow: auto;width: 100%;">
       <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
         <thead class="bg-info">

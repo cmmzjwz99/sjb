@@ -7,6 +7,10 @@ class Admin::TeamsController < Admin::BaseController
     @teams = Team.page(params[:page]).per(10)
   end
 
+  def show
+    @member=Member.new
+  end
+
   def create
     @teams = Team.new(team_params)
 

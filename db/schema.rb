@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "fwf", limit: 24, default: 0.0
     t.float "wzyj", limit: 24, default: 0.0
     t.float "bxyj", limit: 24, default: 0.0
-    t.string "dyzy"
     t.string "team", default: "无团队"
     t.index ["loan_id"], name: "index_basic_messages_on_loan_id"
   end
@@ -210,6 +209,14 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
+  create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_members_on_team_id"
+  end
+
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.float "lx", limit: 24, default: 1.0
@@ -320,6 +327,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
   add_foreign_key "loan_comments", "loans"
   add_foreign_key "loan_images", "loans"
   add_foreign_key "loans", "users"
+  add_foreign_key "members", "teams"
   add_foreign_key "repay_logs", "instalments"
   add_foreign_key "user_areas", "users"
   add_foreign_key "user_powers", "users"

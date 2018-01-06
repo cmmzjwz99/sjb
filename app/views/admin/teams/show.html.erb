@@ -1,0 +1,70 @@
+
+
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a>
+  <a class="breadcrumb-item" href="index.html">Pages</a-->
+  <span class="breadcrumb-item active">团队列表</span>
+</nav>
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+
+
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">团队成员</h6>
+
+      <table class="table table-hover table-bordered mg-b-0 mg-t-20">
+        <thead class="bg-info">
+        <tr>
+          <th>id</th>
+          <th>成员姓名</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%@team.members.each do |ele|%>
+            <tr>
+              <td><%=ele.id%></td>
+              <td><%=ele.name%></td>
+              <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+              <td class="centeralign">
+                <%= link_to '删除', admin_member_path(ele), method: :delete, data: { confirm: '确定删除?' } ,class: "icon-trash"%>
+              </td>
+            </tr>
+        <%end%>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="card pd-20 pd-sm-40 mg-t-20">
+
+      <h6 class="card-body-title">添加成员</h6>
+
+
+      <%= form_for([:admin, @member], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+
+          <div class="form-layout pd-b-10 pd-t-10">
+
+            <%= hidden_field_tag 'member[team_id]', params[:id] %>
+            <div class="col-4" style="padding: 0">
+              <div class="form-group">
+                <label class="form-control-label">姓名: </label>
+                <%= text_field_tag('member[name]', @member.name, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="row" style="margin: 0">
+              <div class="form-layout-footer">
+                <button class="btn btn-info mg-r-5">保存</button>
+              </div><!-- form-layout-footer -->
+            </div><!-- row -->
+
+          </div><!-- form-layout -->
+      <% end %>
+    </div>
+  </div><!-- sl-page-title -->
+
+</div><!-- sl-pagebody -->

@@ -36,8 +36,37 @@
         <div class="form-layout pd-b-10 pd-t-10">
           <div class="row" style="margin: 0">
             <div class="form-group">
+              <label class="form-control-label">地区: </label>
+              <select class="form-control select2" id="location" name="location" value="<%=(params[:location]||'')%>" style="width:100px;">
+                <option value="" <%= params[:location] == '' ? 'selected' : '' %>>全部</option>
+                <% if current_user.user_area.zjwz %>
+                    <option value="zjwz" <%= params[:location] == 'zjwz' ? 'selected' : '' %>>浙江温州</option>
+                <% end %>
+                <% if current_user.user_area.zjsxsz %>
+                <option value="zjsxsz" <%=params[:location] == 'zjsxsz'?'selected':''%>>绍兴嵊州</option>
+                <% end %>
+                <% if current_user.user_area.zjsxkq %>
+                <option value="zjsxkq" <%=params[:location] == 'zjsxkq'?'selected':''%>>绍兴柯桥</option>
+                <% end %>
+                <% if current_user.user_area.zjsxyc %>
+                <option value="zjsxyc" <%=params[:location] == 'zjsxyc'?'selected':''%>>绍兴越城</option>
+                <% end %>
+                <% if current_user.user_area.zjhz %>
+                <option value="zjhz" <%=params[:location] == 'zjhz'?'selected':''%>>浙江杭州</option>
+                <% end %>
+                <% if current_user.user_area.ahhf %>
+                <option value="ahhf" <%=params[:location] == 'ahhf'?'selected':''%>>安徽合肥</option>
+                <% end %>
+              </select>
+            </div>
+            <div class="form-group">
               <label class="form-control-label">业务员: </label>
-              <input class="form-control" type="text" name="name" value="<%=(params[:name]||'')%>" >
+              <select class="form-control select2" id="name" name="name"  style="width:100px;">
+                <option value="">全部</option>
+                <%@zdrs.each do |ele|%>
+                    <option value="<%=ele.zdr%>" <%=params[:name] == ele.zdr ? 'selected':''%>><%=ele.zdr%></option>
+                <%end%>
+              </select>
             </div>
             <div class="form-group">
               <label class="form-control-label">开始日期: </label>
@@ -88,7 +117,7 @@
                 <td><%=ele.name%></td>
                 <td><%=basic_message.hkfs%></td>
                 <td><%=basic_message.dkqx%></td>
-                <td><%=basic_message.dyzy%></td>
+                <td><%=basic_message.dbfs%></td>
                 <td><%=basic_message.dklx%></td>
                 <td><%=basic_message.dkcp%></td>
                 <td>执行中</td>
@@ -119,5 +148,9 @@
             dateFormat:'yy-mm-dd'
         });
 
+
+        $('.select2').select2({
+            minimumResultsForSearch: Infinity
+        });
     </script>
 <%end%>

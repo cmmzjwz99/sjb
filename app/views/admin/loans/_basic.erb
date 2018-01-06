@@ -37,11 +37,6 @@
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
-                  <label class="form-control-label">抵押/质押: </label>
-                  <select name="basic[dyzy]" class="form-control select2" data-placeholder="Choose Browser">
-                    <option value="抵押"<%=@basic.dyzy=='抵押' ? 'selected' : ''%>>抵押</option>
-                    <option value="质押"<%=@basic.dyzy=='质押' ? 'selected' : ''%>>质押</option>
-                  </select>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -65,7 +60,10 @@
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">担保方式: </label>
-                  <%= text_field_tag('basic[dbfs]', @basic.dbfs,{class: 'form-control'}) %>
+                  <select name="basic[dbfs]" class="form-control select2" data-placeholder="Choose Browser">
+                    <option value="抵押"<%=@basic.dbfs=='抵押' ? 'selected' : ''%>>抵押</option>
+                    <option value="质押"<%=@basic.dbfs=='质押' ? 'selected' : ''%>>质押</option>
+                  </select>
                 </div>
               </div><!-- col-4 -->
               <div class="col-3">
@@ -149,22 +147,21 @@
               </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
-                  <label class="form-control-label">业务员姓名: </label>
-                  <%= text_field_tag('basic[zdr]', @basic.zdr,{class: 'form-control'}) %>
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-3">
-                <div class="form-group">
                   <label class="form-control-label">业务员团队: </label>
-                  <select name="basic[team]" class="form-control select2" data-placeholder="Choose Browser">
-                    <option value="无团队" <%=@basic.team == '无团队'?'selected':''%>>无团队</option>
+                  <select name="basic[team]" class="form-control select2" id="basic_team" data-placeholder="Choose Browser">
                     <%Team.where({}).each do |ele|%>
                         <option value="<%=ele.name%>" <%=@basic.team == ele.name ? 'selected':''%>><%=ele.name%></option>
                     <%end%>
                   </select>
                 </div>
               </div><!-- col-4 -->
-
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="form-control-label">业务员姓名: </label>
+                  <select name="basic[zdr]" class="form-control" id="basic_zdr" data-placeholder="业务员姓名">
+                  </select>
+                </div>
+              </div><!-- col-4 -->
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">制单日期: </label>
@@ -298,3 +295,34 @@
       <%end%>
     </div>
   </div><!-- sl-page-title -->
+
+    <%content_for :js do%>
+        <script>
+          $(function () {
+              render_team_member()
+          });
+          $('#basic_team').change(function () {
+              render_team_member();
+          })
+          function render_team_member() {
+              $.ajax({
+                  url:'<%=get_members_admin_members_path%>',
+                  method:'get',
+                  data:{
+                      team: $('#basic_team').val()
+                  },
+                  success:function (data) {
+                     // $('#basic_zdr').html(data.data.jybs);
+                      html=''
+                      for(i=0;i<data.data.length;i++){
+                          html+=" <option value="+data.data[i]+">"+data.data[i]+"</option>"
+                      }
+                      $('#basic_zdr').html(html)
+                      $('#basic_zdr').select2({
+                          minimumResultsForSearch: Infinity
+                      });
+                  }
+              })
+          }
+        </script>
+    <%end%>

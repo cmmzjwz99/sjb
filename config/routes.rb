@@ -115,6 +115,11 @@ Rails.application.routes.draw do
     resources :repay_logs
     resources :products
     resources :teams
+    resources :members do
+      collection do
+        get 'get_members'
+      end
+    end
   end
 
   root "portal#index"
