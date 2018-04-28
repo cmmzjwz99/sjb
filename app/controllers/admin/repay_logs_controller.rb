@@ -2,6 +2,10 @@ class Admin::RepayLogsController < Admin::BaseController
 
   before_action :set_logs, only: [:show, :edit, :update, :destroy]
   def index
+    if !current_user.have_power('caiwu')
+      redirect_to power_admin_dashboard_index_path
+    end
+
     @repaylogs=RepayLog.where(status:Loan::UNVERIFIED).page(params[:page]).per(10)
   end
   def update

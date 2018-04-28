@@ -21,6 +21,21 @@
                   <label class="form-control-label">密码: </label>
                   <%= text_field_tag('user[password]', @user.password, {class: 'form-control'}) %>
                 </div>
+                <div class="form-group">
+                  <label class="form-control-label">身份: </label>
+                  <select class="form-control select2" data-placeholder="Choose country" value="<%= @user.location %>" name="user[identity]">
+                    <option value="3" <%= @user.identity == 3 ? 'selected' : '' %>>录入员</option>
+                    <option value="5" <%= @user.identity == 5 ? 'selected' : '' %>>催收</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label">所属地区: </label>
+                  <select class="form-control select2" data-placeholder="Choose country" value="<%=@user.location%>" name="user[location]">
+                    <%UserArea.where({}).each do |ele|%>
+                        <option value="<%=ele.name%>" <%=@user.location == ele.name ? 'selected':''%>><%=ele.name%></option>
+                    <%end%>
+                  </select>
+                </div>
               </div><!-- col-4 -->
             </div><!-- row -->
             <div class="form-layout-footer">

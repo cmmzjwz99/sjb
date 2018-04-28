@@ -3,10 +3,14 @@ class Admin::LoansController < Admin::BaseController
   before_action :set_loan, only: [:show, :edit, :update, :destroy ,:instalment]
 
   def index
-    if !current_user.have_power('input')
+    if !current_user.have_power('luru')
       redirect_to power_admin_dashboard_index_path
     end
-    conditions={user:current_user}
+
+    conditions={}
+
+    current_user.id!=1 &&
+        conditions.merge!({user:current_user})
 
     start_date = '2016-01-01'
     end_date = DateTime.now
@@ -20,16 +24,12 @@ class Admin::LoansController < Admin::BaseController
 
     params[:name].present? &&
         conditions.merge!({name:params[:name]})
-    params[:phone].present? &&
-        conditions.merge!({phone:params[:phone]})
     params[:first].present? &&
         conditions.merge!({first_verify:params[:first]})
-    params[:basic].present? &&
-        conditions.merge!({basic_verify:params[:basic]})
+    params[:review].present? &&
+        conditions.merge!({review_verify:params[:review]})
     params[:customer].present? &&
-        conditions.merge!({customer_verify:params[:customer]})
-    params[:car].present? &&
-        conditions.merge!({car_verify:params[:car]})
+        conditions.merge!({pay_verify:params[:customer]})
 
     conditions.merge!({created_at: start_date..end_date})
 
@@ -66,12 +66,17 @@ class Admin::LoansController < Admin::BaseController
   end
 
   def show
-    @car=@loan.car_message || CarMessage.new
-    @customer=@loan.customer_message || CustomerMessage.new
-    @basic=@loan.basic_message || CustomerMessage.new
+    if !current_user.have_power('luru')
+      redirect_to power_admin_dashboard_index_path
+    end
+
+    @message=@loan.loan_message || LoanMessage.new()
   end
 
   def new
+    if !current_user.have_power('luru')
+      redirect_to power_admin_dashboard_index_path
+    end
     @loan=Loan.new
   end
 
@@ -82,6 +87,8 @@ class Admin::LoansController < Admin::BaseController
   def update
     respond_to do |format|
       if @loan.update(loan_params)
+        @message=@loan.loan_message || LoanMessage.new(loan:@loan)
+        @message.update(params.require(:message).permit!)
         format.html {redirect_to admin_loans_path, notice: 'successfully updated'}
         format.json {render :show, status: :ok, location: @loan}
       else
@@ -94,7 +101,6 @@ class Admin::LoansController < Admin::BaseController
   def create
     @loan= Loan.new(loan_params)
     @loan.user=current_user
-    @loan.location=current_user.location
     respond_to do |format|
       if @loan.save
         format.html {
@@ -112,13 +118,13 @@ class Admin::LoansController < Admin::BaseController
 
   end
 
-  def car
+  def review
     if request.post?
-      @car= CarMessage.find_by_loan_id(params[:car][:loan_id]) || CarMessage.new
+      @loan=Loan.find(params[:loan][:id])
       respond_to do |format|
-        if @car.update(car_params)
+        if @loan.update(loan_params)
           format.html {
-            redirect_to admin_loan_path(@car.loan), notice: '添加成功'
+            redirect_to admin_loan_path(@loan), notice: '添加成功'
           }
         else
           format.html {
@@ -129,39 +135,14 @@ class Admin::LoansController < Admin::BaseController
     end
   end
 
-  def customer
-    if request.post?
-      @customer= CustomerMessage.find_by_loan_id(params[:customer][:loan_id]) || CustomerMessage.new
-      respond_to do |format|
-        if @customer.update(customer_params)
-          format.html {
-            redirect_to admin_loan_path(@customer.loan), notice: '添加成功'
-          }
-        else
-          format.html {
-            render :new
-          }
-        end
-      end
-    end
-  end
-
-  def basic
-    if request.post?
-      @basic= BasicMessage.find_by_loan_id(params[:basic][:loan_id]) || BasicMessage.new
-      BasicMessage.transaction do
-        respond_to do |format|
-          if @basic.update(basic_params)
-            format.html {
-              redirect_to admin_loan_path(@basic.loan), notice: '添加成功'
-            }
-          else
-            format.html {
-              render :new
-            }
-          end
-        end
-      end
+  def financial_verify
+    @loan=Loan.find(params[:id])
+    #标记审过
+    @loan.pay_verify=Loan::UNVERIFIED
+    @loan.save
+    respond_to do |format|
+      format.html {redirect_to admin_loans_path, notice: '添加成功'}
+      format.json {render :show, status: :ok, location: @loan}
     end
   end
 
@@ -176,15 +157,6 @@ class Admin::LoansController < Admin::BaseController
     @loan = Loan.find(params[:id])
   end
   def loan_params
-    params.require(:loan).permit(:name, :idcard,:phone,:source,:first_verify)
-  end
-  def car_params
-    params.require(:car).permit!
-  end
-  def customer_params
-    params.require(:customer).permit!
-  end
-  def basic_params
-    params.require(:basic).permit!
+    params.require(:loan).permit!
   end
 end

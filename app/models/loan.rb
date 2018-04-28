@@ -1,11 +1,10 @@
 class Loan  < ActiveRecord::Base
   belongs_to :user
-  has_one :car_message
-  has_one :customer_message
-  has_one :basic_message
+  has_one :loan_message
   has_many :instalments
   has_many :loan_comments
   has_many :loan_images
+
 
 
   VERIFYPASS='verifypass'
@@ -16,10 +15,10 @@ class Loan  < ActiveRecord::Base
 
   def pay
     if self.has_pay==false
-      product=Product.find_by_name(self.basic_message.dkcp)
+      product=Product.find(self.product_id)
       lx=product.lx
-      balance=self.basic_message.zjkje.to_f
-      periods=self.basic_message.dkqx.to_i
+      balance=self.jkje.to_f
+      periods=self.jkqx.to_i
       start_time=Time.now.end_of_day
 
       if product.fqlx==1
@@ -35,11 +34,11 @@ class Loan  < ActiveRecord::Base
           condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -68,11 +67,11 @@ class Loan  < ActiveRecord::Base
           condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -99,11 +98,11 @@ class Loan  < ActiveRecord::Base
           condition[:balance]=condition[:lx]+condition[:bj]+condition[:gpsllf]
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -141,11 +140,11 @@ class Loan  < ActiveRecord::Base
   def get_instalment
     instalments=Array.new
 
-    if self.basic_message.present? && self.basic_message.dkcp.present?
-      product=Product.find_by_name(self.basic_message.dkcp)
+    if self.product_id.present?
+      product=Product.find(self.product_id)
       lx=product.lx
-      balance=self.basic_message.zjkje.to_f
-      periods=self.basic_message.dkqx.to_i
+      balance=self.jkje.to_f
+      periods=self.jkqx.to_i
       start_time=Time.now.end_of_day
 
       if product.fqlx==1
@@ -172,11 +171,11 @@ class Loan  < ActiveRecord::Base
           condition[:jjf]=0
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -216,11 +215,11 @@ class Loan  < ActiveRecord::Base
           condition[:jjf]=0
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -258,11 +257,11 @@ class Loan  < ActiveRecord::Base
           condition[:jjf]=0
           if i==0
             condition[:balance]=condition[:lx]+product.gpsllf+product.gpsfy+product.jjf+
-                self.basic_message.fwf+self.basic_message.wzyj+self.basic_message.bxyj+
+                self.fwf+self.wzyj+self.bxyj+
                 product.bzj+product.qt+product.fxj
-            condition[:fwf]=self.basic_message.fwf
-            condition[:wzyj]=self.basic_message.wzyj
-            condition[:bxyj]=self.basic_message.bxyj
+            condition[:fwf]=self.fwf
+            condition[:wzyj]=self.wzyj
+            condition[:bxyj]=self.bxyj
             condition[:bzj]=product.bzj
             condition[:qt]=product.qt
             condition[:fxj]=product.fxj
@@ -305,13 +304,6 @@ class Loan  < ActiveRecord::Base
     elsif name=='unverified'
       return '审核中'
     end
-  end
-
-  def verify_pass(user)
-    basic=self.basic_message || BasicMessage.new(loan:self)
-    basic.save
-    self.verify_time=Time.now
-    self.verify_user=user.id
   end
 
   def get_location

@@ -106,6 +106,10 @@ class Admin::AccountsController < Admin::BaseController
   end
 
   def redirect_back_or_default
+    if current_user.identity==2
+      redirect_to financial_admin_verify_index_path
+      return
+    end
     redirect_to(session[:return_to] || { controller: 'admin/dashboard', action: 'index' })
     session[:return_to] = nil
   end

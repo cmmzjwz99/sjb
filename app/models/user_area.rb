@@ -1,4 +1,2 @@
-class UserArea< ActiveRecord::Base
-   belongs_to :user
-
+class UserArea < ActiveRecord::Base
 end

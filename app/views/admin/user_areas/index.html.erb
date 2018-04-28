@@ -33,37 +33,33 @@
       <div class="form-layout pd-b-10 pd-t-10">
         <div class="row" style="margin: 0">
           <div class="form-layout-footer">
-            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_user_url%>">新建</a>
+            <a class="btn btn-secondary" style="line-height: 1" href="<%=new_admin_user_area_path%>">新建</a>
           </div><!-- form-layout-footer -->
         </div><!-- row -->
 
       </div><!-- form-layout -->
-        <table class="table table-hover table-bordered mg-b-0">
+      <table class="table table-hover table-bordered mg-b-0">
         <thead class="bg-info">
         <tr>
           <th>id</th>
-          <th>账号</th>
-          <th>名字</th>
-          <th>所属地区</th>
+          <th>名称</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <%@users.each do |ele|%>
+        <%@user_areas.each do |ele|%>
             <tr>
               <td><%=ele.id%></td>
-              <td><a href="<%=admin_user_path(ele)%>"><%=ele.login%></a></td>
               <td><%=ele.name%></td>
-              <td><%=ele.location%></td>
               <td>
-                <%= link_to '删除', "/admin/users/freeze/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                <%= link_to '删除', admin_user_area_path(ele), method: :delete, data: { confirm: '确定删除?' }%>
               </td>
             </tr>
         <%end%>
         </tbody>
       </table>
       <div class="dataTables_wrapper no-footer">
-        <%= paginate @users %>
+        <%= paginate @user_areas %>
       </div>
     </div>
   </div><!-- sl-page-title -->

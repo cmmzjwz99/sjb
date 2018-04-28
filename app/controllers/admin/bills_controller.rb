@@ -1,22 +1,19 @@
 require 'csv'
 class Admin::BillsController < Admin::BaseController
   def not_pay
-    if !current_user.have_power('financial')
+    if !current_user.have_power('caiwu')
       redirect_to power_admin_dashboard_index_path
     end
-    conditions={location:current_user.get_locations,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: false}
+
+    conditions={first_verify: 'verifypass',review_verify: 'verifypass',pay_verify: 'verifypass',has_pay: false}
     @loans=Loan.where(conditions).page(params[:page]).per(10)
   end
 
   def pay
-    if !current_user.have_power('financial')
-      redirect_to power_admin_dashboard_index_path
-    end
     loan=Loan.find(params[:id])
 
     respond_to do |format|
       if loan.pay
-        loan.pay_user_id=current_user.id
         loan.save
         format.html { redirect_to not_pay_admin_bills_path, notice: 'unlock successfully.' }
       else
@@ -26,9 +23,6 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def has_pay
-    if !current_user.have_power('input')
-      redirect_to power_admin_dashboard_index_path
-    end
     conditions={user:current_user,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
 
     if params[:export].present?
@@ -54,11 +48,11 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def has_pay_financial
-    if !current_user.have_power('financial')
+    if !current_user.have_power('caiwu')
       redirect_to power_admin_dashboard_index_path
     end
-    conditions={location:current_user.get_locations,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
 
+    conditions={first_verify: 'verifypass',review_verify: 'verifypass',pay_verify: 'verifypass',has_pay: true}
 
     if params[:export].present?
       @loans=Loan.where(conditions).order(created_at: :desc)
@@ -84,18 +78,10 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def instalment
-    if !current_user.have_power('financial')
-      redirect_to power_admin_dashboard_index_path
-    end
-
     @loan=Loan.find(params[:id])
   end
 
   def repay
-    if !current_user.have_power('financial')
-      redirect_to redirect_back(fallback_location: root_path)
-    end
-
     instalment=Instalment.find(params[:id])
 
     instalment.has_repay=true
@@ -110,9 +96,6 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def salesman_report
-    if !current_user.have_power('totle_loan')
-      redirect_to power_admin_dashboard_index_path
-    end
     conditions={}
 
     start_date = '2016-01-01'
@@ -140,9 +123,6 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def performance_report
-    if !current_user.have_power('totle_loan')
-      redirect_to power_admin_dashboard_index_path
-    end
     if request.post?
       conditions={}
 

@@ -31,66 +31,24 @@
     <div class="card pd-20 pd-sm-40">
 
       <h6 class="card-body-title">订单列表</h6>
-      <div class="form-layout pd-b-10 pd-t-10">
-        <div class="row" style="margin: 0">
-          <div class="form-group">
-            <label class="form-control-label">姓名: </label>
-            <input class="form-control" type="text" name="firstname" >
-          </div>
-          <div class="form-group">
-            <label class="form-control-label">手机号: </label>
-            <input class="form-control" type="text" name="firstname" >
-          </div>
-          <div class="form-group">
-            <label class="form-control-label">借款来源: </label>
-            <input class="form-control" type="text" name="firstname" >
-          </div>
-          <div class="form-layout-footer" style="padding-left: 10px">
-            <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
-          </div><!-- form-layout-footer -->
-        </div><!-- row -->
-
-      </div><!-- form-layout -->
       <div style="overflow: auto;width: 100%;">
-      <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
+      <table class="table table-hover table-bordered mg-b-0" style="margin-top: 10px">
         <thead class="bg-info">
         <tr>
-          <th>合同编号</th>
-          <th>地区</th>
-          <th>合同金额</th>
-          <th>借款人姓名</th>
-          <th>手机号</th>
-          <th>担保方式</th>
-          <th>贷款形式</th>
-          <th>还款方式</th>
-          <th>贷款利率</th>
-          <th>贷款期限</th>
-          <th>期限单位</th>
-          <th>结息日</th>
-          <th>开始日期</th>
-          <th>结束日期</th>
+          <th>合同号</th>
+          <th>姓名</th>
+          <th>金额</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
             <tr>
-              <td><%= ele.basic_message.hkzl %></td>
-              <td><%= ele.get_location %></td>
-              <td><%= ele.basic_message.zjkje %></td>
-              <td><a href="<%= admin_loan_path(ele) %>"><%= ele.name %></td>
-              <td><%= ele.phone %></td>
-              <td><%= ele.basic_message.dbfs %></td>
-              <td><%= ele.basic_message.dkxs %></td>
-              <td><%= ele.basic_message.hkfs %></td>
-              <td><%= ele.get_lx %></td>
-              <td><%= ele.basic_message.dkqx %></td>
-              <td><%= ele.basic_message.dkqxdw %></td>
-              <td><%=(ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
-              <td><%=(ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
-              <td><%=(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
+              <td><%= ele.loan_message.htxlh%></td>
+              <td><%= ele.name%></td>
+              <td><%= ele.jkje%></td>
               <td>
-                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款#{ele.basic_message.zjkje.to_f.round(2)}元吗？')==false)return false;" %> &nbsp;
+                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款#{ele.jkje.to_f.round(2)}元吗？')==false)return false;" %> &nbsp;
               </td>
             </tr>
         <%end%>

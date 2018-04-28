@@ -4,14 +4,15 @@
 <nav class="breadcrumb sl-breadcrumb">
   <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
   <a class="breadcrumb-item" href="<%=first_admin_verify_index_path%>">待审名单</a>
-  <span class="breadcrumb-item active">初审</span>
+  <span class="breadcrumb-item active">复审</span>
 </nav>
 
 <div class="sl-pagebody">
+
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title">初审</h6>
+      <h6 class="card-body-title">初审信息</h6>
 
       <%= form_tag('/admin/verify/first_verify', class:'stdform') do %>
           <%= hidden_field_tag 'id', params[:id] %>
@@ -29,6 +30,7 @@
                   <%= text_field_tag('message[htxlh]',@message.htxlh, {class: 'form-control',disabled:''}) %>
                 </div>
               </div>
+
               <div class="col-6">
                 <div class="form-group">
                   <label class="form-control-label">借款金额: </label>
@@ -38,7 +40,7 @@
               <div class="col-6">
                 <div class="form-group">
                   <label class="form-control-label">借款期限: </label>
-                  <%= text_field_tag('loan[jkqx]',"#{@loan.jkqx}个月", {class: 'form-control',disabled:''}) %>
+                  <%= text_field_tag('loan[jkqx]',@loan.jkqx, {class: 'form-control',disabled:''}) %>
                 </div>
               </div>
               <div class="col-3">
@@ -62,7 +64,7 @@
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">产品: </label>
-                  <%= text_field_tag('loan[product_id]',Product.find(@loan.product_id).name, {class: 'form-control',disabled:''}) %>
+                  <%= text_field_tag('loan[product_id]',@loan.product_id, {class: 'form-control',disabled:''}) %>
                 </div>
               </div>
               <div class="col-3">
@@ -511,6 +513,242 @@
                 </div>
               </div><!-- col-4 -->
               <div class="col-xs-6">&nbsp;</div>
+            </div><!-- row -->
+            <%if @loan.first_verify==Loan::UNVERIFIED%>
+                <div class="form-layout-footer">
+                  <button class="btn btn-info mg-r-5">保存</button>
+                  <a class="btn btn-secondary" onclick="window.history.go(-1)" style="color: white">返回</a>
+                </div><!-- form-layout-footer -->
+            <%end%>
+          </div><!-- form-layout -->
+      <%end%>
+    </div>
+  </div><!-- sl-page-title -->
+  <div class="sl-page-title">
+    <div class="card pd-20 pd-sm-40">
+
+      <h6 class="card-body-title">复审</h6>
+
+      <%= form_tag('/admin/verify/review_verify', class:'stdform') do %>
+          <%= hidden_field_tag 'id', params[:id] %>
+          <div class="form-layout">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">借款人资料: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="jkrzl" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('jkrzl')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-jkrzl">
+                      <% @loan.loan_images.where(style:'jkrzl').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', admin_loan_image_path(ele), method: :delete, data: { confirm: '确定删除?' }%>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">车辆照片: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th  style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="clzp" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('clzp')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-clzp">
+                      <% @loan.loan_images.where(style:'clzp').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', "/admin/loan_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">合同签署: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th  style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="htqs" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('htqs')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-htqs">
+                      <% @loan.loan_images.where(style:'htqs').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', "/admin/loan_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">GPS安装照: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th  style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="gpsazz" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('gpsazz')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-gpsazz">
+                      <% @loan.loan_images.where(style:'gpsazz').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', "/admin/loan_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">银行征信: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th  style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="yhzz" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('yhzz')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-yhzz">
+                      <% @loan.loan_images.where(style:'yhzz').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', "/admin/loan_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group" style="overflow: auto">
+                  <label class="form-control-label">家访照片: </label>
+                  <div class="table-responsive">
+                    <table class="table mg-b-0">
+                      <thead>
+                      <tr>
+                        <th>文件名</th>
+                        <th style="width: 200px">日期</th>
+                        <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                            <th  style="width: 100px">
+                              <label class="custom-file" style="display: none">
+                                <input type="file" class="loan-file" id="jfzp" class="custom-file-input">
+                              </label>
+                              <a onclick="upload('jfzp')">上传</a>
+                            </th>
+                        <% end %>
+                      </tr>
+                      </thead>
+                      <tbody id="table-loan-jfzp">
+                      <% @loan.loan_images.where(style:'jfzp').each do |ele| %>
+                          <tr>
+                            <td><a href="<%= ele.img.url %>" target="_blank"><%= ele.img.url.split('/').last %></a></td>
+                            <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                            <% if @loan.review_verify==Loan::VERIFYFAIL %>
+                                <td>
+                                  <%= link_to '删除', "/admin/loan_images/destroyimg/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
+                                </td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div><!-- col-4 -->
               <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">审核不通过原因: </label>
@@ -521,18 +759,18 @@
                 <div class="form-group">
                   <label class="form-control-label">审核: <span class="tx-danger">*</span></label>
                   <div class="controls">
-                    <%=radio_button_tag('first_verify',Loan::VERIFYPASS,@loan.first_verify==Loan::VERIFYPASS ? '1' : nil)%>通过
-                    <%=radio_button_tag('first_verify',Loan::VERIFYFAIL,@loan.first_verify==Loan::VERIFYFAIL ? '1' : nil)%>不通过
+                    <%=radio_button_tag('review_verify',Loan::VERIFYPASS,@loan.review_verify==Loan::VERIFYPASS ? '1' : nil)%>通过
+                    <%=radio_button_tag('review_verify',Loan::VERIFYFAIL,@loan.review_verify==Loan::VERIFYFAIL ? '1' : nil)%>不通过
 
                   </div>
                 </div>
               </div>
             </div><!-- row -->
-            <%if @loan.first_verify==Loan::UNVERIFIED%>
-            <div class="form-layout-footer">
-              <button class="btn btn-info mg-r-5">保存</button>
-              <a class="btn btn-secondary" onclick="window.history.go(-1)" style="color: white">返回</a>
-            </div><!-- form-layout-footer -->
+            <%if @loan.review_verify==Loan::UNVERIFIED%>
+                <div class="form-layout-footer">
+                  <button class="btn btn-info mg-r-5">保存</button>
+                  <a class="btn btn-secondary" onclick="window.history.go(-1)" style="color: white">返回</a>
+                </div><!-- form-layout-footer -->
             <%end%>
           </div><!-- form-layout -->
       <%end%>

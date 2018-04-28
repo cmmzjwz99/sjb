@@ -1,23 +1,26 @@
 class Admin::UsersController < Admin::BaseController
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy,:local,:risk_unlock,:service,:update_concern,:update_area,:update_power]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    if !current_user.have_power('user_manage')
+    if !current_user.have_power('admin')
       redirect_to power_admin_dashboard_index_path
     end
-    @users=User.where(profile_id:1).page(params[:page]).per(10)
+    @users=User.where(profile_id:1).where('id > 2').page(params[:page]).per(10)
   end
 
 
   def show
-    if !current_user.have_power('user_manage')
+    if !current_user.have_power('admin')
       redirect_to power_admin_dashboard_index_path
     end
   end
 
   # GET /users/new
   def new
+    if !current_user.have_power('admin')
+      redirect_to power_admin_dashboard_index_path
+    end
     @user = User.new
   end
 
@@ -31,9 +34,7 @@ class Admin::UsersController < Admin::BaseController
     @user.profile_id=1
     User.transaction do
       if @user.save
-        if UserPower.new(user:@user).save && UserArea.new(user:@user).save
           redirect_to admin_user_path(@user)
-        end
       else
         redirect_to '/admin/users/new?msg=zhycz'
       end
@@ -82,18 +83,6 @@ class Admin::UsersController < Admin::BaseController
         end
       end
     end
-
-  end
-
-
-  def update_area
-    @user.user_area.update(params.require(:area).permit!)
-    render json:{code:1}
-  end
-
-  def update_power
-    @user.user_power.update(params.require(:power).permit!)
-    render json:{code:1}
   end
 
   private

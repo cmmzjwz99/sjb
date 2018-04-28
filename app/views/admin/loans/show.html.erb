@@ -8,19 +8,13 @@
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title  mg-b-20">网审信息</h6>
+      <h3 class="card-body-title mg-b-20">初审信息</h3>
 
       <%=render 'form'%>
 
     </div>
-
     <%if @loan.first_verify==Loan::VERIFYPASS%>
-        <%=render 'basic'%>
-    <%end%>
-
-    <%if @loan.basic_verify==Loan::VERIFYPASS %>
-        <%=render 'customer'%>
-        <%=render 'car'%>
+        <%=render 'review_message'%>
     <%end%>
 
     <%=render 'comment'%>
@@ -29,33 +23,6 @@
 </div><!-- sl-pagebody -->
 <%content_for :js do%>
     <script>
-        $('.customer-file').change(function () {
-            var form = new FormData();
-            form.append('img',$(this)[0].files[0]);
-            form.append('id','<%=@loan.id%>');
-
-            $.ajax({
-                url:"<%=img_upload_admin_customer_messages_path%>",
-                method:"post",
-                data:form,
-                processData:false,
-                contentType:false,
-                success:function(data){
-                    console.log(data);
-                    if(data.code==0){
-                        alert('上传成功')
-                        html='<tr> <td><a href="'+data.data.url+'" target="_blank">'+data.data.name+'</a></td> \
-                            <td>'+data.data.date+'</td><td><a data-confirm="确定删除?" rel="nofollow"  \
-                            data-method="delete" href="/admin/customer_images/'+data.data.id+'">删除</a></td></tr>'
-                        $('#table-customer').append(html);
-                    }
-                },
-                error:function(e){
-                    alert("错误！！");
-                }
-            });
-        });
-
 
         $('.loan-file').change(function () {
             var form = new FormData();

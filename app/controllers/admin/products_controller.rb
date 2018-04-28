@@ -2,13 +2,22 @@ class Admin::ProductsController < Admin::BaseController
     before_action :set_product, only: [:show, :edit, :update, :destroy]
 
     def index
+      if !current_user.have_power('admin')
+        redirect_to power_admin_dashboard_index_path
+      end
       @products = Product.page(params[:page]).per(10)
     end
 
     def show
+      if !current_user.have_power('admin')
+        redirect_to power_admin_dashboard_index_path
+      end
     end
 
     def new
+      if !current_user.have_power('admin')
+        redirect_to power_admin_dashboard_index_path
+      end
       @product = Product.new
     end
 

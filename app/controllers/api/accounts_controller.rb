@@ -250,24 +250,4 @@ class Api::AccountsController < Api::BaseController
     session[:return_to] = nil
   end
 
-  # def upload
-  #   # if !params[:adv].blank?
-  #   file = params[:user][:filename]
-  #   if file
-  #     mime = if file.content_type
-  #              file.content_type.chomp
-  #            else
-  #              'text/plain'
-  #            end
-  #     flash[:success] = I18n.t('admin.resources.upload.success')
-  #     @up = Resource.create(upload: file, mime: mime, created_at: Time.now)
-  #   else
-  #     nil
-  #   end
-  #
-  #   # return @up
-  #   # else
-  #   #   flash[:warning] = I18n.t('admin.resources.upload.warning')
-  #   # end
-  # end
 end

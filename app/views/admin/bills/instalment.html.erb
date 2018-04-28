@@ -18,20 +18,8 @@
             </div>
             <div class="col-7">
               <div class="form-group">
-                <label class="form-control-label">手机号: </label>
-                <%= text_field_tag('', @loan.phone,{class: 'form-control',disabled:''}) %>
-              </div>
-            </div>
-            <div class="col-7">
-              <div class="form-group">
-                <label class="form-control-label">身份证: </label>
-                <%= text_field_tag('', @loan.idcard,{class: 'form-control',disabled:''}) %>
-              </div>
-            </div>
-            <div class="col-7">
-              <div class="form-group">
                 <label class="form-control-label">贷款产品: </label>
-                <%= text_field_tag('', @loan.basic_message.dkcp,{class: 'form-control',disabled:''}) %>
+                <%= text_field_tag('', Product.find(@loan.product_id).name,{class: 'form-control',disabled:''}) %>
               </div>
             </div>
 
@@ -82,7 +70,7 @@
                           <td><%= ele.balance %></td>
                           <td><%= ele.dkye %></td>
                           <td>
-                            <% if ele.can_repay && !ele.has_repay && current_user.have_power('input') %>
+                            <% if ele.can_repay && !ele.has_repay %>
                                 <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}", onclick: "if(confirm('确认提交还款吗？')==false)return false;" %>
                             <% elsif !ele.can_repay %>
                                 还款审核中

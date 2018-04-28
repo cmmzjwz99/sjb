@@ -211,19 +211,23 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{salt}--#{pass}--")
   end
 
-  def have_power(name)
-    return self.user_power[name]
-  end
-
-  def get_locations
-    arr=[]
-    (arr << 'zjwz')if self.user_area.zjwz
-    (arr << 'zjsxsz')if self.user_area.zjsxsz
-    (arr << 'zjsxkq')if self.user_area.zjsxkq
-    (arr << 'zjsxyc')if self.user_area.zjsxyc
-    (arr << 'zjhz')if self.user_area.zjhz
-    (arr << 'ahhf')if self.user_area.ahhf
-    return arr
+  def have_power power
+    if power=='luru'
+      (return true) if self.identity==1 || self.identity==3
+      return false
+    #elsif power=='cuishou'
+    #  (return true) if self.identity==1 || self.identity==3
+    #  return false
+    elsif power=='caiwu'
+      (return true) if self.identity==1 || self.identity==6
+      return false
+    elsif power=='caiwushenhe'
+      (return true) if self.identity==2
+      return false
+    elsif power=='admin'
+      (return true) if self.identity==1
+      return false
+    end
   end
 
   protected
@@ -239,12 +243,6 @@ class User < ActiveRecord::Base
   before_create :crypt_password
 
   before_create :crypt_verify_password
-
-  before_create :set_default_location
-
-  def set_default_location
-    self.location='zjwz'
-  end
 
   # Before saving the record to database we will crypt the password
   # using SHA1.

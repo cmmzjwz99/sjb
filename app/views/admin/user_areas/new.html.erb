@@ -1,0 +1,32 @@
+<nav class="breadcrumb sl-breadcrumb">
+  <!--a class="breadcrumb-item" href="index.html">Starlight</a-->
+  <span class="breadcrumb-item active">新建地区</span>
+</nav>
+
+<div class="sl-pagebody">
+  <%= form_for([:admin, @user_area], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+      <div class="sl-page-title" style="margin-bottom: 0">
+        <div class="card pd-20 pd-sm-40">
+
+          <div class="form-layout">
+            <div class="row mg-b-15">
+              <div class="col-lg-5">
+                <div class="form-group">
+                  <label class="form-control-label">名称: </label>
+                  <%= text_field_tag('area[name]', @user_area.name, {class: 'form-control'}) %>
+                </div>
+              </div><!-- col-4 -->
+            </div><!-- row -->
+            <div class="form-layout-footer">
+              <button class="btn btn-info mg-r-5">保存</button>
+            </div><!-- form-layout-footer -->
+          </div>
+
+        </div>
+      </div><!-- sl-page-title -->
+  <% end %>
+</div><!-- sl-pagebody -->
+
+
+<%content_for :js do%>
+<%end%>
