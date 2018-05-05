@@ -230,6 +230,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_identity
+    if self.identity==1
+      return 'admin'
+    elsif self.identity==3
+      return '录入员'
+    elsif self.identity==6
+      return '财务'
+    elsif self.identity==5
+      return '催收'
+    elsif self.identity==2
+      return '打款审核'
+    end
+  end
+
   protected
 
   # Apply SHA1 encryption to the supplied password.

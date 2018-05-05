@@ -10,46 +10,54 @@
     <%= text_field_tag('message[htxlh]',@message.htxlh, {class: 'form-control'}) %>
   </div>
 </div>
-<div class="col-6">
+<div class="col-4">
   <div class="form-group">
     <label class="form-control-label">借款金额: </label>
     <%= text_field_tag('loan[jkje]',@loan.jkje, {class: 'form-control',required:''}) %>
   </div>
 </div>
-<div class="col-6">
+<div class="col-4">
   <div class="form-group">
     <label class="form-control-label">借款期限: </label>
     <select name="loan[jkqx]" class="form-control select2" data-placeholder="Choose Browser">
       <option value="3"<%=@loan.jkqx==3 ? 'selected' : ''%>>3个月</option>
       <option value="6"<%=@loan.jkqx==6 ? 'selected' : ''%>>6个月</option>
+      <option value="6"<%=@loan.jkqx==9 ? 'selected' : ''%>>9个月</option>
+      <option value="6"<%=@loan.jkqx==12 ? 'selected' : ''%>>12个月</option>
       <option value="24"<%=@loan.jkqx==24 ? 'selected' : ''%>>24个月</option>
       <option value="36"<%=@loan.jkqx==36 ? 'selected' : ''%>>36个月</option>
     </select>
   </div>
 </div>
+<div class="col-4">
+  <div class="form-group">
+    <label class="form-control-label">借款开始时间: </label>
+    <%= text_field_tag('loan[start_time]',(@loan.start_time.present? ? @loan.start_time : Time.now).strftime("%Y-%m-%d"), {class: 'form-control fc-datepicker',required:''}) %>
+  </div>
+</div>
 <div class="col-3">
   <div class="form-group">
     <label class="form-control-label">服务费: </label>
-    <%= text_field_tag('loan[fwf]',@loan.fwf, {class: 'form-control'}) %>
+    <%= text_field_tag('loan[fwf]',@loan.fwf, {class: 'form-control',required:''}) %>
   </div>
 </div>
 <div class="col-3">
   <div class="form-group">
     <label class="form-control-label">保险押金: </label>
-    <%= text_field_tag('loan[bxyj]',@loan.bxyj, {class: 'form-control'}) %>
+    <%= text_field_tag('loan[bxyj]',@loan.bxyj, {class: 'form-control',required:''}) %>
   </div>
 </div>
 <div class="col-3">
   <div class="form-group">
     <label class="form-control-label">违章押金: </label>
-    <%= text_field_tag('loan[wzyj]',@loan.wzyj, {class: 'form-control'}) %>
+    <%= text_field_tag('loan[wzyj]',@loan.wzyj, {class: 'form-control',required:''}) %>
   </div>
 </div>
 <div class="col-3">
   <div class="form-group">
     <label class="form-control-label">产品: </label>
     <select name="loan[product_id]" class="form-control select2" data-placeholder="Choose Browser">
-      <% Product.where({}).each do |ele| %>
+      <% Product.where({status:true}).each do |ele| %>
           <option value="<%=ele.id%>"<%= @loan.product_id==ele.id ? 'selected' : '' %>><%=ele.name%></option>
       <% end %>
     </select>

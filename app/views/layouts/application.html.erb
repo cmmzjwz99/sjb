@@ -123,8 +123,34 @@
     </div>
     <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a>
     </div>
+
   </div><!-- sl-header-left -->
+
+  <%if current_user.login=='admin'%>
+  <div style="position: absolute;left: 60px">
+    <div class="navicon-right" style="float: left;text-align: center">
+      <a  href="/admin/verify/first" class="pos-relative" style="line-height: normal;">
+        <p style="margin: 0;font-size: 23px"><%=Loan.where({first_verify:Loan::UNVERIFIED}).count%></p>
+        <p style="margin: 0;font-size: 10px">待初审</p>
+      </a>
+    </div>
+    <div class="navicon-right" style="float: left;text-align: center">
+      <a  href="/admin/verify/review" class="pos-relative" style="line-height: normal">
+        <p style="margin: 0;font-size: 23px"><%=Loan.where({first_verify:Loan::VERIFYPASS,review_verify:Loan::UNVERIFIED}).count%></p>
+        <p style="margin: 0;font-size: 10px;">待复审</p>
+      </a>
+    </div>
+    <div class="navicon-right" style="float: left;text-align: center">
+      <a  href="/admin/loans?first=verifypass&review=verifypass&pay_verify=verifyfail" class="pos-relative" style="line-height: normal">
+        <p style="margin: 0;font-size: 23px"><%=Loan.where({first_verify:Loan::VERIFYPASS,review_verify:Loan::VERIFYPASS,pay_verify:Loan::VERIFYFAIL}).count%></p>
+        <p style="margin: 0;font-size: 10px">待提交</p>
+      </a>
+    </div>
+  </div>
+
+  <% end %>
   <div class="sl-header-right">
+
     <nav class="nav">
       <div class="dropdown">
         <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
@@ -138,6 +164,7 @@
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
     </nav>
+
   </div><!-- sl-header-right -->
 </div><!-- sl-header -->
 <!-- ########## END: HEAD PANEL ########## -->

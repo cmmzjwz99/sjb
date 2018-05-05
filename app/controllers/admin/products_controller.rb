@@ -2,10 +2,11 @@ class Admin::ProductsController < Admin::BaseController
     before_action :set_product, only: [:show, :edit, :update, :destroy]
 
     def index
+      conditions={status:true}
       if !current_user.have_power('admin')
         redirect_to power_admin_dashboard_index_path
       end
-      @products = Product.page(params[:page]).per(10)
+      @products = Product.where(conditions).page(params[:page]).per(10)
     end
 
     def show
@@ -51,7 +52,8 @@ class Admin::ProductsController < Admin::BaseController
     end
 
     def destroy
-      @product.destroy
+      @product.status=false
+      @product.save
       respond_to do |format|
         format.html { redirect_to admin_products_url, notice: 'Product was successfully destroyed.' }
         format.json { head :no_content }

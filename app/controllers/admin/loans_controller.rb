@@ -28,8 +28,8 @@ class Admin::LoansController < Admin::BaseController
         conditions.merge!({first_verify:params[:first]})
     params[:review].present? &&
         conditions.merge!({review_verify:params[:review]})
-    params[:customer].present? &&
-        conditions.merge!({pay_verify:params[:customer]})
+    params[:pay_verify].present? &&
+        conditions.merge!({pay_verify:params[:pay_verify]})
 
     conditions.merge!({created_at: start_date..end_date})
 

@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.integer "jkqx"
     t.float "jkje", limit: 24
     t.bigint "product_id"
+    t.datetime "start_time"
     t.index ["product_id"], name: "index_loans_on_product_id"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "bzj", limit: 24, default: 0.0
     t.float "qt", limit: 24, default: 0.0
     t.float "fxj", limit: 24, default: 0.0
+    t.boolean "status", default: true
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

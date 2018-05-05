@@ -1,5 +1,6 @@
 class Loan  < ActiveRecord::Base
   belongs_to :user
+  belongs_to :product
   has_one :loan_message
   has_many :instalments
   has_many :loan_comments
@@ -19,7 +20,7 @@ class Loan  < ActiveRecord::Base
       lx=product.lx
       balance=self.jkje.to_f
       periods=self.jkqx.to_i
-      start_time=Time.now.end_of_day
+      start_time=self.start_time.end_of_day
 
       if product.fqlx==1
         #先息后本
@@ -145,7 +146,7 @@ class Loan  < ActiveRecord::Base
       lx=product.lx
       balance=self.jkje.to_f
       periods=self.jkqx.to_i
-      start_time=Time.now.end_of_day
+      start_time=self.start_time.end_of_day
 
       if product.fqlx==1
         #先息后本

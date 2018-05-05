@@ -63,14 +63,13 @@ class Admin::BillsController < Admin::BaseController
 
     if params[:export].present?
       data = CSV.generate(headers: true) do |csv|
-        csv << ['合同编号', '地区', '合同金额', '借款人姓名', '手机号', '担保方式','贷款形式','还款方式','贷款利率', '贷款期限', '期限单位', '结息日', '开始时间', '结束时间']
+        csv << ['合同编号', '地区', '借款人姓名', '贷款金额', '利率','期数','每月还款金额','还款日', '身份证', '联系方式']
 
         for i in 0..@loans.length-1
           ele = @loans[i]
-          csv << [ele.basic_message.hkzl, ele.get_location, ele.basic_message.zjkje, ele.name, ele.phone,
-                  ele.basic_message.dbfs, ele.basic_message.dkxs,ele.basic_message.hkfs, ele.get_lx, ele.basic_message.dkqx,
-                  ele.basic_message.dkqxdw, (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : ''),
-                  (ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : ''),(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')]
+          csv << [ele.loan_message.htxlh, ele.user.location, ele.name, ele.jkje,
+                  ele.product.lx, ele.jkqx,'每月还款金额', (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : ''),
+                  ele.loan_message.sfz, ele.loan_message.yddh]
         end
       end
       send_data data, filename: "审核成功详单-#{Date.today}.csv"

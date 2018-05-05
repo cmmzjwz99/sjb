@@ -26,6 +26,7 @@
                   <select class="form-control select2" data-placeholder="Choose country" value="<%= @user.location %>" name="user[identity]">
                     <option value="3" <%= @user.identity == 3 ? 'selected' : '' %>>录入员</option>
                     <option value="5" <%= @user.identity == 5 ? 'selected' : '' %>>催收</option>
+                    <option value="6" <%= @user.identity == 6 ? 'selected' : '' %>>财务</option>
                   </select>
                 </div>
                 <div class="form-group">

@@ -64,7 +64,7 @@
               <div class="col-3">
                 <div class="form-group">
                   <label class="form-control-label">产品: </label>
-                  <%= text_field_tag('loan[product_id]',@loan.product_id, {class: 'form-control',disabled:''}) %>
+                  <%= text_field_tag('loan[product_id]',Product.find(@loan.product_id).name, {class: 'form-control',disabled:''}) %>
                 </div>
               </div>
               <div class="col-3">
