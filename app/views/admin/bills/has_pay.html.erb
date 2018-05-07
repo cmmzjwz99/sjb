@@ -40,7 +40,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label">日期: </label>
-            <input class="form-control fc-datepicker" type="text" name="time" value="<%=params[:time]%>">
+            <input class="form-control fc-datepicker" type="text" name="time" value="<%=params[:time] || Time.now.strftime('%Y-%m-%d')%>">
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
