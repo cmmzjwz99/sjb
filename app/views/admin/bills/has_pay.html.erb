@@ -23,76 +23,71 @@
 <nav class="breadcrumb sl-breadcrumb">
   <!--a class="breadcrumb-item" href="index.html">Starlight</a>
   <a class="breadcrumb-item" href="index.html">Pages</a-->
-  <span class="breadcrumb-item active">审核成功详单</span>
+  <span class="breadcrumb-item active">借款到期详单</span>
 </nav>
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
 
-      <h6 class="card-body-title">审核成功详单</h6>
+      <h6 class="card-body-title">借款到期详单</h6>
       <form>
       <div class="form-layout pd-b-10 pd-t-10">
         <div class="row" style="margin: 0">
           <div class="form-group">
             <label class="form-control-label">姓名: </label>
-            <input class="form-control" type="text" name="firstname" >
+            <input class="form-control" type="text" name="name" value="<%=params[:name]%>">
           </div>
           <div class="form-group">
-            <label class="form-control-label">手机号: </label>
-            <input class="form-control" type="text" name="firstname" >
-          </div>
-          <div class="form-group">
-            <label class="form-control-label">身份证: </label>
-            <input class="form-control" type="text" name="firstname" >
+            <label class="form-control-label">日期: </label>
+            <input class="form-control fc-datepicker" type="text" name="time" value="<%=params[:time]%>">
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
-            <button name="export" value="export" class="btn btn-secondary mg-r-5" >导出文件</button>
           </div><!-- form-layout-footer -->
         </div><!-- row -->
 
       </div><!-- form-layout -->
       </form>
       <div style="overflow: auto;width: 100%;">
-      <table class="table table-hover table-bordered mg-b-0" style="width: 2000px">
+      <table class="table table-hover table-bordered mg-b-0">
         <thead class="bg-info">
         <tr>
           <th>合同编号</th>
-          <th>地区</th>
-          <th>合同金额</th>
-          <th>借款人姓名</th>
-          <th>手机号</th>
-          <th>担保方式</th>
-          <th>贷款形式</th>
-          <th>还款方式</th>
-          <th>贷款利率</th>
-          <th>贷款期限</th>
-          <th>期限单位</th>
-          <th>结息日</th>
-          <th>开始日期</th>
-          <th>结束日期</th>
+          <th>姓名</th>
+          <th>身份证</th>
+          <th>联系方式</th>
+          <th>还款金额</th>
+          <th>到期时间</th>
+          <th>是否已还款</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <%@loans.each do |ele|%>
             <tr>
-              <td><%=ele.basic_message.hkzl%></td>
-              <td><%=ele.get_location%></td>
-              <td><%=ele.basic_message.zjkje%></td>
-              <td><a href="<%=instalment_admin_bills_path(ele)%>"><%=ele.name%></td>
-              <td><%=ele.phone%></td>
-              <td><%=ele.basic_message.dbfs%></td>
-              <td><%=ele.basic_message.dkxs%></td>
-              <td><%=ele.basic_message.hkfs%></td>
-              <td><%=ele.get_lx %></td>
-              <td><%=ele.basic_message.dkqx%></td>
-              <td><%=ele.basic_message.dkqxdw%></td>
-              <td><%=(ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
-              <td><%=(ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : '')%></td>
-              <td><%=(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')%></td>
+              <td><%= ele.loan.loan_message.htxlh%></td>
+              <td><%= ele.loan.name %></td>
+              <td><%= ele.loan.loan_message.sfz%></td>
+              <td><%= ele.loan.loan_message.yddh%></td>
+              <td><%=ele.balance%></td>
+              <td><%=ele.overdue_time.strftime('%Y-%m-%d')%></td>
+              <td>
+                <% if !ele.can_repay %>
+                    还款审核中
+                <% elsif ele.has_repay %>
+                    已还款
+                <% else %>
+                    未还款
+                <% end %>
+              </td>
+              <td>
+                <% if ele.can_repay && !ele.has_repay %>
+                    <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}?type=cuishou", onclick: "if(confirm('确认提交还款吗？')==false)return false;" %>
+                <% end %>
+              </td>
             </tr>
-        <%end%>
+        <% end %>
         </tbody>
       </table>
       </div>
@@ -103,3 +98,12 @@
   </div><!-- sl-page-title -->
 
 </div><!-- sl-pagebody -->
+<%content_for :js do%>
+    <script>
+        $('.fc-datepicker').datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            dateFormat:'yy-mm-dd'
+        });
+    </script>
+<%end%>

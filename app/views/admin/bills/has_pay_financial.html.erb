@@ -67,7 +67,7 @@
           <% @loans.each do |ele| %>
               <tr>
                 <td><%= ele.loan_message.htxlh%></td>
-                <td><a href="<%= instalment_admin_bills_path(ele) %>"><%= ele.name %></td>
+                <td><a href="<%= instalment_admin_bills_path(ele) %>"><%= ele.name %></a></td>
                 <td><%= ele.user.location%></td>
                 <td><%= ele.jkje%></td>
                 <td><%= ele.product.lx%>%</td>

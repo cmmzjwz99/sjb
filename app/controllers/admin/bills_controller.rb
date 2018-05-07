@@ -23,28 +23,25 @@ class Admin::BillsController < Admin::BaseController
   end
 
   def has_pay
-    conditions={user:current_user,first_verify: 'verifypass',basic_verify: 'verifypass',customer_verify: 'verifypass',car_verify: 'verifypass',has_pay: true}
-
-    if params[:export].present?
-      @loans=Loan.where(conditions).order(created_at: :desc)
-    else
-      @loans=Loan.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
+    if !current_user.have_power('cuishou')
+      redirect_to power_admin_dashboard_index_path
     end
 
-    if params[:export].present?
-      data = CSV.generate(headers: true) do |csv|
-        csv << ['合同编号', '地区', '合同金额', '借款人姓名', '手机号', '担保方式','贷款形式','还款方式','贷款利率', '贷款期限', '期限单位', '结息日', '开始时间', '结束时间']
+    conditions={}
 
-        for i in 0..@loans.length-1
-          ele = @loans[i]
-          csv << [ele.basic_message.hkzl, ele.get_location, ele.basic_message.zjkje, ele.name, ele.phone,
-                  ele.basic_message.dbfs, ele.basic_message.dkxs,ele.basic_message.hkfs, ele.get_lx, ele.basic_message.dkqx,
-                  ele.basic_message.dkqxdw, (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : ''),
-                  (ele.basic_message.ksrq.present? ? ele.basic_message.ksrq.strftime("%Y-%m-%d") : ''),(ele.basic_message.jsrq.present? ? ele.basic_message.jsrq.strftime("%Y-%m-%d") : '')]
-        end
-      end
-      send_data data, filename: "审核成功详单-#{Date.today}.csv"
+    date=Time.now.all_day
+
+    params[:time].present? &&
+        date=Time.parse(params[:time]).all_day
+
+    params[:name].present? &&
+        conditions.merge!({loan: Loan.where(name:params[:name])})
+
+    if !(params[:name].present?)
+      conditions.merge!({overdue_time: date})
     end
+
+    @loans=Instalment.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def has_pay_financial

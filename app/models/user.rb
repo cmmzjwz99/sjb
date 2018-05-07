@@ -215,9 +215,9 @@ class User < ActiveRecord::Base
     if power=='luru'
       (return true) if self.identity==1 || self.identity==3
       return false
-    #elsif power=='cuishou'
-    #  (return true) if self.identity==1 || self.identity==3
-    #  return false
+    elsif power=='cuishou'
+      (return true) if self.identity==1 || self.identity==5
+      return false
     elsif power=='caiwu'
       (return true) if self.identity==1 || self.identity==6
       return false
