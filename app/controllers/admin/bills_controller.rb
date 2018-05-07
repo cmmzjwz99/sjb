@@ -54,6 +54,9 @@ class Admin::BillsController < Admin::BaseController
 
     conditions={first_verify: 'verifypass',review_verify: 'verifypass',pay_verify: 'verifypass',has_pay: true}
 
+    params[:name].present? &&
+        conditions.merge!({name:params[:name]})
+
     if params[:export].present?
       @loans=Loan.where(conditions).order(created_at: :desc)
     else
@@ -68,7 +71,9 @@ class Admin::BillsController < Admin::BaseController
         for i in 0..@loans.length-1
           ele = @loans[i]
           csv << [ele.loan_message.htxlh, ele.user.location, ele.name, ele.jkje,
-                  ele.product.lx, ele.jkqx,'每月还款金额', (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : ''),
+                  ele.product.lx, ele.jkqx,
+                  ele.instalments.where("overdue_time > #{Time.now.strftime('%Y-%m-%d')}").first.balance,
+                  (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : ''),
                   ele.loan_message.sfz, ele.loan_message.yddh]
         end
       end

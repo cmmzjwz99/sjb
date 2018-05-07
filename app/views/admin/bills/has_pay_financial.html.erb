@@ -37,7 +37,7 @@
         <div class="row" style="margin: 0">
           <div class="form-group">
             <label class="form-control-label">姓名: </label>
-            <input class="form-control" type="text" name="firstname">
+            <input class="form-control" type="text" name="name" value="<%=params[:name]%>">
           </div>
           <div class="form-layout-footer" style="padding-left: 10px">
             <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
@@ -72,7 +72,7 @@
                 <td><%= ele.jkje%></td>
                 <td><%= ele.product.lx%>%</td>
                 <td><%= ele.jkqx%></td>
-                <td>每月还款金额</td>
+                <td><%= ele.instalments.where("overdue_time > #{Time.now.strftime('%Y-%m-%d')}").first.balance%></td>
                 <td><%= (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
                 <td><%= ele.loan_message.sfz%></td>
                 <td><%= ele.loan_message.yddh%></td>
