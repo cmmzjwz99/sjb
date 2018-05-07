@@ -101,6 +101,7 @@ class Admin::LoansController < Admin::BaseController
   def create
     @loan= Loan.new(loan_params)
     @loan.user=current_user
+    @loan.product=Product.where(status:true)[0]
     respond_to do |format|
       if @loan.save
         format.html {
