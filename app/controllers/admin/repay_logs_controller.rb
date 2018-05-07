@@ -6,8 +6,13 @@ class Admin::RepayLogsController < Admin::BaseController
       redirect_to power_admin_dashboard_index_path
     end
 
-    @repaylogs=RepayLog.where(status:Loan::UNVERIFIED).page(params[:page]).per(10)
+    conditions={}
+
+    conditions.merge!({status: params[:status] || Loan::UNVERIFIED})
+
+    @repaylogs=RepayLog.where(conditions).order(created_at: :desc).page(params[:page]).per(10)
   end
+
   def update
     RepayLog.transaction do
       respond_to do |format|

@@ -29,15 +29,17 @@
 <div class="sl-pagebody">
   <div class="sl-page-title">
     <div class="card pd-20 pd-sm-40">
-
       <h6 class="card-body-title">还款审核</h6>
-
       <form>
         <div class="form-layout pd-b-10 pd-t-10">
           <div class="row" style="margin: 0">
             <div class="form-group">
               <label class="form-control-label">审核状态: </label>
-              <input class="form-control" type="text" name="firstname">
+              <select name="status" class="form-control select2">
+                <option value="unverified" <%=params[:status]=='unverified' ? 'selected' : ''%>>待审核</option>
+                <option value="verifyfail" <%=params[:status]=='verifyfail' ? 'selected' : ''%>>审核失败</option>
+                <option value="verifypass" <%=params[:status]=='verifypass' ? 'selected' : ''%>>审核成功</option>
+              </select>
             </div>
             <div class="form-layout-footer" style="padding-left: 10px">
               <button class="btn btn-info mg-r-5" style="line-height: 1">查询</button>
