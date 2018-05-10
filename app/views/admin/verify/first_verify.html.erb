@@ -31,6 +31,18 @@
               </div>
               <div class="col-6">
                 <div class="form-group">
+                  <label class="form-control-label">标的名称: </label>
+                  <%= text_field_tag('message[bdmc]',@message.bdmc, {class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="form-control-label">标的类型: </label>
+                  <%= text_field_tag('message[bdlx]',@message.bdlx, {class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
                   <label class="form-control-label">借款金额: </label>
                   <%= text_field_tag('loan[jkje]',@loan.jkje, {class: 'form-control',disabled:''}) %>
                 </div>
@@ -43,7 +55,7 @@
               </div>
               <div class="col-3">
                 <div class="form-group">
-                  <label class="form-control-label">服务费: </label>
+                  <label class="form-control-label">平台管理费: </label>
                   <%= text_field_tag('loan[fwf]',@loan.fwf, {class: 'form-control',disabled:''}) %>
                 </div>
               </div>

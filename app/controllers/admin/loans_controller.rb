@@ -1,6 +1,6 @@
 class Admin::LoansController < Admin::BaseController
 
-  before_action :set_loan, only: [:show, :edit, :update, :destroy ,:instalment]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy ,:instalment, :instalment_bg]
 
   def index
     if !current_user.have_power('luru')
@@ -89,7 +89,7 @@ class Admin::LoansController < Admin::BaseController
       if @loan.update(loan_params)
         @message=@loan.loan_message || LoanMessage.new(loan:@loan)
         @message.update(params.require(:message).permit!)
-        format.html {redirect_to admin_loans_path, notice: 'successfully updated'}
+        format.html { redirect_back(fallback_location: root_path) }
         format.json {render :show, status: :ok, location: @loan}
       else
         format.html {render :edit}
@@ -150,6 +150,11 @@ class Admin::LoansController < Admin::BaseController
   def instalment
     @instalments=@loan.get_instalment
     render :instalment ,layout: false
+  end
+
+  def instalment_bg
+    @instalments=@loan.get_instalment
+    render :instalment_bg ,layout: false
   end
 
   private

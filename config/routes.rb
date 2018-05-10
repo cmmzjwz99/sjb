@@ -40,6 +40,7 @@ Rails.application.routes.draw do
         post 'review'
         get 'totle_loan'
         get   "instalment/:id",action:"instalment",id:/\d{1,}/,as: :instalment
+        get "instalment_bg/:id",action:"instalment_bg",id:/\d{1,}/,as: :instalment_bg
         get "financial/:id",action:"financial_verify",id:/\d{1,}/,as: :financial_verify
       end
     end

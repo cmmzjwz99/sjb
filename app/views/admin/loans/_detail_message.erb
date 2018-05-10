@@ -10,6 +10,18 @@
     <%= text_field_tag('message[htxlh]',@message.htxlh, {class: 'form-control'}) %>
   </div>
 </div>
+<div class="col-6">
+  <div class="form-group">
+    <label class="form-control-label">标的名称: </label>
+    <%= text_field_tag('message[bdmc]',@message.bdmc, {class: 'form-control'}) %>
+  </div>
+</div>
+<div class="col-6">
+  <div class="form-group">
+    <label class="form-control-label">标的类型: </label>
+    <%= text_field_tag('message[bdlx]',@message.bdlx, {class: 'form-control'}) %>
+  </div>
+</div>
 <div class="col-4">
   <div class="form-group">
     <label class="form-control-label">借款金额: </label>
@@ -22,8 +34,8 @@
     <select name="loan[jkqx]" class="form-control select2" data-placeholder="Choose Browser">
       <option value="3"<%=@loan.jkqx==3 ? 'selected' : ''%>>3个月</option>
       <option value="6"<%=@loan.jkqx==6 ? 'selected' : ''%>>6个月</option>
-      <option value="6"<%=@loan.jkqx==9 ? 'selected' : ''%>>9个月</option>
-      <option value="6"<%=@loan.jkqx==12 ? 'selected' : ''%>>12个月</option>
+      <option value="9"<%=@loan.jkqx==9 ? 'selected' : ''%>>9个月</option>
+      <option value="12"<%=@loan.jkqx==12 ? 'selected' : ''%>>12个月</option>
       <option value="24"<%=@loan.jkqx==24 ? 'selected' : ''%>>24个月</option>
       <option value="36"<%=@loan.jkqx==36 ? 'selected' : ''%>>36个月</option>
     </select>
@@ -37,7 +49,7 @@
 </div>
 <div class="col-3">
   <div class="form-group">
-    <label class="form-control-label">服务费: </label>
+    <label class="form-control-label">平台管理费: </label>
     <%= text_field_tag('loan[fwf]',@loan.fwf, {class: 'form-control',required:''}) %>
   </div>
 </div>

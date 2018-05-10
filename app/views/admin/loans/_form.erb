@@ -30,9 +30,10 @@
       <% if @loan.first_verify==Loan::VERIFYFAIL %>
           <div class="form-layout-footer">
             <button class="btn btn-info mg-r-5">保存</button>
-            <% if @loan.id.present? %>
-                <a class="btn btn-secondary mg-r-5" style="color: white" href="/admin/loans/instalment/<%= @loan.id %>" target="_blank">分期预览</a>
-            <% end %>
+            <% if @loan.jkje.present? %>
+                <a class="btn btn-secondary mg-r-5" style="color: white" href="/admin/loans/instalment/<%= @loan.id %>" target="_blank">分期预览(客户)</a>
+                <a class="btn btn-secondary mg-r-5" style="color: white" href="/admin/loans/instalment_bg/<%= @loan.id %>" target="_blank">分期预览(后台)</a>
+          <% end %>
           </div><!-- form-layout-footer -->
       <% elsif @loan.first_verify==Loan::VERIFYPASS %>
           <div class="form-layout-footer">

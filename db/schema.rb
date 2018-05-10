@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.bigint "loan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bdmc"
+    t.string "bdlx"
     t.index ["loan_id"], name: "index_loan_messages_on_loan_id"
   end
 
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 2017082414512011) do
     t.float "qt", limit: 24, default: 0.0
     t.float "fxj", limit: 24, default: 0.0
     t.boolean "status", default: true
+    t.float "sqlx", limit: 24, default: 1.0
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -10,19 +10,101 @@
           <h6 class="card-body-title">订单详情</h6>
 
           <div class="form-layout">
-            <div class="col-7">
-              <div class="form-group">
-                <label class="form-control-label">姓名: </label>
-                <%= text_field_tag('', @loan.name,{class: 'form-control',disabled:''}) %>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">姓名: </label>
+                  <%= text_field_tag('', @loan.name,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">标的名称: </label>
+                  <%= text_field_tag('', @loan.loan_message.bdmc,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">标的类型: </label>
+                  <%= text_field_tag('', @loan.loan_message.bdlx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">贷款金额: </label>
+                  <%= text_field_tag('', @loan.jkje+@loan.instalments.first.lx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">贷款月数: </label>
+                  <%= text_field_tag('', @loan.jkqx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">月利率: </label>
+                  <%= text_field_tag('', "#{@loan.product.lx+@loan.product.sqlx}%",{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">借款日期: </label>
+                  <%= text_field_tag('', @loan.start_time.strftime('%Y-%m-%d'),{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">风险金: </label>
+                  <%= text_field_tag('', '0.0',{class: 'form-control',disabled:''}) %>
+                </div>
               </div>
             </div>
-            <div class="col-7">
-              <div class="form-group">
-                <label class="form-control-label">贷款产品: </label>
-                <%= text_field_tag('', Product.find(@loan.product_id).name,{class: 'form-control',disabled:''}) %>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">GPS设备费: </label>
+                  <%= text_field_tag('', @loan.product.gpsfy,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">GPS流量费: </label>
+                  <%= text_field_tag('', @loan.product.gpsllf,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">违章押金: </label>
+                  <%= text_field_tag('', @loan.wzyj,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">首期利息+风险金: </label>
+                  <%= text_field_tag('', @loan.instalments.first.lx,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">进件费抵押登记费: </label>
+                  <%= text_field_tag('', @loan.product.jjf,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">平台管理费: </label>
+                  <%= text_field_tag('', @loan.fwf,{class: 'form-control',disabled:''}) %>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="form-control-label">到账金额: </label>
+                  <%= text_field_tag('', @loan.jkje+@loan.instalments.first.lx-@loan.instalments.first.balance,{class: 'form-control',disabled:''}) %>
+                </div>
               </div>
             </div>
-
+            <div class="row">
             <div class="col-lg-12">
               <div class="form-group" style="overflow: auto">
                 <label class="form-control-label">分期详情: <span class="tx-danger">*</span></label>
@@ -31,21 +113,14 @@
                     <thead>
                     <tr>
                       <th>期数</th>
-                      <th>到期时间</th>
+                      <th>还款日期</th>
+                      <th>还款总额</th>
                       <th>本金</th>
-                      <th>利息</th>
+                      <th>利息+风险金</th>
                       <th>gps费用</th>
-                      <th>gps流量费</th>
                       <th>进件费</th>
-                      <th>中介返点</th>
-                      <th>服务费</th>
+                      <th>平台管理费</th>
                       <th>违章押金</th>
-                      <th>保险押金</th>
-                      <th>保证金</th>
-                      <th>其他</th>
-                      <th>风险金</th>
-                      <th>总计费用</th>
-                      <th>贷款余额</th>
                       <th>操作</th>
                       <th>备注</th>
                     </tr>
@@ -55,20 +130,13 @@
                         <tr>
                           <td><%= ele.periods%></td>
                           <td><%=ele.overdue_time.strftime('%Y-%m-%d')%></td>
+                          <td><%= ele.balance %></td>
                           <td><%= ele.bj %></td>
                           <td><%= ele.lx %></td>
-                          <td><%= ele.gpsfy %></td>
-                          <td><%= ele.gpsllf %></td>
+                          <td><%= ele.gpsfy+ele.gpsllf %></td>
                           <td><%= ele.jjf %></td>
-                          <td><%= ele.zjfd %></td>
                           <td><%= ele.fwf %></td>
                           <td><%= ele.wzyj %></td>
-                          <td><%= ele.bxyj %></td>
-                          <td><%= ele.bzj %></td>
-                          <td><%= ele.qt %></td>
-                          <td><%= ele.fxj %></td>
-                          <td><%= ele.balance %></td>
-                          <td><%= ele.dkye %></td>
                           <td>
                             <% if ele.can_repay && !ele.has_repay %>
                                 <%= link_to '提交还款', "/admin/bills/repay/#{ele.id}", onclick: "if(confirm('确认提交还款吗？')==false)return false;" %>
@@ -92,6 +160,7 @@
                 </div>
               </div>
             </div><!-- col-4 -->
+            </div>
           </div>
 
         </div>

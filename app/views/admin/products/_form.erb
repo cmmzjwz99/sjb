@@ -19,6 +19,12 @@
             </div>
             <div class="col-6">
               <div class="form-group">
+                <label class="form-control-label">首期利息(%): </label>
+                <%= text_field_tag('product[sqlx]', @product.sqlx, {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
                 <label class="form-control-label">双倍期数(不是一期还两期不用填): </label>
                 <%= text_field_tag('product[sbqs]', @product.sbqs, {class: 'form-control'}) %>
               </div>
