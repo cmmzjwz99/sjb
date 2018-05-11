@@ -72,7 +72,7 @@
                 <td><%= ele.jkje%></td>
                 <td><%= ele.product.lx%>%</td>
                 <td><%= ele.jkqx%></td>
-                <td><%= ele.instalments.where("overdue_time > #{Time.now.strftime('%Y-%m-%d')}").first.balance%></td>
+                <td><%= ele.instalments.where("overdue_time > '#{Time.now.strftime('%Y-%m-%d')}'").first.balance%></td>
                 <td><%= (ele.instalments[0].present? ? (ele.instalments[0].overdue_time-1.days).strftime("%d") : '')%></td>
                 <td><%= ele.loan_message.sfz%></td>
                 <td><%= ele.loan_message.yddh%></td>

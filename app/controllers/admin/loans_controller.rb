@@ -148,7 +148,8 @@ class Admin::LoansController < Admin::BaseController
   end
 
   def instalment
-    @instalments=@loan.get_instalment
+    instalments=@loan.get_instalment
+    @instalments=instalments[1,instalments.length-1]
     render :instalment ,layout: false
   end
 

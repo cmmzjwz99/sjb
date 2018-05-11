@@ -21,20 +21,6 @@
     <div style="text-align: center;font-size: 30px;line-height: 60px;margin-top: 30px">
       云指贷还款说明书
     </div>
-
-  <div style="text-align: center;font-size: 20px;line-height: 50px">
-    还款情况（单位：元）
-  </div>
-  <table style="width: 100%;max-width: 1000px;border: 1px solid #cccccc">
-    <tbody style="text-align: center;">
-    <tr>
-      <td style="width: 25%">首月利息+风险金：</td>
-      <td style="width: 25%"><%=@instalments.first[:lx].to_f%></td>
-      <td style="width: 25%">等额等息：</td>
-      <td style="width: 25%"><%=@loan.jkje+@instalments.first[:lx]%></td>
-    </tr>
-    </tbody>
-  </table>
   <div style="text-align: center;font-size: 20px;line-height: 50px">
     云指贷还款明细清单
   </div>
@@ -55,7 +41,6 @@
       <tbody style="text-align: center;">
       <% @instalments.each do |ele| %>
           <tr>
-
             <td><%= ele[:periods]%></td>
             <td><%=ele[:overdue_time].strftime('%Y-%m-%d')%></td>
             <td><%= ele[:balance].to_f %></td>
@@ -65,7 +50,6 @@
             <td><%= ele[:jjf]||0.0 %></td>
             <td><%= ele[:fwf]||0.0 %></td>
             <td><%= ele[:wzyj]||0.0 %></td>
-
           </tr>
       <% end %>
       </tbody>
@@ -80,7 +64,7 @@
       注：收登记证书1本、备用车钥匙1把。<br />
       1、以上收费标准请参见平台相关收费标准。<br />
       2、以上成本不包括逾期迟还款费用，逾期罚息以借条为准，催收费用另计。<br />
-      3、每月07日下午17：30分之前必须还款，如发生逾期 每天收本金0.3%滞纳金.GPS费用：1000元，流量费100元/月。【如提前还款收本金5%违约金，保证金不予退还】<br />
+      3、每月<%=@instalments[0][:overdue_time].strftime("%d")%>日下午17：30分之前必须还款，如发生逾期 每天收本金0.3%滞纳金.GPS费用：1000元，流量费100元/月。【如提前还款收本金5%违约金，保证金不予退还】<br />
       4、具体还款金额与还款日期以贷款成功后网站自动计算结果为准。
     </div>
 
