@@ -19,9 +19,6 @@ class User < ActiveRecord::Base
   # has_many :articles
 
 
-
-  has_one :user_area
-  has_one :user_power
   serialize :settings, Hash
 
   STATUS = %w(active inactive black white)
@@ -81,10 +78,6 @@ class User < ActiveRecord::Base
     self.remember_token_expires_at = nil
     self.remember_token = nil
     save(validate: false)
-  end
-
-  def default_text_filter
-    text_filter
   end
 
   def self.authenticate?(login, pass)
@@ -171,30 +164,11 @@ class User < ActiveRecord::Base
     profile.label == Profile::ADMIN
   end
 
-  def update_twitter_profile_image(img)
-    return if twitter_profile_image == img
-    self.twitter_profile_image = img
-    save
-  end
-
   def generate_password!
     chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
     newpass = ''
     1.upto(7) { |_i| newpass << chars[rand(chars.size - 1)] }
     self.password = newpass
-  end
-
-  def has_twitter_configured?
-    twitter_oauth_token.present? && twitter_oauth_token_secret.present?
-  end
-
-  def add_score(score)
-    self.score += score
-    self.score = 0 if self.score < 0
-    return if self.score > CreditRating::HIGHTEST
-    self.level = CreditRating.find_by(%" low_scores <= :score and high_scores >= :score ",
-                                      :score => self.score).level
-    save
   end
 
   def update_password(pass)
@@ -211,39 +185,6 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{salt}--#{pass}--")
   end
 
-  def have_power power
-    if power=='luru'
-      (return true) if self.identity==1 || self.identity==3
-      return false
-    elsif power=='cuishou'
-      (return true) if self.identity==1 || self.identity==5
-      return false
-    elsif power=='caiwu'
-      (return true) if self.identity==1 || self.identity==6
-      return false
-    elsif power=='caiwushenhe'
-      (return true) if self.identity==2
-      return false
-    elsif power=='admin'
-      (return true) if self.identity==1
-      return false
-    end
-  end
-
-  def get_identity
-    if self.identity==1
-      return 'admin'
-    elsif self.identity==3
-      return '录入员'
-    elsif self.identity==6
-      return '财务'
-    elsif self.identity==5
-      return '催收'
-    elsif self.identity==2
-      return '打款审核'
-    end
-  end
-
   protected
 
   # Apply SHA1 encryption to the supplied password.
@@ -257,6 +198,7 @@ class User < ActiveRecord::Base
   before_create :crypt_password
 
   before_create :crypt_verify_password
+
 
   # Before saving the record to database we will crypt the password
   # using SHA1.

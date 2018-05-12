@@ -4,7 +4,7 @@ class Admin::AccountsController < Admin::BaseController
   # before_action :redirect_if_already_logged_in, only: :login
 
 
-  layout 'accounts'
+  layout 'accounts' ,except: [:recover_password]
 
 
   def index
@@ -17,7 +17,6 @@ class Admin::AccountsController < Admin::BaseController
     return unless request.post?
     self.current_user = User.admin.authenticate(params[:user][:login], params[:user][:password])
     if logged_in?
-      flash[:error] = nil
       successful_login
     else
       flash[:error] = "用户名或密码错误!"
@@ -45,21 +44,20 @@ class Admin::AccountsController < Admin::BaseController
     end
   end
 
+  def recover_password
+    if request.post?
+      if current_user.password != User.password_hash(params[:current_password])
+        render json: {code:1,msg:'原密码错误'}
+        return
+      end
 
-  # def recover_password
-  #   return unless request.post?
-  #   @user = User.where('login = ? or email = ?', params[:user][:login], params[:user][:login]).first
-  #
-  #   if @user
-  #     @user.generate_password!
-  #     @user.save
-  #     flash[:notice] = t('accounts.recover_password.notice')
-  #     redirect_to login_accounts_url
-  #   else
-  #     flash[:error] = t('accounts.recover_password.error')
-  #   end
-  # end
-  #
+      if current_user.update_password(params[:password])
+        render json: {code:0,msg:'修改成功'}
+        return
+      end
+    end
+  end
+
   def logout
     flash[:notice] = t('accounts.logout.notice')
     current_user.forget_me
@@ -69,23 +67,6 @@ class Admin::AccountsController < Admin::BaseController
     cookies.delete :publify_user_profile
     redirect_to login_admin_accounts_path
   end
-  #
-  # private
-  #
-  # def verify_users
-  #   redirect_to(controller: 'accounts', action: 'signup') if User.count == 0
-  #   true
-  # end
-  #
-  # def verify_config
-  #   redirect_to controller: 'setup', action: 'index' unless this_blog.configured?
-  # end
-  #
-  # def redirect_if_already_logged_in
-  #   if session[:user_id] && session[:user_id] == current_user.id
-  #     redirect_back_or_default
-  #   end
-  # end
 
   def successful_login
     session[:user_id] = current_user.id
@@ -106,10 +87,6 @@ class Admin::AccountsController < Admin::BaseController
   end
 
   def redirect_back_or_default
-    if current_user.identity==2
-      redirect_to financial_admin_verify_index_path
-      return
-    end
     redirect_to(session[:return_to] || { controller: 'admin/dashboard', action: 'index' })
     session[:return_to] = nil
   end

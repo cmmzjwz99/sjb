@@ -12,11 +12,9 @@ require 'digest/sha1'
 
 admin = Profile.create(label: 'admin', nicename: 'Publify administrator',
                        modules: [:dashboard, :profile])
-publisher = Profile.create(label: 'publisher', nicename: 'Blog publisher',
+publisher = Profile.create(label: 'agent', nicename: 'Blog publisher',
                            modules: [:dashboard, :profile])
 contributor = Profile.create(label: 'contributor', nicename: 'Contributor',
                              modules: [:dashboard, :profile ])
 
-User.create(login: 'admin',  password: '123456',verify_password:'123456',profile_id:1,identity:1)
-User.create(login: 'yzdzs',  password: '123456',verify_password:'123456',profile_id:1,identity:2)
-User.create(login: 'caiwu',  password: '123456',verify_password:'123456',profile_id:1,identity:6)
+User.create(login: 'admin',  password: '123456',verify_password:'123456',profile_id:1)

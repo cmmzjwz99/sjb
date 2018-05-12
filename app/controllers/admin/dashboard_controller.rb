@@ -2,8 +2,4 @@
 class Admin::DashboardController <  Admin::BaseController
   def index
   end
-
-  def power
-
-  end
 end

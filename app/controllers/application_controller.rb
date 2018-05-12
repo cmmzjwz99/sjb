@@ -1,7 +1,4 @@
 class ApplicationController < ActionController::Base
-  # reset captcha code after each request for security
-  #after_filter :reset_last_captcha_code!
-
   include ::LoginSystem
 
   # before_action :login_required, except: [:login, :signup]
