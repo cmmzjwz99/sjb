@@ -18,10 +18,12 @@ class Admin::AccountsController < Admin::BaseController
     self.current_user = User.admin.authenticate(params[:user][:login], params[:user][:password])
     if logged_in?
       successful_login
+      render json:{code:0}
     else
       flash[:error] = "用户名或密码错误!"
       #t('accounts.login.error')
       @login = params[:user][:login]
+      render json:{code:1,msg:"用户名或密码错误!"}
     end
   end
 
@@ -81,13 +83,12 @@ class Admin::AccountsController < Admin::BaseController
     # add_to_cookies(:publify_user_profile, current_user.profile_label, '/')
 
     current_user.update_connection_time
-    flash[:success] = "登陆成功"
     #t('accounts.login.success')
     redirect_back_or_default
   end
 
   def redirect_back_or_default
-    redirect_to(session[:return_to] || { controller: 'admin/dashboard', action: 'index' })
-    session[:return_to] = nil
+    #redirect_to(session[:return_to] || { controller: 'admin/dashboard', action: 'index' })
+    #session[:return_to] = nil
   end
 end

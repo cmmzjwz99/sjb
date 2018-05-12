@@ -37,9 +37,9 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  # Debug mode disables concatenation and preprocessing of assets.
+  # Debug mode disables concatenation and preprocessing of asset.
   # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
+  # number of complex asset.
   config.assets.debug = true
 
   # Suppress logger output for asset requests.

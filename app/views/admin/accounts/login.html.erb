@@ -1,0 +1,41 @@
+
+<div class="left">
+  <div class="content">
+    <div class="header">
+      <p class="lead">后台登陆</p>
+    </div>
+      <div class="form-group">
+        <label for="signin-email" class="control-label sr-only">Email</label>
+        <input type="email" class="form-control" id="login" placeholder="账号">
+      </div>
+      <div class="form-group">
+        <label for="signin-password" class="control-label sr-only">Password</label>
+        <input type="password" class="form-control" id="pwd" placeholder="秘密">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" onclick="login()">登陆</button>
+  </div>
+</div>
+<% content_for :js do %>
+    <script>
+        function login() {
+            $.ajax({
+                url:'/admin/accounts/login',
+                type:'post',
+                data:{user:{
+                    login:$('#login').val(),
+                    password:$('#pwd').val()
+                }},
+                success:function (data) {
+                    if(data.code==0){
+                        window.location.href='/admin'
+                    }else{
+                        alert(data.msg)
+                    }
+                    console.log(data)
+                }
+            })
+        }
+
+    </script>
+
+<% end %>
