@@ -1,13 +1,9 @@
 class User < ActiveRecord::Base
-
-
-
   include ConfigManager
 
   belongs_to :profile
   #belongs_to :text_filter
   has_one :resource , as: :file, dependent: :destroy
-
 
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true
@@ -17,7 +13,6 @@ class User < ActiveRecord::Base
   #          source: 'notify_content'
   #
   # has_many :articles
-
 
   serialize :settings, Hash
 
