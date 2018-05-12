@@ -46,9 +46,9 @@
             <tr>
               <td><%= ele.loan_message.htxlh%></td>
               <td><a href="<%=admin_loan_path(ele)%>"><%= ele.name%></a></td>
-              <td><%= ele.jkje%></td>
+              <td><%= IntegerUtil.convert(ele.get_agreeement_balance)%></td>
               <td>
-                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款#{ele.jkje.to_f.round(2)}元吗？')==false)return false;" %> &nbsp;
+                <%= link_to '打款', pay_admin_bills_path(ele), onclick:"if(confirm('确认打款#{IntegerUtil.convert(ele.get_agreeement_balance)}元吗？')==false)return false;" %> &nbsp;
               </td>
             </tr>
         <%end%>

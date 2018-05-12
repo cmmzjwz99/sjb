@@ -105,6 +105,7 @@ class Loan  < ActiveRecord::Base
             condition[:lx]=balance*sqlx*periods
             condition[:lx]=IntegerUtil.convert(condition[:lx])
             condition[:bj]=0
+            condition[:gpsllf]=0
             condition[:fwf]=self.fwf
             condition[:gpsfy]=product.gpsfy
             condition[:jjf]=product.jjf
@@ -176,6 +177,16 @@ class Loan  < ActiveRecord::Base
     end
 
     return instalments
+  end
+
+  def get_agreeement_balance
+    if self.product.fqlx!=2
+      return self.jkje.to_f
+    end
+    sqlx=self.product.sqlx/100
+    balance=self.jkje.to_f
+    periods=self.jkqx.to_i
+    return (balance+sqlx*balance*periods)
   end
 
   def get_status(name,type)

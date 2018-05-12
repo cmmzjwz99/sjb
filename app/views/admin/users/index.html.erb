@@ -1,6 +1,5 @@
 
 <%content_for :css do%>
-
     <style>
       .form-group{
         overflow: auto;
@@ -49,20 +48,20 @@
           <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <%@users.each do |ele|%>
-            <tr>
-              <td><%=ele.id%></td>
-              <td><a href="<%=admin_user_path(ele)%>"><%=ele.login%></a></td>
-              <td><%=ele.name%></td>
-              <td><%=ele.get_identity%></td>
-              <td><%=ele.location%></td>
-              <td>
-                <%= link_to '删除', "/admin/users/freeze/#{ele.id}", onclick:"if(confirm('确认删除？')==false)return false;" %>
-              </td>
-            </tr>
-        <%end%>
-        </tbody>
+          <tbody>
+          <% @users.each do |ele| %>
+              <tr>
+                <td><%= ele.id %></td>
+                <td><a href="<%= admin_user_path(ele) %>"><%= ele.login %></a></td>
+                <td><%= ele.name %></td>
+                <td><%= ele.get_identity %></td>
+                <td><%= ele.location %></td>
+                <td>
+                  <%= link_to '删除', "/admin/users/freeze/#{ele.id}", onclick: "if(confirm('确认删除？')==false)return false;" %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
       </table>
       <div class="dataTables_wrapper no-footer">
         <%= paginate @users %>
