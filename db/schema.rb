@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322121717) do
+ActiveRecord::Schema.define(version: 20180512091654) do
+
+  create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean "payment_type"
+    t.float "balance", limit: 24
+    t.integer "status"
+    t.string "no"
+    t.bigint "user_id"
+    t.string "category"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "label"

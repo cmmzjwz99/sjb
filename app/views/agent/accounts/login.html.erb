@@ -19,7 +19,7 @@
     <script>
         function login() {
             $.ajax({
-                url:'/admin/accounts/login',
+                url:'/agent/accounts/login',
                 type:'post',
                 data:{user:{
                     login:$('#login').val(),
@@ -27,7 +27,7 @@
                 }},
                 success:function (data) {
                     if(data.code==0){
-                        window.location.href='/admin'
+                        window.location.href='/agent'
                     }else{
                         alert(data.msg)
                     }

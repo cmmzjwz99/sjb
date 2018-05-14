@@ -1,0 +1,17 @@
+<%= form_tag('/agent/agents', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">账号: </label>
+        <%= text_field_tag('user[login]', @user.login, {class: 'form-control'}) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">密码: </label>
+        <%= text_field_tag('user[password]', @user.password, {class: 'form-control'}) %>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary">添加</button>
+    </div>
+<% end %>

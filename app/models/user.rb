@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   #belongs_to :text_filter
   has_one :resource , as: :file, dependent: :destroy
 
+  has_many :payments
+
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true
 
@@ -29,6 +31,12 @@ class User < ActiveRecord::Base
 
     joins(:profile).
         where(profiles:{label:'admin'})
+  }
+
+  scope :agent, -> {
+
+    joins(:profile).
+        where(profiles:{label:'agent'})
   }
 
   scope :default,-> {

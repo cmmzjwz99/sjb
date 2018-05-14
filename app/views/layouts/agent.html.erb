@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/asset/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/asset/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/asset/vendor/linearicons/style.css">
+  <link rel="stylesheet" href="/asset/vendor/chartist/css/chartist-custom.css">
   <!-- MAIN CSS -->
   <link rel="stylesheet" href="/asset/style.css">
   <!-- GOOGLE FONTS -->
@@ -22,9 +23,9 @@
       float: left;
       width: 180px;
     }
-    .panel-body{
-      padding-bottom: 30px !important;
-    }
+      .panel-body{
+        padding-bottom: 30px !important;
+      }
   </style>
   <% if content_for?(:css) %>
       <%= yield :css %>
@@ -48,7 +49,7 @@
       </div>
       <div id="navbar-menu">
         <div class="navbar-btn navbar-btn-right">
-          <a class="btn btn-success update-pro" href="<%=logout_admin_accounts_path%>" > <span>退出登陆</span></a>
+          <a class="btn btn-warning update-pro" href="<%=logout_agent_accounts_path%>" > <span>退出登陆</span></a>
         </div>
       </div>
     </div>
@@ -59,14 +60,14 @@
     <div class="sidebar-scroll">
       <nav>
         <ul class="nav">
-          <li><a href="/admin" class=""><i class="lnr lnr-home"></i> <span>首页</span></a></li>
-          <li><a href="/admin/users" class=""><i class="lnr lnr-code"></i> <span>用户</span></a></li>
-          <li><a href="/admin/agents" class=""><i class="lnr lnr-chart-bars"></i> <span>代理</span></a></li>
-          <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
-          <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
+          <li><a href="/agent" class=""><i class="lnr lnr-home"></i> <span>首页</span></a></li>
+          <li><a href="/agent/users" class=""><i class="lnr lnr-code"></i> <span>我的用户</span></a></li>
+          <li><a href="/agent/agents" class=""><i class="lnr lnr-chart-bars"></i> <span>下级代理</span></a></li>
+          <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>充值/提现</span></a></li>
+          <!--li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
           <li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
-          <li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
-          <li><a href="<%=recover_password_admin_accounts_path%>" class=""><i class="lnr lnr-linearicons"></i> <span>修改密码</span></a></li>
+          <li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li-->
+          <li><a href="<%=recover_password_agent_users_path%>" class=""><i class="lnr lnr-linearicons"></i> <span>修改密码</span></a></li>
         </ul>
       </nav>
     </div>
@@ -92,13 +93,13 @@
 <script src="/asset/vendor/chartist/js/chartist.min.js"></script>
 <script src="/asset/scripts/klorofil-common.js"></script>
 <script>
-  $(function () {
-      $('.nav a').each(function () {
-          if($(this).attr('href')==window.document.location.pathname){
-             $(this).addClass('active')
-          }
-      })
-  })
+    $(function () {
+        $('.nav a').each(function () {
+            if($(this).attr('href')==window.document.location.pathname){
+                $(this).addClass('active')
+            }
+        })
+    })
 </script>
 <% if content_for?(:js) %>
     <%= yield :js %>

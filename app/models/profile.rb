@@ -5,6 +5,7 @@ class Profile < ActiveRecord::Base
   has_many :users
 
   ADMIN = 'admin'
+  AGENT='agent'
   API = 'api'
 
   def modules

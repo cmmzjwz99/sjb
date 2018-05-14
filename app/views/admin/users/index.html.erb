@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h3 class="page-title">用户表</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">用户表</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>账号</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+              <%@users.each do |ele|%>
+                <tr>
+                  <td><%=ele.id%></td>
+                  <td><%=ele.login%></td>
+                  <td>操作</td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- END BORDERED TABLE -->
+    </div>
+  </div>
+</div>
