@@ -16,23 +16,29 @@
             <tr>
               <th>id</th>
               <th>账号</th>
-              <th>付款方式</th>
-              <th>状态</th>
+              <th>充值／提现</th>
+              <th>流水号</th>
               <th>类型</th>
               <th>金额(元)</th>
+              <th>状态</th>
+              <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <% @payments.each do |ele| %>
                 <tr>
                   <td><%= ele.id %></td>
-                  <td><%= ele.user_id %></td>
-                  <td><%= ele.payment_type %></td>
-                  <td><%= ele.status %></td>
+                  <td><%= ele.user.login %></td>
+                  <td><%= ele.payment_type ? '充值' : '提现' %></td>
+                  <td><%= ele.no %></td>
                   <td><%= ele.category %></td>
                   <td><%= ele.balance %></td>
-                  <!--<td>操作</td>-->
-                </tr>
+                  <td><%= ele.status %></td>
+                  <td>
+                    <% if ele.status==0 %>
+                        <a href="#">确认</a> <a>取消</a></td>
+                    <% end %>
+                    </tr>
             <% end %>
             </tbody>
           </table>
