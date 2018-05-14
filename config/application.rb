@@ -17,6 +17,9 @@ module ServerYzd
     config.active_record.default_timezone = :local
 
     config.time_zone = 'Beijing'
+
+    # redis cache
+    config.cache_store = :redis_store, {:url => 'redis://127.0.0.1:6379/0/cache'}, {expires_in: 12.hours }
   end
   require 'publify_login_system'
 end

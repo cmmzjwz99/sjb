@@ -2,8 +2,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+    #sidekiq
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+    Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
+      [user, password] == %w(admin P@ssw0rd)
+    end
+
     # root
-    root "dashboard#index"
+    root 'dashboard#index'
     # resources :admins, path: '/'
     resources :accounts, only: [:index], format: false do
       collection do

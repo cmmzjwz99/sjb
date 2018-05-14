@@ -5,20 +5,25 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+# Ruby version
+    2.4.3
+# System dependencies
+    Linux, mysql
+# Configuration
 
-* System dependencies
+# Database creation
 
-* Configuration
+# Database initialization
 
-* Database creation
+# How to run the test suite
 
-* Database initialization
+# Services (job queues, cache servers, search engines, etc.)
 
-* How to run the test suite
+# Deployment instructions
+## rails
+    pumactl restart|phased-restart|start|stats|status|stop|...
+## sidekiq
+    sidekiqctl quiet tmp/pids/sidekiq.pid 
+    sidekiqctl stop tmp/pids/sidekiq.pid 
+    sidekiq -d -e development(production)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

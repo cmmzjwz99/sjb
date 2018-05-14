@@ -1,8 +1,5 @@
 module RedisConfigs
-
-  # Reids keys
+  # Redis keys
   USER_TREE_CACHE = 'USER_TREE_CACHE'
 
-  def ping
-  end
 end
