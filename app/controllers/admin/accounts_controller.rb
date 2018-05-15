@@ -1,17 +1,6 @@
 class Admin::AccountsController < Admin::BaseController
-  # before_action :verify_config
-  # before_action :verify_users, only: [:login, :recover_password]
-  # before_action :redirect_if_already_logged_in, only: :login
-
 
   layout 'accounts' ,except: [:recover_password]
-
-
-  def index
-    render text: User.password_hash('lhd2016')
-    # @param_pay = Mpay.new.pay
-    # render text: digitUppercase(100)
-  end
 
   def login
     return unless request.post?

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :users
     resources :agents
+    resources :matchs
   end
 
   namespace :agent do
@@ -44,5 +45,13 @@ Rails.application.routes.draw do
     end
     resources :agents
     resources :payments
+  end
+
+  namespace :api do
+    resources :quiz do
+      collection do
+        get 'list'
+      end
+    end
   end
 end

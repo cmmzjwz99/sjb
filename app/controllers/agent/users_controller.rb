@@ -1,6 +1,5 @@
 class Agent::UsersController <  Agent::BaseController
   def index
-    #conditions={profile_id:2}
     conditions={father_id:current_user.id,profile_id:3}
     @users=User.where(conditions).page(params[:page]).per(10)
   end
@@ -18,5 +17,4 @@ class Agent::UsersController <  Agent::BaseController
       end
     end
   end
-
 end

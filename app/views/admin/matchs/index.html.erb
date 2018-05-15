@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h3 class="page-title">用户表</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+        <div style="padding: 20px 25px">
+          <form>
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="name" value="<%=params[:name]%>">
+            <button class="btn btn-primary" style="margin-left: 3px">查询</button>
+            <a type="button" class="btn btn-default" href="<%=new_admin_match_path%>">添加代理</a>
+          </form>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered" style="margin-bottom: 0">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>比赛名</th>
+              <th>队伍1</th>
+              <th>队伍2</th>
+              <th>开始时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%@matchs.each do |ele|%>
+                <tr>
+                  <td><%=ele.id%></td>
+                  <td><%=ele.name%></td>
+                  <td><%=ele.team1%></td>
+                  <td><%=ele.team2%></td>
+                  <td><%=ele.start_time%></td>
+                  <td>操作</td>
+                </tr>
+            <%end%>
+            </tbody>
+          </table>
+          <div class="dataTables_wrapper no-footer" style="text-align: right">
+            <%= paginate @matchs %>
+          </div>
+        </div>
+      </div>
+      <!-- END BORDERED TABLE -->
+    </div>
+  </div>
+</div>

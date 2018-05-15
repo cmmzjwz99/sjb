@@ -3,8 +3,6 @@
   <!-- OVERVIEW -->
   <div class="panel panel-headline">
     <div class="panel-heading">
-      <h3 class="panel-title">Weekly Overview</h3>
-      <p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -12,8 +10,8 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-download"></i></span>
             <p>
-              <span class="number">1,252</span>
-              <span class="title">Downloads</span>
+              <span class="number cz_val">0</span>
+              <span class="title">充值</span>
             </p>
           </div>
         </div>
@@ -21,8 +19,8 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-shopping-bag"></i></span>
             <p>
-              <span class="number">203</span>
-              <span class="title">Sales</span>
+              <span class="number tx_val">0</span>
+              <span class="title">提现</span>
             </p>
           </div>
         </div>
@@ -30,8 +28,8 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-eye"></i></span>
             <p>
-              <span class="number">274,678</span>
-              <span class="title">Visits</span>
+              <span class="number yh_val">0</span>
+              <span class="title">用户</span>
             </p>
           </div>
         </div>
@@ -39,8 +37,8 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-bar-chart"></i></span>
             <p>
-              <span class="number">35%</span>
-              <span class="title">Conversions</span>
+              <span class="number dl_val">0</span>
+              <span class="title">代理</span>
             </p>
           </div>
         </div>
@@ -72,6 +70,16 @@
     <script>
         $(function () {
 
+            $.ajax({
+                url:'/agent/dashboard/get_data',
+                type:'get',
+                success:function (data) {
+                    $('.cz_val').html(data.cz)
+                    $('.tx_val').html(data.tx)
+                    $('.yh_val').html(data.yh)
+                    $('.dl_val').html(data.dl)
+                }
+            })
             var data, options;
 
             // headline charts

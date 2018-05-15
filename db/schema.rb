@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512091654) do
+ActiveRecord::Schema.define(version: 20180515054535) do
+
+  create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.float "odds1", limit: 24
+    t.float "odds2", limit: 24
+    t.float "balance", limit: 24
+    t.integer "category"
+    t.integer "status"
+    t.bigint "match_id"
+    t.index ["match_id"], name: "index_games_on_match_id"
+  end
+
+  create_table "matchs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "team1"
+    t.string "team2"
+    t.integer "score1"
+    t.integer "score2"
+    t.integer "status"
+    t.datetime "start_time"
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float "point", limit: 24
+    t.float "get_point", limit: 24
+    t.float "odds", limit: 24
+    t.integer "team"
+    t.integer "status"
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.index ["game_id"], name: "index_orders_on_game_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.boolean "payment_type"
@@ -42,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180512091654) do
     t.text "settings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "points", limit: 24, default: 0.0
     t.index ["login"], name: "USER_LOGIN"
     t.index ["profile_id"], name: "USER_PROFILE_ID"
   end

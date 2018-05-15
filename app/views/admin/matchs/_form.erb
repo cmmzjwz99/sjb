@@ -1,0 +1,17 @@
+<%= form_tag('/admin/matchs', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">比赛名: </label>
+        <%= text_field_tag('match[name]', @match.name, {class: 'form-control'}) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">比赛名: </label>
+        <input type="text" class="datetimepicker" placeholder="请选择日期"  data-format="dd/MM/yyyy hh:mm:ss" />
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary">添加</button>
+    </div>
+<% end %>
