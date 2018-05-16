@@ -7,8 +7,20 @@
     </div>
     <div class="row">
       <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛名: </label>
-        <input type="text" class="datetimepicker" placeholder="请选择日期"  data-format="dd/MM/yyyy hh:mm:ss" />
+        <label class="form-control-label">队伍1: </label>
+        <%= text_field_tag('match[team1]', @match.team1, {class: 'form-control'}) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">队伍2: </label>
+        <%= text_field_tag('match[team2]', @match.team2, {class: 'form-control'}) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">比赛日期: </label>
+        <%= text_field_tag('match[start_time]', @match.start_time, {type: "date", class: 'form-control'}) %>
       </div>
     </div>
     <div>

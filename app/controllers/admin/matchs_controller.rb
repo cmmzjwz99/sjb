@@ -2,6 +2,7 @@ class Admin::MatchsController <  Admin::BaseController
   before_action :set_match ,only: [:show]
   def index
     conditions={}
+
     @matchs=Match.where(conditions).page(params[:page]).per(10)
   end
 
