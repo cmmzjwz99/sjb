@@ -4,11 +4,23 @@
         <label class="form-control-label">比赛名: </label>
         <%= text_field_tag('match[name]', @match.name, {class: 'form-control'}) %>
       </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">比赛日期: </label>
+        <%= text_field_tag('match[start_time]', @match.start_time, {type: "date", class: 'form-control'}) %>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">状态: </label>
+        <%= text_field_tag('match[status]', @match.status, { class: 'form-control'}) %>
+      </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">队伍1: </label>
         <%= text_field_tag('match[team1]', @match.team1, {class: 'form-control'}) %>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">分数: </label>
+        <%= text_field_tag('match[score1]', @match.score1, {class: 'form-control'}) %>
       </div>
     </div>
     <div class="row">
@@ -16,12 +28,13 @@
         <label class="form-control-label">队伍2: </label>
         <%= text_field_tag('match[team2]', @match.team2, {class: 'form-control'}) %>
       </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">分数: </label>
+        <%= text_field_tag('match[score2]', @match.score2, {class: 'form-control'}) %>
+      </div>
     </div>
     <div class="row">
-      <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛日期: </label>
-        <%= text_field_tag('match[start_time]', @match.start_time, {type: "date", class: 'form-control'}) %>
-      </div>
+
     </div>
     <div>
       <button class="btn btn-primary">添加</button>
