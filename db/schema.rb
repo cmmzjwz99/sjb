@@ -10,16 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515054535) do
+ActiveRecord::Schema.define(version: 20180516084443) do
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.float "odds1", limit: 24
     t.float "odds2", limit: 24
-    t.float "balance", limit: 24
     t.integer "category"
     t.integer "status"
     t.bigint "match_id"
+    t.float "odds3", limit: 24
+    t.string "name1"
+    t.string "name2"
+    t.string "name3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_games_on_match_id"
   end
 
@@ -31,6 +36,8 @@ ActiveRecord::Schema.define(version: 20180515054535) do
     t.integer "score2"
     t.integer "status"
     t.datetime "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -41,6 +48,8 @@ ActiveRecord::Schema.define(version: 20180515054535) do
     t.integer "status"
     t.bigint "user_id"
     t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_orders_on_game_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -52,6 +61,8 @@ ActiveRecord::Schema.define(version: 20180515054535) do
     t.string "no"
     t.bigint "user_id"
     t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 

@@ -7,6 +7,7 @@ class AddPayment < ActiveRecord::Migration[5.1]
       t.string :no
       t.references :user
       t.string :category
+      t.timestamps null: false
     end
   end
 end

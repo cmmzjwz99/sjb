@@ -55,9 +55,23 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :accounts do
+      collection do
+        post 'login'
+        post 'signup'
+      end
+    end
+    resources :payments do
+      collection do
+        post 'order'
+      end
+    end
     resources :quiz do
       collection do
         get 'list'
+        post 'buy'
+        get 'odds'
+        get 'my_order'
       end
     end
   end

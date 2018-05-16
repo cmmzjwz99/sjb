@@ -39,11 +39,6 @@
                         <a><%= link_to '确定', sh_success_agent_payments_path(ele), method: :post, data: {confirm: '确认充值?'} %></a>
                         <a><%= link_to '取消', sh_fail_agent_payments_path(ele), method: :post, data: {confirm: '确定取消?'} %></a>
                     <% end %>
-                    <% if ele.status!=0  %>
-                        <a>确定</a>
-                        <a>取消</a>
-                  <% end %>
-
                   </td>
                 </tr>
             <% end %>

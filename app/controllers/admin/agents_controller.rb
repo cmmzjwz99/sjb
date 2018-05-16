@@ -22,7 +22,7 @@ class Admin::AgentsController <  Admin::BaseController
         }
       else
         format.html {
-          render :new
+          redirect_to "#{new_admin_agent_url}?msg=账号已存在"
         }
       end
     end

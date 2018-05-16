@@ -9,6 +9,7 @@ class AddMatch < ActiveRecord::Migration[5.1]
       t.integer :score2
       t.integer :status
       t.datetime :start_time
+      t.timestamps null: false
     end
 
     create_table :games do |t|
@@ -20,6 +21,7 @@ class AddMatch < ActiveRecord::Migration[5.1]
       t.integer :status
 
       t.references :match
+      t.timestamps null: false
     end
     add_column :users,:points,:float,default: 0.0
   end

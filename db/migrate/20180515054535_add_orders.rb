@@ -8,6 +8,7 @@ class AddOrders < ActiveRecord::Migration[5.1]
       t.integer :status
       t.references :user
       t.references :game
+      t.timestamps null: false
     end
   end
 end
