@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :users
     resources :agents
     resources :matchs
+    resources :user_payments
   end
 
   namespace :agent do
@@ -47,11 +48,12 @@ Rails.application.routes.draw do
     # resources :payments
     resources :payments do
       collection do
-        get 'payment'
+        get 'payments'
         post "sh_success/:id",action:"sh_success",id:/\d{1,}/,as: :sh_success;
         post "sh_fail/:id",action:"sh_fail",id:/\d{1,}/,as: :sh_fail;
       end
     end
+    resources :user_payments
   end
 
   namespace :api do
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
     resources :payments do
       collection do
         post 'order'
+        get 'get_payments'
       end
     end
     resources :quiz do

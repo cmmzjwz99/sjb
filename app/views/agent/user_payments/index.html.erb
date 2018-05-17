@@ -1,0 +1,155 @@
+<div class="container-fluid">
+  <h3 class="page-title">收款配置</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+        <div class="panel-heading"></div>
+        <div class="panel-body" style="padding-top: 0">
+          <%= form_for([:agent, @user_payment], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label>支付宝状态</label>
+                    <%= f.select :alipay_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
+                  </div>
+                  <div class="form-group">
+                    <label>支付宝收款人姓名</label>
+                    <%= f.text_field(:alipay_name, {class: 'form-control'}) %>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <div class="row" style="padding-left: 15px">
+                      <label>支付宝收款二维码</label>
+                    </div>
+                    <input type="file" name="user_payment[alipay_qr]" id="alipay_qr" style="display: none">
+                    <img id="alipay_img" onclick="changeimg('alipay_qr')" src="<%= (@user_payment.alipay_qr.nil? ? '' : @user_payment.alipay_qr.url) %>" style="width: 182px;height: 182px">
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label>微信状态</label>
+                    <%= f.select :wechat_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
+                  </div>
+                  <div class="form-group">
+                    <label>微信收款人姓名</label>
+                    <%= f.text_field(:wechat_name, {class: 'form-control'}) %>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <div class="row" style="padding-left: 15px">
+                      <label>微信收款二维码</label>
+                    </div>
+                    <input type="file" name="user_payment[wechat_qr]" id="wechat_qr" style="display: none">
+                    <img id="wechat_img" onclick="changeimg('wechat_qr')" src="<%= (@user_payment.wechat_qr.nil? ? '' : @user_payment.wechat_qr.url) %>" style="width: 182px;height: 182px">
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label>银行状态</label>
+                    <%= f.select :bank_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
+                  </div>
+                  <div class="form-group">
+                    <label>银行卡号</label>
+                    <%= f.text_field(:bank_no, {class: 'form-control'}) %>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label>银行名称</label>
+                    <%= f.text_field(:bank_name, {class: 'form-control'}) %>
+                  </div>
+                  <div class="form-group">
+                    <label>收款人姓名</label>
+                    <%= f.text_field(:bank_user, {class: 'form-control'}) %>
+                  </div>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-xs-4">
+
+                    <button class="btn btn-primary">修改</button>
+                  </div>
+                </div>
+          <% end %>
+          </div>
+        </div>
+        <div style="padding: 10px"></div>
+      </div>
+      <!-- END BORDERED TABLE -->
+    </div>
+  </div>
+</div>
+
+<% content_for :js do %>
+    <script>
+        function changeimg(name) {
+            $("#"+name).click()
+        };
+        $("#alipay_qr").change(function () {
+            if (typeof (FileReader) != "undefined") {
+                var dvPreview = $("#dvPreview");
+                dvPreview.html("");
+                var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = $("#alipay_img");
+                            img.attr("src", e.target.result);
+                            dvPreview.append(img);
+                        }
+                        reader.readAsDataURL(file[0]);
+                    } else {
+                        alert(file[0].name + " isnotavalidimagefile.");
+                        dvPreview.html("");
+                        return false;
+                    }
+                });
+            } else {
+                alert("ThisbrowserdoesnotsupportHTML5FileReader.");
+            }
+        });
+
+        $("#wechat_qr").change(function () {
+            if (typeof (FileReader) != "undefined") {
+                var dvPreview = $("#dvPreview");
+                dvPreview.html("");
+                var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = $("#wechat_img");
+                            img.attr("src", e.target.result);
+                            dvPreview.append(img);
+                        }
+                        reader.readAsDataURL(file[0]);
+                    } else {
+                        alert(file[0].name + " isnotavalidimagefile.");
+                        dvPreview.html("");
+                        return false;
+                    }
+                });
+            } else {
+                alert("ThisbrowserdoesnotsupportHTML5FileReader.");
+            }
+        });
+    </script>
+<%end%>
+<%if params[:msg].present?%>
+    <script>
+        alert('<%=params[:msg]%>')
+    </script>
+<%end%>

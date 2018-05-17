@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516084443) do
+ActiveRecord::Schema.define(version: 20180517012829) do
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -72,6 +72,23 @@ ActiveRecord::Schema.define(version: 20180516084443) do
     t.text "modules"
   end
 
+  create_table "user_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean "alipay_status"
+    t.string "alipay_qr"
+    t.string "alipay_name"
+    t.boolean "wechat_status"
+    t.string "wechat_qr"
+    t.string "wechat_name"
+    t.boolean "bank_status"
+    t.string "bank_no"
+    t.string "bank_name"
+    t.string "bank_user"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_payments_on_user_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "login"
     t.string "password"
@@ -87,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180516084443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "points", limit: 24, default: 0.0
+    t.boolean "add_agent", default: false
     t.index ["login"], name: "USER_LOGIN"
     t.index ["profile_id"], name: "USER_PROFILE_ID"
   end

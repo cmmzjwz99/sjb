@@ -54,3 +54,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'kaminari'
+
+
+# Use for file upload
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.2', require: 'mini_magick'
+gem 'piet'

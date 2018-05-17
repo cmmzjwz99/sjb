@@ -13,9 +13,14 @@ class Api::PaymentsController < Api::BaseController
     end
   end
 
+  def get_payments
+    user=current_user.father_id.present? ? User.find(current_user.father_id) : User.find(1)
+    @payment=user.user_payment || UserPayment.new({alipay_status:false,wechat_status:false,bank_status:false})
+  end
+
   private
   def payment_params
-    params.require(:payment).permit!
+    params.require(:payments).permit!
   end
 
 end
