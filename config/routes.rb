@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :users
     resources :agents
     resources :matchs
+    resources :games
     resources :user_payments
   end
 
