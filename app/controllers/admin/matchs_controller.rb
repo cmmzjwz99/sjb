@@ -2,7 +2,8 @@ class Admin::MatchsController <  Admin::BaseController
   before_action :set_match ,only: [:show]
   def index
     conditions={}
-
+    params[:name].present? &&
+        conditions.merge!({name: params[:name]})
     @matchs=Match.where(conditions).page(params[:page]).per(10)
   end
 
