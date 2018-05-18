@@ -4,7 +4,7 @@ class Admin::MatchesController <  Admin::BaseController
     conditions={}
     params[:name].present? &&
         conditions.merge!({name: params[:name]})
-    @matchs=Match.where(conditions).page(params[:page]).per(10)
+    @matches=Match.where(conditions).page(params[:page]).per(10)
   end
 
   def new
