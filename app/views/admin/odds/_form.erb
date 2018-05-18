@@ -1,0 +1,38 @@
+<%= form_tag('/admin/odds', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">主队: </label>
+        <%= text_field_tag('odd[home_team]', @odd.home_team, {class: 'form-control'}) %>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">主队赔率: </label>
+        <%= text_field_tag('odd[home_odd]', @odd.home_odd, { class: 'form-control'}) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">客队: </label>
+        <%= text_field_tag('odd[away_team]', @odd.away_team, {class: 'form-control'}) %>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">客队赔率: </label>
+        <%= text_field_tag('odd[away_odd]', @odd.away_odd, { class: 'form-control'}) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">规则: </label>
+        <%= text_field_tag('odd[rule]', @odd.rule, {class: 'form-control'}) %>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">来源: </label>
+        <%= text_field_tag('odd[source]', @odd.source, { class: 'form-control'}) %>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn-primary">添加</button>
+    </div>
+<% end %>
