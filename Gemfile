@@ -60,3 +60,5 @@ gem 'kaminari'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.2', require: 'mini_magick'
 gem 'piet'
+
+gem 'selenium-webdriver'
