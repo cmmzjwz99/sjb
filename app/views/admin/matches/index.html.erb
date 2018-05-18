@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            <%@matchs.each do |ele|%>
+            <%@matches.each do |ele|%>
                 <tr>
                   <td><%=ele.id%></td>
                   <td><%=ele.name%></td>
@@ -37,7 +37,7 @@
             </tbody>
           </table>
           <div class="dataTables_wrapper no-footer" style="text-align: right">
-            <%= paginate @matchs %>
+            <%= paginate @matches %>
           </div>
         </div>
       </div>
