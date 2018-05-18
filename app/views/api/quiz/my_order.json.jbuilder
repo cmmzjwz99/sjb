@@ -1,6 +1,7 @@
 json.code @orders.nil? ? 1 : 0
 json.data(@orders) do |order|
   json.extract! order, :point,:get_point
+  json.time order.created_at.strftime('%Y-%m-%d')
   case order.status
     when 0
       json.get_point '进行中'

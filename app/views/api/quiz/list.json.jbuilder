@@ -4,6 +4,6 @@ json.data(@matchs) do |match|
   json.date match.start_time.strftime('%Y-%m-%d')
   json.time match.start_time.strftime('%H:%M')
   json.games(match.games) do |game|
-    json.extract! game, :id, :name,:odds1,:odds2,:odds3,:status,:name1,:name2,:name3
+    json.extract! game, :id, :name,:odds1,:odds2,:odds3,:status,:name1,:name2,:name3,:category
   end
 end

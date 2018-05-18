@@ -1,54 +1,57 @@
-<%= form_tag('/admin/games', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+<%= form_for([:admin, @game], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+    <%if !(@game.id.present?)%>
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">比赛名: </label>
         <%= text_field_tag('game[name]', @game.name, {class: 'form-control'}) %>
       </div>
+
       <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛名1: </label>
+        <label class="form-control-label">比赛场次: </label>
+        <select name="game[match_id]" id="game[match_id]" class="form-control">
+          <% Match.where({status:[0,1]}).each do |ele| %>
+              <option value="<%= ele.id %>" <%= ele.id==@game.id ? 'selected' : '' %>><%= "#{ele.name} #{ele.team1}VS#{ele.team2}" %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">比赛结果数: </label>
+        <select name="game[category]" id="game[category]" class="form-control">
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <%end%>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">结果1: </label>
         <%= text_field_tag('game[name1]', @game.name1, {class: 'form-control'}) %>
       </div>
       <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛名2: </label>
+        <label class="form-control-label">结果2: </label>
         <%= text_field_tag('game[name2]', @game.name2, {class: 'form-control'}) %>
       </div>
-
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">结果3: </label>
+        <%= text_field_tag('game[name3]', @game.name3, {class: 'form-control'}) %>
+      </div>
     </div>
-
     <div class="row">
       <div class="form-group col-xs-4">
-        <label class="form-control-label">几率1: </label>
+        <label class="form-control-label">赔率1: </label>
         <%= text_field_tag('game[odds1]', @game.odds1, {class: 'form-control'}) %>
       </div>
       <div class="form-group col-xs-4">
-        <label class="form-control-label">几率2: </label>
+        <label class="form-control-label">赔率2: </label>
         <%= text_field_tag('game[odds2]', @game.odds2, {class: 'form-control'}) %>
       </div>
       <div class="form-group col-xs-4">
-        <label class="form-control-label">几率3: </label>
+        <label class="form-control-label">赔率3: </label>
         <%= text_field_tag('game[odds3]', @game.odds3, {class: 'form-control'}) %>
       </div>
     </div>
 
-
-    <div class="row">
-      <div class="form-group col-xs-4">
-        <label class="form-control-label">类型: </label>
-        <%= text_field_tag('game[category]', @game.category, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="form-control-label">状态: </label>
-        <%= text_field_tag('game[status]', @game.status, {class: 'form-control'}) %>
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛场次: </label>
-        <select name="game[match_id]" id="game[match_id]" class="form-control">
-          <% Match.where({}).each do |ele| %>
-              <option value="<%= ele.id %>" <%= ele.id==@game.id ? 'selected' : '' %>><%= ele.name %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
 
     <div>
       <button class="btn btn-primary">添加</button>

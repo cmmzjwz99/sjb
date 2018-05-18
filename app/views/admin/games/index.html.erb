@@ -34,8 +34,18 @@
                   <td><%=ele.odds2%></td>
                   <td><%=ele.category%></td>
                   <td><%=ele.status%></td>
-                  <td><%=ele.match.name%></td>
-                  <td>操作</td>
+                  <td><%=ele.match.name %></td>
+                  <td>
+                    <% if ele.status!=1 %>
+                        <a href="<%= admin_game_path(ele) %>">
+                          修改赔率
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="<%= settlement_admin_games_path(ele)%>">
+                          结算
+                        </a>
+                    <% end %>
+                  </td>
                 </tr>
             <%end%>
             </tbody>

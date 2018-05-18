@@ -13,3 +13,4 @@ production:
   - [critical, 2]
   - default
   - low
+  - [settlement,2]

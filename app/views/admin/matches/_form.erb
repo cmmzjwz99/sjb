@@ -1,4 +1,4 @@
-<%= form_tag('/admin/matchs', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+<%= form_for([:admin, @match], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">比赛名: </label>
@@ -10,13 +10,14 @@
       </div>
       <div class="form-group col-xs-4">
         <label class="form-control-label">状态: </label>
-        <%= text_field_tag('match[status]', @match.status, { class: 'form-control'}) %>
+        <%= select_tag 'match[status]', options_for_select([["未开始", "0"], ["可押注", "1"], ["进行中", "2"], ["已结束", "3"]], @match.status), {class: "form-control"} %>
+
       </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">队伍1: </label>
-        <%= text_field_tag('match[team1]', @match.team1, {class: 'form-control'}) %>
+        <%= select_tag 'match[team1]', options_for_select(Match::TEAM , @match.team1),{class: 'form-control'} %>
       </div>
       <div class="form-group col-xs-4">
         <label class="form-control-label">分数: </label>
@@ -26,7 +27,7 @@
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">队伍2: </label>
-        <%= text_field_tag('match[team2]', @match.team2, {class: 'form-control'}) %>
+        <%= select_tag 'match[team2]', options_for_select(Match::TEAM , @match.team2),{class: 'form-control'} %>
       </div>
       <div class="form-group col-xs-4">
         <label class="form-control-label">分数: </label>

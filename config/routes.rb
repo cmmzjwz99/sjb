@@ -24,8 +24,12 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :users
     resources :agents
-    resources :matchs
-    resources :games
+    resources :matches
+    resources :games do
+      collection do
+        get "settlement/:id",action:"settlement",id:/\d{1,}/,as: :settlement;
+      end
+    end
     resources :odds
     resources :user_payments
   end
@@ -63,6 +67,7 @@ Rails.application.routes.draw do
       collection do
         post 'login'
         post 'signup'
+        get 'info'
       end
     end
     resources :payments do
