@@ -24,14 +24,16 @@ class Api::PaymentsController < Api::BaseController
     @payment=user.user_payment || UserPayment.new({alipay_status: false, wechat_status: false, bank_status: false})
   end
 
+  def pay_way
+    user=current_user.father_id.present? ? User.find(current_user.father_id) : User.find(1)
+    @payment= user.user_payment || UserPayment.new({alipay_status: false, wechat_status: false, bank_status: false})
+    render json: {code: 0, data:{alipay_status: @payment.alipay_status,wechat_status: @payment.wechat_status, bank_status: @payment.bank_status}}
+  end
+
   private
   def payment_params
     params.require(:payments).permit!
   end
 
-  def pay_way
-    @payment= UserPayment.new(user_payment_params)
-    render json: {code: 0,alipay_status: @payment.alipay_status,wechat_status: @payment.wechat_status, bank_status: @payment.bank_status}
-  end
 
 end
