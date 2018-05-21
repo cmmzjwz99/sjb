@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <h3 class="page-title">充值</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+        <div style="padding: 20px 25px">
+          <form>
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="user_id" value="<%= params[:login] %>">
+            <button class="btn btn-primary" style="margin-left: 3px">查询</button>
+          </form>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-bordered table-hover" style="margin-bottom: 0">
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>账号</th>
+              <th>充值／提现</th>
+              <th>流水号</th>
+              <th>类型</th>
+              <th>金额(元)</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @payments.each do |ele| %>
+                <tr>
+                  <td><%= ele.id %></td>
+                  <td><%= ele.user.login %></td>
+                  <td><%= ele.payment_type ? '充值' : '提现' %></td>
+                  <td><%= ele.no %></td>
+                  <td><%= ele.category %></td>
+                  <td><%= ele.balance %></td>
+                  <td><%= ele.status %></td>
+                  <td>
+                    <% if ele.status==0 %>
+                        <a><%= link_to '确定', sh_success_admin_payments_path(ele), method: :post, data: {confirm: '确认充值?'} %></a>
+                        <a><%= link_to '取消', sh_fail_admin_payments_path(ele), method: :post, data: {confirm: '确定取消?'} %></a>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <div class="dataTables_wrapper no-footer" style="text-align: right">
+            <%= paginate @payments %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<script>-->
+<!--//    function confirm(s) {-->
+<!--//        alert("确定提交？");-->
+<!--//        $("#confirm").append().val(1);-->
+<!--//        $("#s").append().val(1);-->
+<!--//        s.append().val(1);-->
+<!--//        window.location.href = '/agent/payments'-->
+<!--//    }-->
+<!--//-->
+<!--//    function cancel(status) {-->
+<!--//        alert("确定取消？");-->
+<!--//        status = 2-->
+<!--//    }-->
+<!--</script>-->
+
