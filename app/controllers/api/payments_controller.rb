@@ -5,15 +5,15 @@ class Api::PaymentsController < Api::BaseController
     @payment.user=current_user
     @payment.status=0
 
+    if @payment.balance == 0
+      render json: {code:1,msg:'金额不能为0'}
+      return
+    elsif @payment.balance > 100000
+      render json: {code:1,msg:'金额不能超过100000'}
+      return
+    end
+
     if @payment.save
-      if @payment.balance == 0
-        render json: {code:1,msg:'金额不能为0'}
-        return
-      elsif @payment.balance > 100000
-        render json: {code:1,msg:'金额不能超过100000'}
-        return
-      end
-    else
       render json: {code:0,msg:'成功'}
       return
     end
