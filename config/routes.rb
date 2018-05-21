@@ -32,13 +32,6 @@ Rails.application.routes.draw do
     end
     resources :odds
     resources :user_payments
-    resources :payments do
-      collection do
-        get 'payments'
-        post "sh_success/:id",action:"sh_success",id:/\d{1,}/,as: :sh_success;
-        post "sh_fail/:id",action:"sh_fail",id:/\d{1,}/,as: :sh_fail;
-      end
-    end
   end
 
   namespace :agent do
@@ -81,6 +74,7 @@ Rails.application.routes.draw do
       collection do
         post 'order'
         get 'get_payments'
+        get 'pay_way'
       end
     end
     resources :quiz do
