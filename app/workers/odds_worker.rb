@@ -4,7 +4,7 @@ class OddsWorker
 
   def perform
     begin
-      Match.where({status:[0,1]}).not.where({match_id:nil}).each do |match|
+      Match.where({status:[0,1]}).where.not({match_id:nil}).each do |match|
         update_odds match.id
       end
     end
@@ -18,31 +18,31 @@ class OddsWorker
 
     #让球
     rq=games.where(name:'让球盘')[0]
-    if rq.present?
+    if rq.present? && odds[0].present?
       rq.update_odd odds[0]
     end
 
     #标准盘
     bz=games.where(name:'标准盘')[0]
-    if bz.present?
+    if bz.present? && odds[1].present?
       bz.update_odd odds[1]
     end
 
     #大小球
     dx=games.where(name:'大小球')[0]
-    if dx.present?
+    if dx.present? && odds[2].present?
       dx.update_odd odds[2]
     end
 
     #半场让球
     h_rq=games.where(name:'半场让球盘')[0]
-    if h_rq.present?
+    if h_rq.present? && odds[3].present?
       h_rq.update_odd odds[3]
     end
 
     #半场大小球
     h_dx=games.where(name:'半场大小球')[0]
-    if h_dx.present?
+    if h_dx.present? && odds[4].present?
       h_dx.update_odd odds[4]
     end
   end

@@ -9,7 +9,7 @@ class Match < ActiveRecord::Base
         '比利时','巴拿马','突尼斯','英格兰', '波兰','塞内加尔','哥伦比亚','日本']
 
   def get_match_id
-    doc = Nokogiri::HTML(open('http://interface.win007.com/zq/BF_XML.aspx?date=2018-05-21'))
+    doc = Nokogiri::HTML(open('http://interface.win007.com/zq/BF_XML.aspx?'))
     doc = doc.css('list match')
 
     doc.each do |match|
