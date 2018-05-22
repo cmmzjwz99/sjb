@@ -2,8 +2,14 @@
     <%if !(@game.id.present?)%>
     <div class="row">
       <div class="form-group col-xs-4">
-        <label class="form-control-label">比赛名: </label>
-        <%= text_field_tag('game[name]', @game.name, {class: 'form-control'}) %>
+        <label class="form-control-label">盘口名: </label>
+        <select name="game[name]" id="game[name]" class="form-control">
+          <option <%= @game.name=='让球盘' ? 'selected' : '' %>>让球盘</option>
+          <option <%= @game.name=='标准盘' ? 'selected' : '' %>>标准盘</option>
+          <option <%= @game.name=='大小球' ? 'selected' : '' %>>大小球</option>
+          <option <%= @game.name=='上半场让球盘' ? 'selected' : '' %>>上半场让球盘</option>
+          <option <%= @game.name=='上半场大小球' ? 'selected' : '' %>>上半场大小球</option>
+        </select>
       </div>
 
       <div class="form-group col-xs-4">

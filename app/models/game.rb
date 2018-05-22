@@ -20,4 +20,13 @@ class Game < ActiveRecord::Base
       return self.name3
     end
   end
+
+  def update_odd odds
+    self.odds1=odds[0]
+    self.odds2=odds[1]
+    if odds.length==3
+      self.odds3=odds[2]
+    end
+    self.save
+  end
 end

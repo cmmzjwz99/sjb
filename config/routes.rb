@@ -24,7 +24,12 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :users
     resources :agents
-    resources :matches
+    resources :matches do
+      collection do
+        post 'get_match_id'
+        post 'delete_match_id'
+      end
+    end
     resources :games do
       collection do
         get "settlement/:id",action:"settlement",id:/\d{1,}/,as: :settlement;

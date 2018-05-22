@@ -62,3 +62,5 @@ gem 'mini_magick', '~> 4.2', require: 'mini_magick'
 gem 'piet'
 
 gem 'selenium-webdriver'
+
+gem 'httparty'

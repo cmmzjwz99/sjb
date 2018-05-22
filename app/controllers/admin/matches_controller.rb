@@ -1,5 +1,5 @@
 class Admin::MatchesController <  Admin::BaseController
-  before_action :set_match ,only: [:show,:update]
+  before_action :set_match ,only: [:show,:update,:get_match_id,:delete_match_id]
   def index
     conditions={}
     params[:name].present? &&
@@ -37,6 +37,25 @@ class Admin::MatchesController <  Admin::BaseController
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def get_match_id
+    begin
+      @match.get_match_id
+    end
+    if @match.match_id.present?
+      render json:{code:0,msg:'chenggong'}
+    else
+      render json:{code:1,msg:'shibai'}
+    end
+  end
+
+  def delete_match_id
+    if @match.update({match_id:nil})
+      render json:{code:0,msg:'chenggong'}
+    else
+      render json:{code:1,msg:'shibai'}
     end
   end
 

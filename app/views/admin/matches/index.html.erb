@@ -20,6 +20,7 @@
               <th>队伍1</th>
               <th>队伍2</th>
               <th>开始时间</th>
+              <th>比赛id</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -31,9 +32,17 @@
                   <td><%=ele.team1%></td>
                   <td><%=ele.team2%></td>
                   <td><%=ele.start_time%></td>
-                  <td><a href="<%=admin_match_path(ele)%>">操作</a></td>
+                  <td><%=ele.match_id%></td>
+                  <td>
+                    <a href="<%= admin_match_path(ele) %>">操作</a>&nbsp;&nbsp;
+                    <% if ele.match_id.present? %>
+                        <a href="#" onclick="delete_match_id(<%=ele.id%>)">删除比赛id</a>
+                    <% else %>
+                        <a href="#" onclick="get_match_id(<%=ele.id%>)">获取比赛id</a>&nbsp;&nbsp;
+                    <% end %>
+                  </td>
                 </tr>
-            <%end%>
+            <% end %>
             </tbody>
           </table>
           <div class="dataTables_wrapper no-footer" style="text-align: right">
@@ -45,3 +54,36 @@
     </div>
   </div>
 </div>
+
+<% content_for :js do %>
+    <script>
+      function get_match_id(id) {
+          $.ajax({
+              url:'/admin/matches/get_match_id?id='+id,
+              type:'post',
+              success:function(data){
+                  if(data.code==0){
+                      alert('添加成功')
+                      history.go(0)
+                  }else{
+                      alert('找不到比赛id')
+                  }
+                  console.log(data)
+              }
+          })
+      }
+      function delete_match_id(id) {
+          $.ajax({
+              url:'/admin/matches/delete_match_id?id='+id,
+              type:'post',
+              success:function(data){
+                  if(data.code==0){
+                      alert('删除成功')
+                      history.go(0)
+                  }
+                  console.log(data)
+              }
+          })
+      }
+    </script>
+<%end%>
