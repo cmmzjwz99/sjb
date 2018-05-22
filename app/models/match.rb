@@ -13,7 +13,7 @@ class Match < ActiveRecord::Base
     doc = doc.css('list match')
 
     doc.each do |match|
-      if match.css('h').text =~/#{team1}/ &&  match.css('i').text=~/#{team2}/
+      if match.css('h').text =~/#{self.team1}/ &&  match.css('i').text=~/#{self.team2}/
         self.match_id=match.css('a').text
       end
     end
