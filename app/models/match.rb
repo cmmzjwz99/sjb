@@ -41,7 +41,7 @@ class Match < ActiveRecord::Base
     arr1.each do |ele|
       ele=ele.split(',')
       if ele[0]==self.match_id && ele[1]=='8'
-        res[0]=[ele[6],ele[7]]
+        res[0]=[ele[6],ele[7],ele[5]]
       end
     end
 
@@ -55,21 +55,21 @@ class Match < ActiveRecord::Base
     arr3.each do |ele|
       ele=ele.split(',')
       if ele[0]==self.match_id && ele[1]=='8'
-        res[2]=[ele[6],ele[7]]
+        res[2]=[ele[6],ele[7],ele[5]]
       end
     end
 
     arr4.each do |ele|
       ele=ele.split(',')
       if ele[0]==self.match_id && ele[1]=='8'
-        res[3]=[ele[6],ele[7]]
+        res[3]=[ele[6],ele[7],ele[5]]
       end
     end
 
     arr5.each do |ele|
       ele=ele.split(',')
       if ele[0]==self.match_id && ele[1]=='8'
-        res[4]=[ele[6],ele[7]]
+        res[4]=[ele[6],ele[7],ele[5]]
       end
     end
 

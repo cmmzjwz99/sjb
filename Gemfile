@@ -30,6 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 #sidekiq
 gem 'sidekiq'
+gem 'sidetiq'
 gem 'sinatra', require: false
 gem 'slim'
 

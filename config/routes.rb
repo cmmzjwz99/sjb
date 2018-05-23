@@ -41,6 +41,11 @@ Rails.application.routes.draw do
       end
     end
     resources :odds
+    resources :fj_matches do
+      collection do
+        get 'add_match'
+      end
+    end
     resources :user_payments
     resources :payments do
       collection do
