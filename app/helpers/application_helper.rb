@@ -19,7 +19,6 @@ module ApplicationHelper
   end
 
   def user_number
-    # User.count
     User.where(profile_id: 3).count
   end
 

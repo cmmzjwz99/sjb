@@ -16,6 +16,7 @@ class Admin::DashboardController <  Admin::BaseController
     chongzhi_list=Payment.where(status: Payment::VERIFYPASS,payment_type: 1,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
     tixian_list=Payment.where(status: Payment::VERIFYPASS,payment_type: 0,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
 
+
     yh_conditions={profile_id:3,father_id:current_user.id}
     yonghu=User.where(yh_conditions).count
 

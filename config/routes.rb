@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index] do
       collection do
         get 'get_data'
+        
       end
     end
     resources :users
