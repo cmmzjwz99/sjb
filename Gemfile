@@ -63,4 +63,6 @@ gem 'piet'
 
 gem 'selenium-webdriver'
 
+gem 'logstasher'
+
 gem 'httparty'
