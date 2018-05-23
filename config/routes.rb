@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index] do
       collection do
         get 'get_data'
-        
+
       end
     end
     resources :users
@@ -65,7 +65,12 @@ Rails.application.routes.draw do
         get 'logout'
       end
     end
-    resources :dashboard, only: [:index]
+    resources :dashboard, only: [:index] do
+      collection do
+        get 'get_data'
+
+      end
+    end
     resources :users do
       collection do
         get 'recover_password'

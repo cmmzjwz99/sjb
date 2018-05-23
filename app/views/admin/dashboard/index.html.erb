@@ -68,7 +68,6 @@
 <% content_for :js do %>
     <script>
         var dateArray = [];
-
         $(function () {
             //设置日期，当前日期的前七天
             var myDate = new Date(); //获取今天日期
@@ -83,22 +82,6 @@
                 myDate.setDate(myDate.getDate() + flag);
             }
         });
-
-
-        function isContainsKey(elements, _key) {
-//            var elements = new Map();
-            var bln = false;
-            try {
-                for (i = 0; i < this.elements.length; i++) {
-                    if (this.elements[i].key == _key) {
-                        bln = true;
-                    }
-                }
-            } catch (e) {
-                bln = false;
-            }
-            return bln;
-        }
 
         $(function () {
             var cz_val = [];
@@ -138,7 +121,7 @@
                     }
 
                     cz_key.sort();
-                    cz_val.sort();
+                    tv_key.sort();
                     for (var i = 0 ; i < cz_key.length; i ++){
                         cz_val.push(cz[cz_key[i]])
                     }
