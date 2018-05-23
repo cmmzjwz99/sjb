@@ -21,7 +21,11 @@ Rails.application.routes.draw do
         get 'logout'
       end
     end
-    resources :dashboard, only: [:index]
+    resources :dashboard, only: [:index] do
+      collection do
+        get 'get_data'
+      end
+    end
     resources :users
     resources :agents
     resources :matches do
