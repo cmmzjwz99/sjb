@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       collection do
         post 'get_match_id'
         post 'delete_match_id'
+        post 'offline_match'
       end
     end
     resources :games do
@@ -100,6 +101,7 @@ Rails.application.routes.draw do
     resources :payments do
       collection do
         post 'order'
+        post 'cash_out'
         get 'get_payments'
         get 'pay_way'
       end

@@ -1,6 +1,6 @@
 class Api::QuizController < Api::BaseController
   def list
-    @matchs=Match.where({}).order(:start_time)
+    @matchs=Match.online.where({}).order(:start_time)
   end
 
   def history

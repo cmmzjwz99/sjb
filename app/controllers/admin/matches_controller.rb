@@ -1,10 +1,10 @@
 class Admin::MatchesController <  Admin::BaseController
-  before_action :set_match ,only: [:show,:update,:get_match_id,:delete_match_id]
+  before_action :set_match ,only: [:show,:update,:get_match_id,:delete_match_id,:offline_match]
   def index
     conditions={}
     params[:name].present? &&
         conditions.merge!({name: params[:name]})
-    @matches=Match.where(conditions).page(params[:page]).per(10)
+    @matches=Match.online.where(conditions).page(params[:page]).per(10)
   end
 
   def new
@@ -53,6 +53,15 @@ class Admin::MatchesController <  Admin::BaseController
 
   def delete_match_id
     if @match.update({match_id:nil})
+      render json:{code:0,msg:'chenggong'}
+    else
+      render json:{code:1,msg:'shibai'}
+    end
+  end
+
+  def offline_match
+    @match.status=10
+    if @match.save
       render json:{code:0,msg:'chenggong'}
     else
       render json:{code:1,msg:'shibai'}

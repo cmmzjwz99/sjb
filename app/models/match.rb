@@ -1,12 +1,11 @@
 class Match < ActiveRecord::Base
   self.table_name='matchs'
   has_many :games
-  #status 0未开始 1可竞猜 2进行中 3已结束
+  #status 0未开始 1可竞猜 2进行中 3已结束 10下线比赛
 
-  TEAM=['俄罗斯','沙特阿拉伯','埃及','乌拉圭', '葡萄牙','西班牙','摩洛哥','伊朗',
-        '法国','澳大利亚','秘鲁','丹麦', '阿根廷','冰岛','克罗地亚','尼日利亚',
-        '巴西','瑞士','哥斯达黎加','塞尔维亚', '德国','墨西哥','瑞典','韩国',
-        '比利时','巴拿马','突尼斯','英格兰', '波兰','塞内加尔','哥伦比亚','日本']
+  scope :online, -> {
+    where(status:[0..5])
+  }
 
   def get_match_id
     doc = Nokogiri::HTML(open('http://interface.win007.com/zq/BF_XML.aspx?'))
