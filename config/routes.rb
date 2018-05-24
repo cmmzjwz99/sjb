@@ -104,6 +104,7 @@ Rails.application.routes.draw do
         post 'cash_out'
         get 'get_payments'
         get 'pay_way'
+        post 'tixian'
       end
     end
     resources :quiz do
