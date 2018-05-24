@@ -17,7 +17,7 @@
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">队伍1: </label>
-        <%= select_tag 'match[team1]', options_for_select(Match::TEAM , @match.team1),{class: 'form-control'} %>
+        <%= text_field_tag('match[team1]', @match.team1, {class: 'form-control'}) %>
       </div>
       <div class="form-group col-xs-4">
         <label class="form-control-label">分数: </label>
@@ -27,7 +27,7 @@
     <div class="row">
       <div class="form-group col-xs-4">
         <label class="form-control-label">队伍2: </label>
-        <%= select_tag 'match[team2]', options_for_select(Match::TEAM , @match.team2),{class: 'form-control'} %>
+        <%= text_field_tag('match[team2]', @match.team2, {class: 'form-control'}) %>
       </div>
       <div class="form-group col-xs-4">
         <label class="form-control-label">分数: </label>
