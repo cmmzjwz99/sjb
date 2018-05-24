@@ -51,8 +51,13 @@ class Api::PaymentsController < Api::BaseController
       elsif @payment.balance > 100000
         render json: {code: 1, msg: '金额不能超过100000'}
         return
+      elsif @payment.balance > current_user.points
+        render json: {code: 1, msg: '提现金额不能大于余额'}
+        return
       end
-
+      user=current_user
+      user-=@payment.balance
+      user.save
       if @payment.save
         render json: {code: 0, msg: '成功'}
         return
