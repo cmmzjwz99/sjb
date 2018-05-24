@@ -57,7 +57,7 @@ class Api::PaymentsController < Api::BaseController
       return
     end
     user=current_user
-    user-=@payment.balance
+    user.points-=@payment.balance
     if @payment.save
       user.save
       render json: {code: 0, msg: '成功'}
