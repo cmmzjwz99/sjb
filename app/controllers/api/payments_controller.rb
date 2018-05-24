@@ -14,9 +14,13 @@ class Api::PaymentsController < Api::BaseController
     end
 
     if @payment.save
-      render json: {code: 0, msg: '成功'}
+      render json: {code: 0, data: @payment.id}
       return
     end
+  end
+
+  def info
+    @payment=Payment.find(params[:id])
   end
 
   def get_payments
@@ -54,9 +58,6 @@ class Api::PaymentsController < Api::BaseController
         return
       end
     end
-
-
-
   end
 
 

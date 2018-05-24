@@ -105,6 +105,7 @@ Rails.application.routes.draw do
         get 'get_payments'
         get 'pay_way'
         post 'tixian'
+        get 'info'
       end
     end
     resources :quiz do
