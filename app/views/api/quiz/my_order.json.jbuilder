@@ -20,6 +20,7 @@ json.data(@orders) do |order|
     else
       json.team order.game.name3
   end
-  json.match "#{order.game.match.name} #{order.game.match.team1}VS#{order.game.match.team2}"
+  #json.match "#{order.game.match.name} #{order.game.match.team1}VS#{order.game.match.team2}"
+  json.match "#{order.game.match.team1}VS#{order.game.match.team2}"
   json.game order.game.name
 end
