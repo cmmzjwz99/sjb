@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def dl_chongzhi_total
-    @payment=Payment.where(status: Payment::VERIFYPASS,payment_type: 1,user_id: current_user.id)
+    @payment=Payment.where(status: Payment::VERIFYPASS,payment_type: 1,user:User.where(father_id:current_user.id))
     @sum = 0
     @payment.each do |ele|
       @sum +=ele.balance
@@ -37,7 +37,7 @@ module ApplicationHelper
   end
 
   def dl_tixian_total
-    @payment=Payment.where(status: Payment::VERIFYPASS,payment_type: 0,user_id: current_user.id)
+    @payment=Payment.where(status: Payment::VERIFYPASS,payment_type: 0,user:User.where(father_id:current_user.id))
     @sum = 0
     @payment.each do |ele|
       @sum +=ele.balance
