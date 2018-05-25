@@ -1,6 +1,13 @@
 class Admin::FjMatchesController <  Admin::BaseController
   def index
-    @matches=FjMatch.where(' match_id NOT IN (SELECT match_id FROM matchs where match_id is not null)').page(params[:page]).per(10)
+    sql=''
+
+
+    params[:name].present? &&
+        sql="name like '%#{params[:name]}%'"
+
+    @matches=FjMatch.where(' match_id NOT IN (SELECT match_id FROM matchs where match_id is not null)')
+                    .where(sql).order(:time).page(params[:page]).per(10)
   end
 
   def add_match
