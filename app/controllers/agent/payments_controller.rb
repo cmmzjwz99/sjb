@@ -1,10 +1,10 @@
 class Agent::PaymentsController < Agent::BaseController
 
   def index
-    conditions = {}
+    conditions = {user_id:current_user.id}
 
-    params[:login].present? &&
-        conditions.merge!({user_id: params[:login]})
+    # params[:login].present? &&
+    #     conditions.merge!({user_id: params[:login]})
 
     @payments = Payment.where(conditions).page(params[:page]).per(10)
   end

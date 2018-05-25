@@ -13,8 +13,8 @@ class Agent::DashboardController <  Agent::BaseController
     # @startTime = Time.new - 604800
     @startTime = (Time.now - 7.day).beginning_of_day
     @endTime = (Time.now - 1.day).at_end_of_day
-    chongzhi_list=Payment.where(status: Payment::VERIFYPASS,payment_type: 1,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
-    tixian_list=Payment.where(status: Payment::VERIFYPASS,payment_type: 0,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
+    chongzhi_list=Payment.where(user_id: current_user.id,status: Payment::VERIFYPASS,payment_type: 1,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
+    tixian_list=Payment.where(user_id: current_user.id,status: Payment::VERIFYPASS,payment_type: 0,updated_at:[@startTime..@endTime]).group('DATE_FORMAT(payments.updated_at,"%m-%d")').sum(:balance)
 
 
     yh_conditions={profile_id:3,father_id:current_user.id}
