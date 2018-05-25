@@ -1,7 +1,7 @@
 class Agent::PaymentsController < Agent::BaseController
 
   def index
-    conditions = {user_id:current_user.id}
+    conditions = {user:User.where(father_id:current_user.id)}
 
     # params[:login].present? &&
     #     conditions.merge!({user_id: params[:login]})
