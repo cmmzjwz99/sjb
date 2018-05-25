@@ -36,7 +36,7 @@ class Api::PaymentsController < Api::BaseController
 
   def tixian
     if Payment.find_by(user: current_user, payment_type: 0) != nil
-      if Payment.find_by(user: current_user, payment_type: 0).status == 0
+      if Payment.find_by(user: current_user, payment_type: 0 ,status: Payment::UNVERIFIED)
         return(render json: {code: 1, msg: '您已经有一笔待审核'})
       end
     end
