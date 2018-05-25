@@ -22,7 +22,7 @@ class Admin::PaymentsController < Admin::BaseController
   def sh_success
     @payment = Payment.find(params[:id])
     @payment.status=1
-    @payment.pay if @payment.payment_type==false
+    @payment.pay if @payment.payment_type==true
     @payment.save
     respond_to do |format|
       format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
