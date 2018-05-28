@@ -8,6 +8,7 @@ class Admin::PaymentsController < Admin::BaseController
         conditions.merge!({status: params[:status]})
     params[:date].present? &&
         conditions.merge!({created_at:DateTime.parse(params[:date]).all_day})
+
     @payments = Payment.where(conditions).page(params[:page]).per(10)
   end
 
