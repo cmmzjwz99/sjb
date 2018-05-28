@@ -5,4 +5,6 @@ json.data do
   payment=user.user_payment || UserPayment.new({alipay_status: false, wechat_status: false, bank_status: false})
   json.bank_no payment.bank_no || ''
   json.bank_user payment.bank_user || ''
+  json.bank_name payment.bank_name || ''
+  json.bank_address payment.bank_address || ''
 end
