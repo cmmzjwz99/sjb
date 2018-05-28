@@ -6,6 +6,8 @@ class Admin::UsersController <  Admin::BaseController
     params[:name].present? &&
         conditions.merge!({login:params[:name]})
 
+    params[:date].present? &&
+        conditions.merge!({created_at:DateTime.parse(params[:date]).all_day})
     @users=User.where(conditions).page(params[:page]).per(10)
   end
 
