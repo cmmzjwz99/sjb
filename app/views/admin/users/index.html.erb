@@ -4,8 +4,13 @@
     <div class="col-md-12">
       <!-- BORDERED TABLE -->
       <div class="panel">
-        <div class="panel-heading">
-          <h3 class="panel-title">用户表</h3>
+        <div style="padding: 20px 25px">
+          <form>
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="name" value="<%=params[:name]%>">
+            <input type="date" style="margin-left: 3px" class="form-control index-form-control" name="date" value="<%=params[:date]%>">
+            <button class="btn btn-primary" style="margin-left: 3px">查询</button>
+            <a type="button" class="btn btn-default" href="<%=new_admin_agent_path%>">添加代理</a>
+          </form>
         </div>
         <div class="panel-body">
           <table class="table table-bordered">
@@ -13,6 +18,7 @@
             <tr>
               <th>#</th>
               <th>账号</th>
+              <th>注册时间</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -21,7 +27,10 @@
                 <tr>
                   <td><%=ele.id%></td>
                   <td><%=ele.login%></td>
-                  <td>操作</td>
+                  <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                  <td>
+                    <a href="<%=admin_user_path(ele)%>">用户详情</a>
+                  </td>
                 </tr>
               <%end%>
             </tbody>

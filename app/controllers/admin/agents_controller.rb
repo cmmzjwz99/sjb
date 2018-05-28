@@ -5,15 +5,15 @@ class Admin::AgentsController <  Admin::BaseController
     params[:name].present? &&
       conditions.merge!({login:params[:name]})
 
-    @users=User.where(conditions).page(params[:page]).per(10)
+    @users=Agent.where(conditions).page(params[:page]).per(10)
   end
 
   def new
-    @user=User.new()
+    @user=Agent.new()
   end
 
   def create
-    @user= User.new(user_params)
+    @user= Agent.new(user_params)
     @user.profile_id=2
     respond_to do |format|
       if @user.save
@@ -30,7 +30,7 @@ class Admin::AgentsController <  Admin::BaseController
 
   private
   def set_user
-    @user = User.find(params[:id])
+    @user = Agent.find(params[:id])
   end
   def user_params
     params.require(:user).permit!
