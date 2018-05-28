@@ -7,6 +7,15 @@
         <div style="padding: 20px 25px">
           <form>
             <input type="text" placeholder="账号" class="form-control index-form-control" name="user_id" value="<%= params[:login] %>">
+            <input type="date" style="margin-left: 3px" class="form-control index-form-control" name="date" value="<%=params[:date]%>">
+            <label class="control-label" style="width: auto;margin-left: 10px" for="category">状态</label>
+            <div class="controls" style="display: inline-block;">
+              <select class="uniformselect" class="form-control index-form-control" name="status">
+                <option value="0" <%= params[:status] == '0' ? 'selected' : '' %>  >未审核</option>
+                <option value="2" <%= params[:status] == '2' ? 'selected' : '' %> >失败</option>
+                <option value="1" <%= params[:status] == '1' ? 'selected' : '' %> >成功</option>
+              </select>
+            </div>
             <button class="btn btn-primary" style="margin-left: 3px">查询</button>
           </form>
         </div>
@@ -20,6 +29,7 @@
               <th>流水号</th>
               <th>类型</th>
               <th>金额(元)</th>
+              <th>时间</th>
               <th>状态</th>
               <th>操作</th>
             </tr>
@@ -33,7 +43,17 @@
                   <td><%= ele.no %></td>
                   <td><%= ele.category %></td>
                   <td><%= ele.balance %></td>
-                  <td><%= ele.status %></td>
+                  <td><%= ele.created_at %></td>
+                  <!--<td><%= ele.status %></td>-->
+                  <td>
+                    <% if ele.status == 0 %>
+                        <a>未审核</a>
+                    <% elsif ele.status == 1 %>
+                        <a>成功</a>
+                    <% elsif ele.status == 2 %>
+                        <a>失败</a>
+                    <% end %>
+                  </td>
                   <td>
                     <% if ele.status==0 %>
                         <a><%= link_to '确定', sh_success_agent_payments_path(ele), method: :post, data: {confirm: '确认充值?'} %></a>
