@@ -96,6 +96,7 @@ Rails.application.routes.draw do
         post 'login'
         post 'signup'
         get 'info'
+        get 'logout'
       end
     end
     resources :payments do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523011214) do
+ActiveRecord::Schema.define(version: 20180528024132) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20180523011214) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bank_address"
     t.index ["user_id"], name: "index_user_payments_on_user_id"
   end
 
