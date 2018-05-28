@@ -7,6 +7,9 @@
         <div style="padding: 20px 25px">
           <form>
             <input type="text" placeholder="名称" class="form-control index-form-control" name="name" value="<%=params[:name]%>">
+            <input type="text" placeholder="主队" class="form-control index-form-control" name="team1" value="<%= params[:team1] %>">
+            <input type="text" placeholder="客队" class="form-control index-form-control" name="team2" value="<%= params[:team2] %>">
+            <input type="date" style="margin-left: 3px" class="form-control index-form-control" name="date" value="<%=params[:date]%>">
             <button class="btn btn-primary" style="margin-left: 3px">查询</button>
           </form>
         </div>
