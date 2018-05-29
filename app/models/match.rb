@@ -20,8 +20,8 @@ class Match < ActiveRecord::Base
   end
 
 
-  def get_odds
-    doc = Nokogiri::HTML(open('http://interface.win007.com/zq/odds.aspx'))
+  def get_odds doc
+    #doc = Nokogiri::HTML(open('http://interface.win007.com/zq/odds.aspx'))
     main=doc.text.split('$')
 
     #让球

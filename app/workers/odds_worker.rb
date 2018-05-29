@@ -4,16 +4,17 @@ class OddsWorker
 
   def perform
     begin
+      doc = Nokogiri::HTML(open('http://interface.win007.com/zq/odds.aspx'))
       Match.where({status:[0,1]}).where.not({match_id:nil}).each do |match|
-        update_odds match.id
+        update_odds match.id,doc
       end
     end
     OddsWorker.perform_in(1.minutes)
   end
 
-  def update_odds id
+  def update_odds id,odds
     match=Match.find(id)
-    odds=match.get_odds
+    odds=match.get_odds odds
     games=match.games
 
     #让球
