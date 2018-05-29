@@ -2,8 +2,8 @@ class Admin::PaymentsController < Admin::BaseController
 
   def index
     conditions = {}
-    params[:login].present? &&
-        conditions.merge!({user_id: params[:login]})
+    params[:name].present? &&
+        conditions.merge!({user: User.find_by_login(params[:name])})
     params[:status].present? &&
         conditions.merge!({status: params[:status]})
     params[:date].present? &&

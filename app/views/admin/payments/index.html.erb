@@ -6,7 +6,7 @@
       <div class="panel">
         <div style="padding: 20px 25px">
           <form>
-            <input type="text" placeholder="账号" class="form-control index-form-control" name="user_id" value="<%= params[:login] %>">
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="name" value="<%= params[:name] %>">
             <div class="controls" style="display: inline-block;margin-left: 10px">
               <select class="uniformselect" class="form-control index-form-control" name="payment_type">
                 <option value="" <%= params[:payment_type] == '' ? 'selected' : '' %> >全部</option>
