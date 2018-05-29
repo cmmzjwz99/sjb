@@ -4,6 +4,12 @@ class Admin::MatchesController <  Admin::BaseController
     conditions={}
     params[:name].present? &&
         conditions.merge!({name: params[:name]})
+    params[:team1].present? &&
+        conditions.merge!({team1: params[:team1]})
+    params[:team2].present? &&
+        conditions.merge!({team2: params[:team2]})
+    params[:date].present? &&
+        conditions.merge!({start_time:DateTime.parse(params[:date]).all_day})
     @matches=Match.online.where(conditions).page(params[:page]).per(10)
   end
 
