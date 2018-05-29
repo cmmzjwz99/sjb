@@ -99,6 +99,12 @@ Rails.application.routes.draw do
         get 'logout'
       end
     end
+    resources :banks do
+      collection do
+        get 'info'
+        post 'update_bank'
+      end
+    end
     resources :payments do
       collection do
         post 'order'

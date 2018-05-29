@@ -78,7 +78,7 @@
   <!-- MAIN -->
   <div class="main"  style="margin-top: 20px">
     <!-- MAIN CONTENT -->
-    <div class="main-content">
+    <div class="main-content" style="overflow: auto">
       <%= yield %>
     </div>
     <!-- END MAIN CONTENT -->
@@ -101,6 +101,7 @@
              $(this).addClass('active')
           }
       })
+      //$('.main-content').css('max-height',300 +'px')
   })
 </script>
 <% if content_for?(:js) %>

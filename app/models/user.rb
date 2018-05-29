@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   #belongs_to :text_filter
   has_one :resource , as: :file, dependent: :destroy
   has_one :user_payment,dependent: :destroy
+  has_one :user_bank,dependent: :destroy
 
   has_many :payments
 
