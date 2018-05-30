@@ -12,7 +12,7 @@ json.data do
       json.status '审核失败'
     end
   end
-  json.tx(Payment.where(user: current_user, payment_type: true)) do |payment|
+  json.tx(Payment.where(user: current_user, payment_type: false)) do |payment|
     json.extract! payment, :balance, :id
     json.date payment.created_at.strftime('%Y-%m-%d')
     json.time payment.created_at.strftime('%H:%M:%S')
