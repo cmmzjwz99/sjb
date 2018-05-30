@@ -4,6 +4,7 @@ class Admin::MatchesController <  Admin::BaseController
     conditions={}
     params[:name].present? &&
         conditions.merge!({name: params[:name]})
+    
     params[:team1].present? &&
         conditions.merge!({team1: params[:team1]})
     params[:team2].present? &&

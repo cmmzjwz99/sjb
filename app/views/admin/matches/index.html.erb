@@ -100,17 +100,23 @@
         }
 
         function offline_match(id) {
-            $.ajax({
-                url: '/admin/matches/offline_match?id=' + id,
-                type: 'post',
-                success: function (data) {
-                    if (data.code == 0) {
-                        alert('下架成功')
-                        history.go(0)
+            if(window.confirm('你确定要下架比赛吗？')){
+                $.ajax({
+                    url: '/admin/matches/offline_match?id=' + id,
+                    type: 'post',
+                    success: function (data) {
+                        if (data.code == 0) {
+//                            alert('下架成功');
+                            history.go(0)
+                        }
+                        console.log(data)
                     }
-                    console.log(data)
-                }
-            })
+                })
+                return true;
+            }else{
+                //alert("取消");
+                return false;
+            }
         }
     </script>
 <% end %>
