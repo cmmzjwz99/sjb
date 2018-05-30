@@ -1,4 +1,4 @@
-json.code @payment.nil? ? 1 : 0
+json.code 0
 json.data do
   json.cz(Payment.where(user: current_user, payment_type: true)) do |payment|
     json.extract! payment, :balance, :id

@@ -7,4 +7,12 @@ json.data do
   json.bank_user payment.bank_user || ''
   json.bank_name payment.bank_name || ''
   json.bank_address payment.bank_address || ''
+  case @payment.status
+    when 1
+      json.status '审核通过'
+    when 2
+      json.status "审核失败 #{@payment.remark}"
+    when 0
+      json.status '审核中'
+  end
 end
