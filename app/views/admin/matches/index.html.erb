@@ -24,7 +24,7 @@
               <th>队伍2</th>
               <th>开始时间</th>
               <th>状态</th>
-              <th>比赛id</th>
+              <!--<th>比赛id</th>-->
               <th>操作</th>
             </tr>
             </thead>
@@ -48,7 +48,7 @@
                         <a>已结束</a>
                     <% end %>
                   </td>
-                  <td><%= ele.match_id %></td>
+                  <!--<td><%= ele.match_id %></td>-->
                   <td>
                     <a href="<%= admin_match_path(ele) %>">操作</a>&nbsp;&nbsp;
                     <a onclick="offline_match(<%=ele.id%>)">下线比赛</a>
