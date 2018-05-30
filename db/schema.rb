@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180528060710) do
+ActiveRecord::Schema.define(version: 20180530031347) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180528060710) do
     t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "income_point", limit: 24
     t.index ["game_id"], name: "index_orders_on_game_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180528060710) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remark"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 

@@ -9,13 +9,7 @@ class SettlementTask
 
     return if order.game.status!=1
 
-    if order.team==order.game.win_team
-      #获胜
-      order.win
-    else
-      #失败
-      order.fail
-    end
+    order.settlement
   end
 
 end
