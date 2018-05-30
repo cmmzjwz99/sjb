@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>用户</th>
+    <th>充值／提现</th>
+    <th>流水号</th>
+    <th>金额(元)</th>
+    <th>充值时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%@payments.each do |ele|%>
+      <tr>
+        <td><%=ele.id%></td>
+        <td><%= ele.user.login %></td>
+        <td><%=ele.payment_type ? '充值' : '提现'%></td>
+        <td><%= ele.no %></td>
+        <td><%=ele.balance%></td>
+        <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>
+
+
+
+
