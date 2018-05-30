@@ -1,7 +1,11 @@
 class Agent::UsersController <  Agent::BaseController
+  before_action :set_user ,only: [:show,:settlement,:update]
   def index
     conditions={father_id:current_user.id,profile_id:3}
     @users=User.where(conditions).page(params[:page]).per(10)
+  end
+
+  def show
   end
 
   def recover_password
@@ -16,5 +20,14 @@ class Agent::UsersController <  Agent::BaseController
         return
       end
     end
+  end
+
+
+  private
+  def set_user
+    @user = User.find(params[:id])
+  end
+  def game_params
+    params.require(:user).permit!
   end
 end

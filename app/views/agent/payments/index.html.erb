@@ -8,9 +8,17 @@
           <form>
             <input type="text" placeholder="账号" class="form-control index-form-control" name="name" value="<%= params[:name] %>">
             <input type="date" style="margin-left: 3px" class="form-control index-form-control" name="date" value="<%=params[:date]%>">
+            <div class="controls" style="display: inline-block;margin-left: 10px">
+              <select class="uniformselect" class="form-control index-form-control" name="payment_type">
+                <option value="" <%= params[:payment_type] == '' ? 'selected' : '' %>  >全部</option>
+                <option value="1" <%= params[:payment_type] == '1' ? 'selected' : '' %> >充值</option>
+                <option value="0" <%= params[:payment_type] == '0' ? 'selected' : '' %> >提现</option>
+              </select>
+            </div>
             <label class="control-label" style="width: auto;margin-left: 10px" for="category">状态</label>
             <div class="controls" style="display: inline-block;">
               <select class="uniformselect" class="form-control index-form-control" name="status">
+                <option value="" <%= params[:status] == '' ? 'selected' : '' %>  >全部</option>
                 <option value="0" <%= params[:status] == '0' ? 'selected' : '' %>  >未审核</option>
                 <option value="2" <%= params[:status] == '2' ? 'selected' : '' %> >失败</option>
                 <option value="1" <%= params[:status] == '1' ? 'selected' : '' %> >成功</option>

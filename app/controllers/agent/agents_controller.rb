@@ -1,4 +1,5 @@
 class Agent::AgentsController <  Agent::BaseController
+  before_action :set_user ,only: [:show,:settlement,:update]
   def index
     conditions={profile_id:2,father_id:current_user.id}
     #conditions={}
@@ -10,6 +11,12 @@ class Agent::AgentsController <  Agent::BaseController
 
   def new
     @user=User.new()
+  end
+
+  def show
+    @user
+    conditions = {user: User.where(father_id: @user.id)}
+    @payments = Payment.where(conditions).page(params[:page]).per(10)
   end
 
   def create

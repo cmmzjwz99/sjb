@@ -5,6 +5,8 @@ class Agent::PaymentsController < Agent::BaseController
 
     params[:name].present? &&
         conditions.merge!({user: User.find_by_login(params[:name])})
+    params[:payment_type].present? &&
+        conditions.merge!({payment_type: params[:payment_type]})
     params[:status].present? &&
         conditions.merge!({status: params[:status]})
     params[:date].present? &&
