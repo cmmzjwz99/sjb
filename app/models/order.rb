@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
 
   before_create :default_point
 
-  #status 0未结算 1结算中 2获胜 3失败
+  #status 0未结算 1结算中 2已结算
 
   def default_point
     user=self.user
@@ -13,16 +13,34 @@ class Order < ActiveRecord::Base
     self.status=0
   end
 
-  def win
+  def settlement
     user=self.user
-    user.points+=self.get_point
-    self.status=2
-    self.save
+    game=self.game
+    status=game.win_team
+    if status==1 || status==2 || status==3
+      #独赢
+      if self.team==status
+        user.points+=self.get_point
+        self.income_point=self.get_point
+      else
+        self.income_point=0-self.get_point
+      end
+    elsif status ==4 || status ==5
+      #赢半输半
+      if (self.team+3)==status
+        user.points+=((self.get_point-self.point)/2)+self.point
+        self.income_point=((self.get_point-self.point)/2)+self.point
+      else
+        user.points+=(self.point/2)
+        self.income_point=0-(self.point/2)
+      end
+    elsif status==6
+      #不输不赢
+      user.points+=self.point
+      self.income_point=0
+    end
     user.save
-  end
-
-  def fail
-    self.status=3
+    self.status=2
     self.save
   end
 end

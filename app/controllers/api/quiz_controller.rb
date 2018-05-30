@@ -33,7 +33,7 @@ class Api::QuizController < Api::BaseController
   end
 
   def my_order
-    @orders=Order.where({user:current_user})
+    @orders=Order.where({user:current_user}).order(created_at: :desc)
   end
 
 
