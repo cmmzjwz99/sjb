@@ -26,7 +26,7 @@ class Admin::GamesController <  Admin::BaseController
     respond_to do |format|
       if @game.save
         format.html {
-          redirect_to admin_games_url, notice: '添加成功'
+          redirect_to admin_matches_url, notice: '添加成功'
         }
       else
         format.html {
@@ -44,7 +44,7 @@ class Admin::GamesController <  Admin::BaseController
       if @game.save(game_params)
         #结算
         @game.settlement if @game.status==1
-        format.html { redirect_to  admin_games_path, notice: '更新成功' }
+        format.html { redirect_to  admin_matches_path, notice: '更新成功' }
       else
         format.html { render :edit }
       end
