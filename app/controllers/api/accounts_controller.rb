@@ -84,17 +84,17 @@ class Api::AccountsController < Api::BaseController
 
   def recover_password
 
-    @user = User.default.find_by_phone(params[:phone])
+    @user = current_user
 
-    return(render json: {code: 1,msg:{errors:"此用户不存在"}}) if @user.nil?
+    return(render json: {code: 1,msg:"此用户不存在"}) if @user.nil?
 
-    return(render json: {code: 1,msg:{errors:"两次输入密码不一致"}}) if params[:password] !=params[:confirm]
+    return(render json: {code: 1,msg:"两次输入密码不一致"}) if params[:password] !=params[:confirm]
 
     respond_to do |format|
       if @user.update_password(params[:password])
         format.json {render 'user'}
       else
-        format.json {render json:{code: 1,msg:{errors:"#{@user.errors.full_messages[0]}"}}}
+        format.json {render json:{code: 1,msg:"#{@user.errors.full_messages[0]}"}}
       end
     end
   end

@@ -97,6 +97,7 @@ Rails.application.routes.draw do
         post 'signup'
         get 'info'
         get 'logout'
+        post 'recover_password'
       end
     end
     resources :banks do
@@ -113,6 +114,7 @@ Rails.application.routes.draw do
         get 'pay_way'
         post 'tixian'
         get 'info'
+        get 'history'
       end
     end
     resources :quiz do

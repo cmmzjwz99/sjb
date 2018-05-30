@@ -19,6 +19,9 @@ class Api::PaymentsController < Api::BaseController
     end
   end
 
+  def history
+  end
+
   def info
     @payment=Payment.find(params[:id])
   end
