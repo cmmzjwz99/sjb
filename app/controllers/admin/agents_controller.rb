@@ -18,7 +18,7 @@ class Admin::AgentsController < Admin::BaseController
     conditions = {user: User.where(father_id: @user.id)}
     @payments = Payment.where(conditions).page(params[:page]).per(10)
   end
-  
+
 
   def create
     @user= Agent.new(user_params)
