@@ -11,7 +11,6 @@ class Admin::MatchesController <  Admin::BaseController
     params[:date].present? &&
         conditions.merge!({start_time:DateTime.parse(params[:date]).all_day})
     @matches=Match.online.where(conditions).page(params[:page]).per(10)
-    
   end
 
   def new
