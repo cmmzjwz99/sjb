@@ -25,6 +25,18 @@ class Api::PaymentsController < Api::BaseController
   def history
   end
 
+  def cancel
+    @payment=Payment.find(params[:id])
+    if @payment.status != 0
+      render json: {code: 1, msg: '订单已审核，不可撤销'}
+    else
+      @payment.status = 3
+      @payment.save
+      render json: {code: 0, msg: '撤销成功'}
+    end
+    return
+  end
+
   def info
     @payment=Payment.find(params[:id])
   end

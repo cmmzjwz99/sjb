@@ -16,9 +16,11 @@ class Admin::PaymentsController < Admin::BaseController
 
   def sh_fail
     @payment = Payment.find(params[:id])
-    @payment.status=2
-    @payment.pay if @payment.payment_type==false
-    @payment.save
+    if @payment.status==0
+      @payment.status=2
+      @payment.pay if @payment.payment_type==false
+      @payment.save
+    end
     respond_to do |format|
       format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
@@ -27,9 +29,11 @@ class Admin::PaymentsController < Admin::BaseController
 
   def sh_success
     @payment = Payment.find(params[:id])
-    @payment.status=1
-    @payment.pay if @payment.payment_type==true
-    @payment.save
+    if @payment.status==0
+      @payment.status=1
+      @payment.pay if @payment.payment_type==true
+      @payment.save
+    end
     respond_to do |format|
       format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }

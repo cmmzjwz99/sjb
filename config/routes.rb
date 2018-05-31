@@ -115,6 +115,7 @@ Rails.application.routes.draw do
         post 'tixian'
         get 'info'
         get 'history'
+        post 'cancel'
       end
     end
     resources :quiz do
