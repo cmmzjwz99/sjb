@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <h3 class="page-title">盘口
-    <a href="<%= new_admin_game_path %>">添加盘口</a>
+    <!--<a href="<%= new_admin_game_path %>">添加盘口</a>-->
+    <a href="<%= new_admin_game_path(:type_id => @match.id) %>">添加盘口</a>
   </h3>
   <div class="row">
     <div class="col-md-12">
@@ -52,11 +53,11 @@
                   </td>
                   <td>
                     <% if ele.status!=1 %>
-                        <a href="<%= admin_game_path(ele) %>">
+                        <a href="<%= admin_game_path(ele,:type_id => @match.id)  %>">
                           修改赔率
                         </a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="<%= settlement_admin_games_path(ele)%>">
+                        <a href="<%= settlement_admin_games_path(ele,:type_id => @match.id)%>">
                           结算
                         </a>
                     <% end %>

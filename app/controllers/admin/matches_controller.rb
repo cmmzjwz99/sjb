@@ -22,10 +22,14 @@ class Admin::MatchesController <  Admin::BaseController
 
   def create
     @match= Match.new(match_params)
+    if @match.start_time == nil
+      return
+    end
     respond_to do |format|
       if @match.save
         format.html {
-          redirect_to admin_matches_url, notice: '添加成功'
+          # redirect_to admin_matches_url, notice: '添加成功'
+          redirect_to notice: '添加成功'
         }
       else
         format.html {
@@ -39,7 +43,8 @@ class Admin::MatchesController <  Admin::BaseController
     @match.update_attributes(match_params)
     respond_to do |format|
       if @match.save(match_params)
-        format.html { redirect_to  admin_matches_url, notice: '更新成功' }
+        # format.html { redirect_to  admin_matches_url, notice: '更新成功' }
+        format.html { redirect_to   notice: '更新成功' }
       else
         format.html { render :edit }
       end

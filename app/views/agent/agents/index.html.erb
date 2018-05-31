@@ -17,7 +17,8 @@
             <tr>
               <th>#</th>
               <th>账号</th>
-              <th>流水总额</th>
+              <th>充值总额</th>
+              <th>提现总额</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -26,7 +27,8 @@
                 <tr>
                   <td><%=ele.id%></td>
                   <td><%=ele.login%></td>
-                  <td><%=ele.points  %></td>
+                  <td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 1}).sum(:balance) %></td>
+                  <td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 0}).sum(:balance) %></td>
                   <td><a href="<%= agent_agent_path(ele) %>">详情</a></td>
                 </tr>
               <%end%>

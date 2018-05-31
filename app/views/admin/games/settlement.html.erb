@@ -6,7 +6,9 @@
       <div class="panel">
         <div class="panel-heading"></div>
         <div class="panel-body" style="padding-top: 0">
+
           <%= form_for([:admin, @game], :html => {enctype: 'multipart/form-data', class: 'stdform'}) do |f| %>
+              <input type="hidden" value="<%=params[:type_id]%>" name="type_id">
               <div class="row">
                 <div class="form-group col-xs-4">
                   <label class="form-control-label">比赛名: </label>
