@@ -12,6 +12,8 @@ json.data do
       json.status '审核通过'
     when 2
       json.status "审核失败 #{@payment.remark}"
+    when 3
+      json.status "已撤销"
     when 0
       json.status '审核中'
   end
