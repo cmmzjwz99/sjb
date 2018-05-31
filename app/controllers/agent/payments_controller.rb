@@ -17,6 +17,7 @@ class Agent::PaymentsController < Agent::BaseController
   def sh_fail
     @payment = Payment.find(params[:id])
     @payment.status=2
+    @payment.pay if @payment.payment_type==false
     @payment.save
     respond_to do |format|
       format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
@@ -27,7 +28,7 @@ class Agent::PaymentsController < Agent::BaseController
   def sh_success
     @payment = Payment.find(params[:id])
     @payment.status=1
-    @payment.pay
+    @payment.pay if @payment.payment_type==true
     @payment.save
     respond_to do |format|
       format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
