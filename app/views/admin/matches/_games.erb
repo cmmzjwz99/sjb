@@ -26,7 +26,7 @@
             <%@match.games.each do |ele|%>
                 <tr>
                   <td><%=ele.id%></td>
-                  <td><%=ele.name%></td>
+                  <td><%="#{ele.name}#{ele.remark}"%></td>
                   <td><%=ele.odds1%></td>
                   <td><%=ele.odds2%></td>
                   <td><%=ele.category%></td>
