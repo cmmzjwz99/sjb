@@ -20,6 +20,8 @@ json.data do
       json.status '审核中'
     elsif payment.status==1
       json.status '审核成功'
+    elsif payment.status==3
+      json.status '已撤销'
     else
       json.status '审核失败'
     end
