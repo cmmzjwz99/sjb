@@ -20,7 +20,8 @@ class Agent::PaymentsController < Agent::BaseController
     @payment.pay if @payment.payment_type==false
     @payment.save
     respond_to do |format|
-      format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
+      # format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: agent_payments_path) }
       format.json { head :no_content }
     end
   end
@@ -31,7 +32,8 @@ class Agent::PaymentsController < Agent::BaseController
     @payment.pay if @payment.payment_type==true
     @payment.save
     respond_to do |format|
-      format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
+      # format.html { redirect_to agent_payments_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: agent_payments_path) }
       format.json { head :no_content }
     end
   end

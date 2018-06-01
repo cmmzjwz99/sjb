@@ -22,7 +22,8 @@ class Admin::PaymentsController < Admin::BaseController
       @payment.save
     end
     respond_to do |format|
-      format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
+      # format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: admin_payments_path) }
       format.json { head :no_content }
     end
   end
@@ -35,7 +36,8 @@ class Admin::PaymentsController < Admin::BaseController
       @payment.save
     end
     respond_to do |format|
-      format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
+      # format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: admin_payments_path) }
       format.json { head :no_content }
     end
   end

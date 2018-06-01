@@ -2,12 +2,6 @@ class Admin::FjMatchesController <  Admin::BaseController
   def index
     sql=''
 
-    # params[:team1].present? &&
-    #     conditions.merge!({team1: params[:team1]})
-    # params[:team2].present? &&
-    #     conditions.merge!({team2: params[:team2]})
-    # params[:date].present? &&
-    #     conditions.merge!({time:DateTime.parse(params[:date]).all_day})
     params[:name].present? &&
         sql="name like '%#{params[:name]}%'"
     params[:team1].present? &&
@@ -25,7 +19,8 @@ class Admin::FjMatchesController <  Admin::BaseController
     fj_match=FjMatch.find(params[:id])
     fj_match.add_to_match
     respond_to do |format|
-      format.html {redirect_to admin_fj_matches_path}
+      # format.html {redirect_back (fallback_location: admin_fj_matches_path)}
+      format.html { redirect_back(fallback_location: admin_fj_matches_path)}
     end
   end
 end
