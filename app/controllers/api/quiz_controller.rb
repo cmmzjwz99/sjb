@@ -18,7 +18,14 @@ class Api::QuizController < Api::BaseController
       render json:{code:1,msg:'金币不足'}
       return
     end
-    odds= @order.team==1 ? @order.game.odds1 : @order.game.odds2
+    case @order.team
+      when 1
+        odds=@order.game.odds1
+      when 2
+        odds=@order.game.odds2
+      when 3
+        odds=@order.game.odds3
+    end
     @order.get_point=@order.point*odds
     @order.odds=odds
     if @order.save
