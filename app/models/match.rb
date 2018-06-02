@@ -39,35 +39,35 @@ class Match < ActiveRecord::Base
 
     arr1.each do |ele|
       ele=ele.split(',')
-      if ele[0]==self.match_id && ele[1]=='8'
+      if ele[0]==self.match_id && ele[1]=='3'
         res[0]=[ele[6],ele[7],ele[5]]
       end
     end
 
     arr2.each do |ele|
       ele=ele.split(',')
-      if ele[0]==self.match_id && ele[1]=='8'
+      if ele[0]==self.match_id && ele[1]=='3'
         res[1]=[ele[5],ele[6],ele[7]]
       end
     end
 
     arr3.each do |ele|
       ele=ele.split(',')
-      if ele[0]==self.match_id && ele[1]=='8'
+      if ele[0]==self.match_id && ele[1]=='3'
         res[2]=[ele[6],ele[7],ele[5]]
       end
     end
 
     arr4.each do |ele|
       ele=ele.split(',')
-      if ele[0]==self.match_id && ele[1]=='8'
+      if ele[0]==self.match_id && ele[1]=='3'
         res[3]=[ele[6],ele[7],ele[5]]
       end
     end
 
     arr5.each do |ele|
       ele=ele.split(',')
-      if ele[0]==self.match_id && ele[1]=='8'
+      if ele[0]==self.match_id && ele[1]=='3'
         res[4]=[ele[6],ele[7],ele[5]]
       end
     end
