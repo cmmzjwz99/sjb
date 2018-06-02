@@ -52,7 +52,7 @@
                   <td><%= ele.no %></td>
                   <td><%= ele.category %></td>
                   <td><%= ele.balance %></td>
-                  <td><%= ele.created_at %></td>
+                  <td><%= ele.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
                   <!--<td><%= ele.status %></td>-->
                   <td>
                     <% if ele.status == 0 %>

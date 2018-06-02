@@ -35,7 +35,7 @@
                   <td><%= ele.name %></td>
                   <td><%= ele.team1 %></td>
                   <td><%= ele.team2 %></td>
-                  <td><%= ele.start_time %></td>
+                  <td><%= ele.start_time.strftime('%Y-%m-%d %H:%M:%S') %></td>
                   <!--<td><%= ele.status %></td>-->
                   <td>
                     <% if ele.status == 0 %>
