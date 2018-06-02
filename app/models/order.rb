@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
         user.points+=self.get_point
         self.income_point=self.get_point
       else
-        self.income_point=0-self.get_point
+        self.income_point=0-self.point
       end
     elsif status ==4 || status ==5
       #赢半输半
@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     elsif status==6
       #不输不赢
       user.points+=self.point
-      self.income_point=0
+      self.income_point=self.point
     end
     user.save
     self.status=2
