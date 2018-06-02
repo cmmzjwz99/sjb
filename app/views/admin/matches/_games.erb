@@ -40,15 +40,15 @@
                     <%=Order.where({game:ele,team:3}).sum(:point)%>
                   </td>
                   <td>
-                    <%=ele.name1%>
+                    <!--<%=ele.name1%>-->
                     <%=Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:1}).sum(:get_point)%>
                   </td>
                   <td>
-                    <%=ele.name2%>
+                    <!--<%=ele.name2%>-->
                     <%=Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:2}).sum(:get_point)%>
                   </td>
                   <td>
-                    <%=ele.name3%>
+                    <!--<%=ele.name3%>-->
                     <%=Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point)%>
                   </td>
                   <td>
