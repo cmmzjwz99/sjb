@@ -59,6 +59,15 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label class="form-control-label">是否显示盘口: </label>
+        <select name="game[show]" class="form-control">
+          <option value="1">显示</option>
+          <option value="0" <%= @game.show!=true ? 'selected' : ''%>>不显示</option>
+        </select>
+      </div>
+    </div>
 
     <div>
       <button class="btn btn-primary">保存</button>

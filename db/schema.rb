@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180602054946) do
+ActiveRecord::Schema.define(version: 20180602083937) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20180602054946) do
     t.datetime "updated_at", null: false
     t.integer "win_team"
     t.string "remark"
+    t.boolean "show", default: true
     t.index ["match_id"], name: "index_games_on_match_id"
   end
 

@@ -26,9 +26,8 @@ class Game < ActiveRecord::Base
     self.odds2=odds[1]
     if self.name=='标准盘'
       self.odds3=odds[2]
-      self.remark="(欧赔)"
     else
-      self.remark="#{odds[2]}(欧赔)"
+      self.remark="#{ConvertUtil.handicap(odds[2])}"
       self.odds1+=1
       self.odds2+=1
     end
