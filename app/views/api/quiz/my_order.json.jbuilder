@@ -8,9 +8,7 @@ json.data(@orders) do |order|
     when 1
       json.get_point '结算中'
     when 2
-      json.get_point "#{order.get_point}"
-    else
-      json.get_point "-#{order.point}"
+      json.get_point "#{order.income_point}"
   end
   case order.team
     when 1
