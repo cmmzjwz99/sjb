@@ -1,6 +1,8 @@
 class Admin::UserPaymentsController < Admin::BaseController
   def index
     @user_payment=current_user.user_payment || UserPayment.new({alipay_status:false,wechat_status:false,bank_status:false})
+    @title=Setting.where(category:'title')[0] || Setting.new(category:'title')
+    @customer=Setting.where(category:'customer')[0] || Setting.new(category:'customer')
   end
 
   def update
