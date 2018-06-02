@@ -1,4 +1,4 @@
-class Api::BSettingsController < Api::BaseController
+class Api::SettingsController < Api::BaseController
   def title
     title=Setting.where(category:'title')[0] || Setting.new()
     render json:{code:0,data:title.val}
