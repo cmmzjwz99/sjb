@@ -47,7 +47,7 @@ class Admin::UserPaymentsController < Admin::BaseController
     customer.save
     respond_to do |format|
       format.html {
-        redirect_to admin_dashboard_path, notice: '添加成功'
+        redirect_to admin_dashboard_index_path, notice: '添加成功'
       }
     end
   end
