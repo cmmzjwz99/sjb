@@ -36,13 +36,13 @@ class OddsWorker
     end
 
     #半场让球
-    h_rq=games.where(name:'半场让球盘')[0] || Game.new({name:'半场让球盘',name1:'主队胜',name2:'客队胜',status:0,match:match,category:2})
+    h_rq=games.where(name:'上半场让球盘')[0] || Game.new({name:'上半场让球盘',name1:'主队胜',name2:'客队胜',status:0,match:match,category:2})
     if h_rq.present? && odds[3].present?
       h_rq.update_odd odds[3]
     end
 
     #半场大小球
-    h_dx=games.where(name:'半场大小球')[0] || Game.new({name:'半场大小球',name1:'大球',name2:'小球',status:0,match:match,category:2})
+    h_dx=games.where(name:'上半场大小球')[0] || Game.new({name:'上半场大小球',name1:'大球',name2:'小球',status:0,match:match,category:2})
     if h_dx.present? && odds[4].present?
       h_dx.update_odd odds[4]
     end
