@@ -34,6 +34,22 @@ class Admin::UserPaymentsController < Admin::BaseController
     end
   end
 
+  def save_setting
+    #网站标题
+    title=Setting.where(category:'')[0] || Setting.new(category:'title')
+    title.val=params[:title]
+    title.save
+    #客服号码
+    customer=Setting.where(category:'customer')[0] || Setting.new(category:'customer')
+    customer.val=params[:customer]
+    customer.save
+    respond_to do |format|
+      format.html {
+        redirect_to admin_agents_url, notice: '添加成功'
+      }
+    end
+  end
+
   private
   def user_payment_params
     params.require(:user_payment).permit!

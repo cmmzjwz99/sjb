@@ -47,7 +47,11 @@ Rails.application.routes.draw do
         get 'add_match'
       end
     end
-    resources :user_payments
+    resources :user_payments do
+      collection do
+        post 'save_setting'
+      end
+    end
     resources :payments do
       collection do
         get 'payments'
@@ -104,6 +108,12 @@ Rails.application.routes.draw do
       collection do
         get 'info'
         post 'update_bank'
+      end
+    end
+    resources :settings do
+      collection do
+        get 'title'
+        get 'customer'
       end
     end
     resources :payments do

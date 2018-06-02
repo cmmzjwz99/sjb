@@ -11,50 +11,6 @@
               <div class="row">
                 <div class="col-xs-4">
                   <div class="form-group">
-                    <label>支付宝状态</label>
-                    <%= f.select :alipay_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
-                  </div>
-                  <div class="form-group">
-                    <label>支付宝收款人姓名</label>
-                    <%= f.text_field(:alipay_name, {class: 'form-control'}) %>
-                  </div>
-                </div>
-                <div class="col-xs-4">
-                  <div class="form-group">
-                    <div class="row" style="padding-left: 15px">
-                      <label>支付宝收款二维码</label>
-                    </div>
-                    <input type="file" name="user_payment[alipay_qr]" id="alipay_qr" style="display: none">
-                    <img id="alipay_img" onclick="changeimg('alipay_qr')" src="<%= (@user_payment.alipay_qr.nil? ? '' : @user_payment.alipay_qr.url) %>" style="width: 182px;height: 182px">
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-4">
-                  <div class="form-group">
-                    <label>微信状态</label>
-                    <%= f.select :wechat_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
-                  </div>
-                  <div class="form-group">
-                    <label>微信收款人姓名</label>
-                    <%= f.text_field(:wechat_name, {class: 'form-control'}) %>
-                  </div>
-                </div>
-                <div class="col-xs-4">
-                  <div class="form-group">
-                    <div class="row" style="padding-left: 15px">
-                      <label>微信收款二维码</label>
-                    </div>
-                    <input type="file" name="user_payment[wechat_qr]" id="wechat_qr" style="display: none">
-                    <img id="wechat_img" onclick="changeimg('wechat_qr')" src="<%= (@user_payment.wechat_qr.nil? ? '' : @user_payment.wechat_qr.url) %>" style="width: 182px;height: 182px">
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-4">
-                  <div class="form-group">
                     <label>银行状态</label>
                     <%= f.select :bank_status, [["开启", "true"], ["关闭", "false"]], {}, {class: "form-control"} %>
                   </div>
@@ -73,6 +29,12 @@
                     <%= f.text_field(:bank_user, {class: 'form-control'}) %>
                   </div>
                 </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label>开户网点</label>
+                    <%= f.text_field(:bank_address, {class: 'form-control'}) %>
+                  </div>
+                </div>
               </div>
                 <div class="row">
                   <div class="col-xs-4">
@@ -88,8 +50,44 @@
       <!-- END BORDERED TABLE -->
     </div>
   </div>
-</div>
 
+<div class="container-fluid">
+  <h3 class="page-title">网站配置</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+        <div class="panel-heading"></div>
+        <div class="panel-body" style="padding-top: 0">
+          <form class="stdform" action="/admin/user_payments/save_setting" accept-charset="UTF-8" method="post">
+
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <label>标题</label>
+                  <input class="form-control" type="text" name="title" id="title">
+                </div>
+                <div class="form-group">
+                  <label>客服号码</label>
+                  <input class="form-control" type="text" name="customer" id="customer">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">
+
+                <button class="btn btn-primary">保存</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div style="padding: 10px"></div>
+    </div>
+    <!-- END BORDERED TABLE -->
+  </div>
+</div>
+</div>
 <% content_for :js do %>
     <script>
         function changeimg(name) {
