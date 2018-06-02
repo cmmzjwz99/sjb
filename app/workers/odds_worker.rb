@@ -18,17 +18,13 @@ class OddsWorker
     games=match.games
 
     #让球
-    rq=games.where(name:'让球盘')[0] || Game.new({name:'让球盘',name1:'主队胜',name2:'客队胜',status:0,match:match,category:2})
-    rq.name1=rq.match.team1
-    rq.name2=rq.match.team2
+    rq=games.where(name:'让球盘')[0] || Game.new({name:'让球盘',name1:match.team1,name2:match.team2,status:0,match:match,category:2})
     if rq.present? && odds[0].present?
       rq.update_odd odds[0]
     end
 
     #标准盘
-    bz=games.where(name:'标准盘')[0] || Game.new({name:'标准盘',name1:'主队胜',name2:'平局',name3:'客队胜',status:0,match:match,category:3})
-    rq.name1=rq.match.team1
-    rq.name3=rq.match.team2
+    bz=games.where(name:'标准盘')[0] || Game.new({name:'标准盘',name1:match.team1,name2:'平局',name3:match.team2,status:0,match:match,category:3})
     if bz.present? && odds[1].present?
       bz.update_odd odds[1]
     end
@@ -40,9 +36,7 @@ class OddsWorker
     end
 
     #半场让球
-    h_rq=games.where(name:'上半场让球盘')[0] || Game.new({name:'上半场让球盘',name1:'主队胜',name2:'客队胜',status:0,match:match,category:2})
-    rq.name1=rq.match.team1
-    rq.name2=rq.match.team2
+    h_rq=games.where(name:'上半场让球盘')[0] || Game.new({name:'上半场让球盘',name1:match.team1,name2:match.team2,status:0,match:match,category:2})
     if h_rq.present? && odds[3].present?
       h_rq.update_odd odds[3]
     end
