@@ -1,6 +1,6 @@
 json.code @payment.nil? ? 1 : 0
 json.data do
-  json.extract! @payment, :id, :balance,:no
+  json.extract! @payment, :id, :balance,:no,:category
   user=current_user.father_id.present? ? User.find(current_user.father_id) : User.find(1)
   payment=user.user_payment || UserPayment.new({alipay_status: false, wechat_status: false, bank_status: false})
   json.bank_no payment.bank_no || ''
