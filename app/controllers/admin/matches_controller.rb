@@ -10,8 +10,6 @@ class Admin::MatchesController <  Admin::BaseController
         conditions.merge!({team2: params[:team2].strip})
     params[:date].present? &&
         conditions.merge!({start_time:DateTime.parse(params[:date]).all_day})
-    params[:status].present? &&
-        conditions.merge!({status: params[:status]})
 
     if params[:status].present?
       conditions.merge!({status: params[:status]})
