@@ -13,6 +13,7 @@
               <th>#</th>
               <th>账号</th>
               <th>注册时间</th>
+              <th>推荐人</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -21,6 +22,7 @@
                 <tr>
                   <td><%=ele.id%></td>
                   <td><%=ele.login%></td>
+                  <td><%=ele.referee%></td>
                   <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
                   <td>
                     <a href="<%=agent_user_path(ele)%>">用户详情</a>
