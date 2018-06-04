@@ -10,7 +10,7 @@ class Api::SettingsController < Api::BaseController
   end
 
   def get_referee
-    url='http://sjb1289.com//index.html?'
+    url='http://sjb1289.com/login.html?'
     if current_user.father_id.present?
       url+='ag='+current_user.father_id.to_s+'&'
     end
