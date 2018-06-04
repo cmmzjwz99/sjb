@@ -1,5 +1,5 @@
 class Admin::MatchesController <  Admin::BaseController
-  before_action :set_match ,only: [:show,:update,:get_match_id,:delete_match_id,:offline_match]
+  before_action :set_match ,only: [:show,:update,:get_match_id,:delete_match_id,:offline_match,:resume_match]
   def index
     conditions={}
     params[:name].present? &&
@@ -10,7 +10,18 @@ class Admin::MatchesController <  Admin::BaseController
         conditions.merge!({team2: params[:team2].strip})
     params[:date].present? &&
         conditions.merge!({start_time:DateTime.parse(params[:date]).all_day})
-    @matches=Match.online.where(conditions).page(params[:page]).per(10)
+    params[:status].present? &&
+        conditions.merge!({status: params[:status]})
+
+    if params[:status].present?
+      conditions.merge!({status: params[:status]})
+      @matches=Match.where(conditions).page(params[:page]).per(10)
+    else
+      conditions.merge!({status: [0..9]})
+      @matches=Match.online.where(conditions).page(params[:page]).per(10)
+    end
+
+
   end
 
   def new
@@ -72,6 +83,15 @@ class Admin::MatchesController <  Admin::BaseController
 
   def offline_match
     @match.status=10
+    if @match.save
+      render json:{code:0,msg:'chenggong'}
+    else
+      render json:{code:1,msg:'shibai'}
+    end
+  end
+
+  def resume_match
+    @match.status=0
     if @match.save
       render json:{code:0,msg:'chenggong'}
     else
