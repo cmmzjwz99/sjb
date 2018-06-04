@@ -114,6 +114,7 @@ Rails.application.routes.draw do
       collection do
         get 'title'
         get 'customer'
+        get 'get_referee'
       end
     end
     resources :payments do
