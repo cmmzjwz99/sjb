@@ -41,15 +41,15 @@ class Game < ActiveRecord::Base
     end
     case self.win_team
       when 1
-        return "#{self.match.team1}"
+        return "#{self.name1}"
       when 2
-        return "#{self.match.team2}"
+        return "#{self.name2}"
       when 3
-        return "#{self.match.team3}"
+        return "#{self.name3}"
       when 4
-        return "#{self.match.team1} 赢半"
+        return "#{self.name1} 赢半"
       when 5
-        return "#{self.match.team2} 赢半"
+        return "#{self.name2} 赢半"
       when 6
         return '不输不赢'
     end
