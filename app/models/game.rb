@@ -33,4 +33,25 @@ class Game < ActiveRecord::Base
     end
     self.save
   end
+
+
+  def get_winner
+    if status==0
+      return '未结算'
+    end
+    case self.win_team
+      when 1
+        return "#{self.match.team1}"
+      when 2
+        return "#{self.match.team2}"
+      when 3
+        return "#{self.match.team3}"
+      when 4
+        return "#{self.match.team1} 赢半"
+      when 5
+        return "#{self.match.team2} 赢半"
+      when 6
+        return '不输不赢'
+    end
+  end
 end

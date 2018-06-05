@@ -24,8 +24,8 @@
                     <% if @game.category==3 %>
                         <option value="3"><%= @game.name3 %></option>
                     <% end %>
-                    <option value="4">主队或大分 赢半</option>
-                    <option value="5">客队或小分 赢半</option>
+                    <option value="4"><%= @game.name1 %> 赢半</option>
+                    <option value="5"><%= @game.name2 %> 赢半</option>
                     <option value="6">不输不赢</option>
                   </select>
                 </div>

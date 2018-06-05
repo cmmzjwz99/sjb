@@ -20,6 +20,7 @@
               <th>结果1获胜</th>
               <th>结果2获胜</th>
               <th>结果3获胜</th>
+              <th>结果</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -50,6 +51,9 @@
                   <td>
                     <!--<%=ele.name3%>-->
                     <%=Order.where({game:ele,team:3}).sum(:point)==0?0:(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point))%>
+                  </td>
+                  <td>
+                    <%=ele.get_winner%>
                   </td>
                   <td>
                     <% if ele.status!=1 %>
