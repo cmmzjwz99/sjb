@@ -8,24 +8,20 @@ class Agent::AgentsController <  Agent::BaseController
     #
     # @users=User.where(conditions).page(params[:page]).per(10)
 
-    conditions={father_id:current_user.id}
-    params[:login].present? &&
-        conditions.merge!({login: params[:login]})
-    params[:date].present? &&
-        conditions.merge!({created_at: DateTime.parse(params[:date]).all_day})
+    conditions='not referee is null'
 
-    start_date = '2018-06-01'
-    end_date = DateTime.now
+    if params[:login].present?
+      user=User.find_by_login(params[:login])
+      if user.present?
+        conditions=" referee = '#{user.id}'"
+      else
+        conditions=" referee = '0'"
+      end
+    end
 
-    params[:s_time].present? &&
-        start_date = params[:s_time].to_datetime.beginning_of_day
-
-    params[:e_time].present? &&
-        end_date = params[:e_time].to_datetime.end_of_day
-
-    conditions.merge!({created_at: start_date..end_date})
-
-    @users=User.where(conditions).group_by{|e| e.referee}.first[1]
+    @users=User.select(" referee")
+               .where(conditions)
+               .group("referee").page(params[:page]).per(10)
 
   end
 

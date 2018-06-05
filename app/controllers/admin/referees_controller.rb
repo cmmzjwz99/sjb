@@ -5,8 +5,6 @@ class Admin::RefereesController < Admin::BaseController
     # conditions={referee:users.group(referee)}
     conditions='not referee is null'
 
-    params[:login].present? &&
-
     if params[:login].present?
       user=User.find_by_login(params[:login])
       if user.present?
@@ -18,7 +16,7 @@ class Admin::RefereesController < Admin::BaseController
 
     @users=User.select(" referee")
                .where(conditions)
-               .group("referee")
+               .group("referee").page(params[:page]).per(10)
 
   end
 
