@@ -18,8 +18,12 @@ class Api::SettingsController < Api::BaseController
 
     user=User.where(referee:current_user.id,father_id:current_user.father_id)
 
-    journal=Payment.where(user:user,payment_type: true,status: 1).sum(:balance)
+    journal=current_user.effective_journal
+    rebate=current_user.rebate
+    coefficient=Setting.where(category:'rebate')[0] || Setting.new(val:'0')
 
-    render json:{code:0,data:{url:url,user:user.count,journal:journal}}
+    render json:{code:0,data:
+        {url:url,user:user.count,journal:journal,rebate:rebate,coefficient:coefficient.val.to_f}
+    }
   end
 end

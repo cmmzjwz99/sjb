@@ -86,6 +86,43 @@ class Api::PaymentsController < Api::BaseController
     end
   end
 
+  #反点提现
+  def rebate
+    if Payment.find_by(user: current_user, payment_type: 0) != nil
+      if Payment.find_by(user: current_user, payment_type: 0 ,status: Payment::UNVERIFIED)
+        return(render json: {code: 1, msg: '您已经有一笔待审核'})
+      end
+    end
+
+    @payment = Payment.new(payment_params)
+    @payment.payment_type=0
+    @payment.user=current_user
+    @payment.status=0
+    rebate=Setting.where(category: 'rebate')[0]
+    rebate=rebate.val || 0
+
+    if @payment.balance == 0
+      render json: {code: 1, msg: '金额不能为0'}
+      return
+    elsif @payment.balance > 100000
+      render json: {code: 1, msg: '金额不能超过100000'}
+      return
+    elsif @payment.balance > (current_user.effective_journal*rebate.to_f - current_user.rebate)
+      render json: {code: 1, msg: '提现金额不能大于反点'}
+      return
+    end
+    user=current_user
+    user.rebate+=@payment.balance
+    if @payment.save
+      user.save
+      render json: {code: 0, msg: '成功'}
+      return
+    else
+      render json:{code:1,msg:'错误'}
+      return
+    end
+  end
+
 
   private
   def payment_params

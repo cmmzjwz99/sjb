@@ -127,6 +127,7 @@ Rails.application.routes.draw do
         get 'info'
         get 'history'
         post 'cancel'
+        post 'rebate'
       end
     end
     resources :quiz do
