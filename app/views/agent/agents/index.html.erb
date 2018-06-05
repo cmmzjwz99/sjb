@@ -24,41 +24,21 @@
             </tr>
             </thead>
             <tbody>
-            <% @users.each do |ele| %>
+            <% @users.where(father_id:current_user.id).each do |ele| %>
+                <% referee= User.find(ele.referee)%>
                 <tr>
-                  <td><%= ele.id %></td>
-                  <td><%= ele.login %></td>
-                  <td><%= User.where(referee:ele.referee,father_id:ele.id).count %></td>
-                  <!--<td><%= Payment.where({user:User.where(referee:ele.referee,father_id:ele.id),status:1,payment_type: 1}).sum(:balance)%></td>-->
-                  <td><%= ele.effective_journal %></td>
-                  <td><%= ele.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
-                  <td><%= ele.rebate %></td>
+                  <td><%= referee.id %></td>
+                  <td><%= referee.login %></td>
+
+                  <td><%= User.where(referee:referee.id,father_id:referee.father_id).count %></td>
+                  <td><%= referee.effective_journal %></td>
+                  <td><%= referee.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
+                  <td><%= referee.rebate %></td>
                 </tr>
             <% end %>
             </tbody>
           </table>
-          <!--<table class="table table-bordered" style="margin-bottom: 0">-->
-            <!--<thead>-->
-            <!--<tr>-->
-              <!--<th>#</th>-->
-              <!--<th>账号</th>-->
-              <!--<th>充值总额</th>-->
-              <!--<th>提现总额</th>-->
-              <!--<th>操作</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-              <!--<%@users.each do |ele|%>-->
-                <!--<tr>-->
-                  <!--<td><%=ele.id%></td>-->
-                  <!--<td><%=ele.login%></td>-->
-                  <!--<td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 1}).sum(:balance) %></td>-->
-                  <!--<td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 0}).sum(:balance) %></td>-->
-                  <!--<td><a href="<%= agent_agent_path(ele) %>">详情</a></td>-->
-                <!--</tr>-->
-              <!--<%end%>-->
-            <!--</tbody>-->
-          <!--</table>-->
+
 
         </div>
       </div>
