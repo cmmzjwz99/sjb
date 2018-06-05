@@ -3,7 +3,7 @@ class Admin::RefereesController < Admin::BaseController
 
   def index
     # conditions={referee:users.group(referee)}
-    conditions='not referee is null'
+    conditions="not referee is null and not referee = ''"
 
     if params[:login].present?
       user=User.find_by_login(params[:login])
