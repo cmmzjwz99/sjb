@@ -18,11 +18,14 @@ class Admin::PaymentsController < Admin::BaseController
     @payment = Payment.find(params[:id])
     if @payment.status==0
       @payment.status=2
-      @payment.pay if @payment.payment_type==false
+      if @payment.payment_type==false && @payment.category!='反点提现'
+        @payment.pay
+      else
+        @payment.rebate_fail
+      end
       @payment.save
     end
     respond_to do |format|
-      # format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
       format.html { redirect_back(fallback_location: admin_payments_path) }
       format.json { head :no_content }
     end
@@ -36,7 +39,6 @@ class Admin::PaymentsController < Admin::BaseController
       @payment.save
     end
     respond_to do |format|
-      # format.html { redirect_to admin_payments_path, notice: 'User was successfully destroyed.' }
       format.html { redirect_back(fallback_location: admin_payments_path) }
       format.json { head :no_content }
     end

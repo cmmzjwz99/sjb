@@ -13,4 +13,10 @@ class Payment < ActiveRecord::Base
     user.points+=self.balance
     user.save
   end
+
+  def rebate_fail
+    user=self.user
+    user.rebate-=self.balance
+    user.save
+  end
 end

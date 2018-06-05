@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180604012756) do
+ActiveRecord::Schema.define(version: 20180605015340) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(version: 20180604012756) do
     t.float "points", limit: 24, default: 0.0
     t.boolean "add_agent", default: false
     t.string "referee"
+    t.float "effective_journal", limit: 24, default: 0.0
+    t.float "rebate", limit: 24, default: 0.0
     t.index ["login"], name: "USER_LOGIN"
     t.index ["profile_id"], name: "USER_PROFILE_ID"
   end
