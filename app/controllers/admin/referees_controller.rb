@@ -3,33 +3,22 @@ class Admin::RefereesController < Admin::BaseController
 
   def index
     # conditions={referee:users.group(referee)}
-    conditions={}
+    conditions='not referee is null'
+
     params[:login].present? &&
-        conditions.merge!({login: params[:login]})
-    params[:date].present? &&
-        conditions.merge!({created_at: DateTime.parse(params[:date]).all_day})
 
+    if params[:login].present?
+      user=User.find_by_login(params[:login])
+      if user.present?
+        conditions=" referee = '#{user.id}'"
+      else
+        conditions=" referee = '0'"
+      end
+    end
 
-      # @users=User.where(conditions).find_by_sql(["select referee from users group by referee"])
-    # @users=[]
-    # @orders = User.where(conditions).group_by{|e|e.referee}
-    # @users=@orders.first[1]
-
-    start_date = '2018-06-01'
-    end_date = DateTime.now
-
-    params[:s_time].present? &&
-        start_date = params[:s_time].to_datetime.beginning_of_day
-
-    params[:e_time].present? &&
-        end_date = params[:e_time].to_datetime.end_of_day
-
-    conditions.merge!({created_at: start_date..end_date})
-
-    @users=User.where(conditions).group_by{|e| e.referee}.first[1]
-
-
-    # @users=User.select("referee").group("referee")
+    @users=User.select(" referee")
+               .where(conditions)
+               .group("referee")
 
   end
 
