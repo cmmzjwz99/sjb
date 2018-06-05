@@ -64,8 +64,8 @@ class Api::PaymentsController < Api::BaseController
     @payment.user=current_user
     @payment.status=0
 
-    if @payment.balance == 0
-      render json: {code: 1, msg: '金额不能为0'}
+    if @payment.balance<50
+      render json: {code: 1, msg: '单次提现金额不能少于50'}
       return
     elsif @payment.balance > 100000
       render json: {code: 1, msg: '金额不能超过100000'}
@@ -101,8 +101,8 @@ class Api::PaymentsController < Api::BaseController
     rebate=Setting.where(category: 'rebate')[0]
     rebate=rebate.val || 0
 
-    if @payment.balance == 0
-      render json: {code: 1, msg: '金额不能为0'}
+    if @payment.balance<50
+      render json: {code: 1, msg: '单次提现金额不能少于50'}
       return
     elsif @payment.balance > 100000
       render json: {code: 1, msg: '金额不能超过100000'}
