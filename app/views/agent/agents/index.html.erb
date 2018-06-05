@@ -29,7 +29,6 @@
                 <tr>
                   <td><%= referee.id %></td>
                   <td><%= referee.login %></td>
-
                   <td><%= User.where(referee:referee.id,father_id:referee.father_id).count %></td>
                   <td><%= referee.effective_journal %></td>
                   <td><%= referee.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
