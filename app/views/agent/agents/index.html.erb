@@ -12,31 +12,54 @@
           </form>
         </div>
         <div class="panel-body" style="padding-top: 0">
-          <table class="table table-bordered" style="margin-bottom: 0">
+          <table class="table table-bordered">
             <thead>
             <tr>
-              <th>#</th>
+              <th>ID</th>
               <th>账号</th>
-              <th>充值总额</th>
-              <th>提现总额</th>
-              <th>操作</th>
+              <th>推荐人数</th>
+              <th>有效流水</th>
+              <th>可提现金额</th>
+              <th>已提现金额</th>
             </tr>
             </thead>
             <tbody>
-              <%@users.each do |ele|%>
+            <% @users.each do |ele| %>
                 <tr>
-                  <td><%=ele.id%></td>
-                  <td><%=ele.login%></td>
-                  <td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 1}).sum(:balance) %></td>
-                  <td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 0}).sum(:balance) %></td>
-                  <td><a href="<%= agent_agent_path(ele) %>">详情</a></td>
+                  <td><%= ele.id %></td>
+                  <td><%= ele.login %></td>
+                  <td><%= User.where(referee:ele.referee,father_id:ele.id).count %></td>
+                  <!--<td><%= Payment.where({user:User.where(referee:ele.referee,father_id:ele.id),status:1,payment_type: 1}).sum(:balance)%></td>-->
+                  <td><%= ele.effective_journal %></td>
+                  <td><%= ele.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
+                  <td><%= ele.rebate %></td>
                 </tr>
-              <%end%>
+            <% end %>
             </tbody>
           </table>
-          <div class="dataTables_wrapper no-footer" style="text-align: right">
-            <%= paginate @users %>
-          </div>
+          <!--<table class="table table-bordered" style="margin-bottom: 0">-->
+            <!--<thead>-->
+            <!--<tr>-->
+              <!--<th>#</th>-->
+              <!--<th>账号</th>-->
+              <!--<th>充值总额</th>-->
+              <!--<th>提现总额</th>-->
+              <!--<th>操作</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+              <!--<%@users.each do |ele|%>-->
+                <!--<tr>-->
+                  <!--<td><%=ele.id%></td>-->
+                  <!--<td><%=ele.login%></td>-->
+                  <!--<td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 1}).sum(:balance) %></td>-->
+                  <!--<td><%= Payment.where({user:User.where(father_id:ele.id),status:1,payment_type: 0}).sum(:balance) %></td>-->
+                  <!--<td><a href="<%= agent_agent_path(ele) %>">详情</a></td>-->
+                <!--</tr>-->
+              <!--<%end%>-->
+            <!--</tbody>-->
+          <!--</table>-->
+
         </div>
       </div>
       <!-- END BORDERED TABLE -->

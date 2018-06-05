@@ -59,6 +59,7 @@ Rails.application.routes.draw do
         post "sh_fail/:id",action:"sh_fail",id:/\d{1,}/,as: :sh_fail;
       end
     end
+    resources :referees
   end
 
   namespace :agent do

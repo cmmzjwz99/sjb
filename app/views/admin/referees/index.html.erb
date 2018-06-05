@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h3 class="page-title">推荐人列表</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div style="padding: 20px 25px">
+          <form>
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="login" value="<%= params[:login] %>">
+            <input type="date" value="<%=params[:s_time] || ''%>" name="s_time" class="form-control index-form-control" placeholder="开始时间" style="min-width: 160px;margin-left: 10px">
+            <input type="date" value="<%=params[:e_time] || ''%>" name="e_time" class="form-control index-form-control" placeholder="结束时间" style="min-width: 160px;margin-left: 10px">
+            <button class="btn btn-primary" style="margin-left: 3px">查询</button>
+          </form>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>账号</th>
+              <th>所属代理</th>
+              <th>推荐人数</th>
+              <th>有效流水</th>
+              <th>可提现金额</th>
+              <th>已提现金额</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |ele| %>
+                <tr>
+                  <td><%= ele.id %></td>
+                  <td><%= ele.login %></td>
+                  <td><%= User.find(ele.father_id).login %></td>
+                  <td><%= User.where(referee:ele.referee,father_id:ele.id).count %></td>
+                  <!--<td><%= Payment.where({user:User.where(referee:ele.referee,father_id:ele.id),status:1,payment_type: 1}).sum(:balance)%></td>-->
+                  <td><%= ele.effective_journal %></td>
+                  <td><%= ele.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
+                  <td><%= ele.rebate %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
