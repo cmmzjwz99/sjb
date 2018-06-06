@@ -50,7 +50,7 @@
                   </td>
                   <td>
                     <!--<%=ele.name3%>-->
-                    <%=Order.where({game:ele,team:3}).sum(:point)==0?0:(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point))%>
+                    <%=ele.category==2?0:(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point))%>
                   </td>
                   <td>
                     <%=ele.get_winner%>
