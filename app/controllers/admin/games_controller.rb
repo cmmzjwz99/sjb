@@ -1,5 +1,5 @@
 class Admin::GamesController <  Admin::BaseController
-  before_action :set_game ,only: [:show,:settlement,:update]
+  before_action :set_game ,only: [:show,:settlement,:update,:game_order]
   # @@type_id=''
   def index
     conditions={}
@@ -9,6 +9,13 @@ class Admin::GamesController <  Admin::BaseController
     # params[:id].present? && conditions.merge!({match_id: params[:id]})
     # @@type_id = params[:type_id]
     @games=Game.where(conditions).page(params[:page]).per(10)
+  end
+
+  def game_order
+    @conditions={}
+    params[:name].present? &&
+        @conditions.merge!({user: User.where(login:params[:name])})
+
   end
 
   def new

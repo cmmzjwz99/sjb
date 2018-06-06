@@ -49,4 +49,14 @@ class Order < ActiveRecord::Base
     self.status=2
     self.save
   end
+
+  def get_team
+    if self.team==1
+      return self.game.name1
+    elsif self.team==2
+      return self.game.name2
+    elsif self.team==3
+      return self.game.name3
+    end
+  end
 end

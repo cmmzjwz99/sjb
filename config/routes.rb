@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :games do
       collection do
         get "settlement/:id",action:"settlement",id:/\d{1,}/,as: :settlement;
+        get 'game_order'
       end
     end
     resources :odds

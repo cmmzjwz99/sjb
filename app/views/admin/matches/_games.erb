@@ -27,7 +27,7 @@
             <tbody>
             <%@match.games.each do |ele|%>
                 <tr>
-                  <td><%="#{ele.name}#{ele.remark}"%></td>
+                  <td><a href="<%=game_order_admin_games_path%>?id=<%=ele.id%>"><%="#{ele.name}#{ele.remark}"%></a></td>
                   <td>
                     <%=ele.name1%>
                     <%=Order.where({game:ele,team:1}).sum(:point)%>
