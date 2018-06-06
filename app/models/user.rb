@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_one :user_bank,dependent: :destroy
 
   has_many :payments
+  has_many :orders
 
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true

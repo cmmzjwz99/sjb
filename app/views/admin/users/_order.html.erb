@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>金额</th>
+    <th>赔率</th>
+    <th>收益</th>
+    <th>下注时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%@user.orders.each do |ele|%>
+      <tr>
+        <td><%=ele.id%></td>
+        <td><%=ele.point%></td>
+        <td><%=ele.odds%></td>
+        <td><%=(ele.income_point || '未结算')%></td>
+        <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>

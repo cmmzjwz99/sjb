@@ -1,5 +1,5 @@
 class Admin::UsersController <  Admin::BaseController
-  before_action :set_user ,only: [:show,:settlement,:update]
+  before_action :set_user ,only: [:show,:settlement,:update,:recover_password]
   def index
     conditions={profile_id:3}
     #conditions={}
@@ -12,6 +12,15 @@ class Admin::UsersController <  Admin::BaseController
   end
 
   def show
+  end
+
+  def recover_password
+    if request.post?
+      if @user.update_password('123456')
+        render json: {code:0,msg:'修改成功'}
+        return
+      end
+    end
   end
 
   private

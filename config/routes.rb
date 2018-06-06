@@ -27,7 +27,11 @@ Rails.application.routes.draw do
 
       end
     end
-    resources :users
+    resources :users do
+      collection do
+        post 'recover_password'
+      end
+    end
     resources :agents
     resources :matches do
       collection do

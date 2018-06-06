@@ -12,11 +12,11 @@ json.data(@orders) do |order|
   end
   case order.team
     when 1
-      json.team order.game.name1
+      json.team "#{order.game.name1} #{order.odds}"
     when 2
-      json.team order.game.name2
+      json.team "#{order.game.name2} #{order.odds}"
     else
-      json.team order.game.name3
+      json.team "#{order.game.name3} #{order.odds}"
   end
   #json.match "#{order.game.match.name} #{order.game.match.team1}VS#{order.game.match.team2}"
   json.match "#{order.game.match.team1}VS#{order.game.match.team2}"

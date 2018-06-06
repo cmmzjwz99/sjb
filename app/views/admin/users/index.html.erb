@@ -30,7 +30,8 @@
                   <td><%=ele.referee%></td>
                   <td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
                   <td>
-                    <a href="<%=admin_user_path(ele)%>">用户详情</a>
+                    <a href="<%=admin_user_path(ele)%>">用户详情</a>&nbsp;
+                    <a onclick="recover_pwd(<%=ele.id%>)">重置密码</a>
                   </td>
                 </tr>
               <%end%>
@@ -45,3 +46,20 @@
     </div>
   </div>
 </div>
+<% content_for :js do %>
+    <script>
+      function recover_pwd(id) {
+          if (window.confirm('确定重置密码？')) {
+              $.ajax({
+                  url:'/admin/users/recover_password?id='+id,
+                  type:'post',
+                  success:function (data) {
+                      if(data.code==0){
+                          alert('重置成功')
+                      }
+                  }
+              })
+          }
+      }
+    </script>
+<%end%>
