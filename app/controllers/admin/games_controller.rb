@@ -48,6 +48,10 @@ class Admin::GamesController <  Admin::BaseController
 
 
   def update
+    if @game.status==1
+       redirect_to  admin_match_path(@type_id)
+      return
+    end
     @game.update_attributes(game_params)
 
     respond_to do |format|
