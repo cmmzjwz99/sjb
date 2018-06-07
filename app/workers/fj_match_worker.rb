@@ -2,7 +2,7 @@ class FjMatchWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
 
-  recurrence  { daily.hour_of_day(7).minute_of_hour(30) }
+  recurrence  { daily.hour_of_day(7).minute_of_hour(31) }
 
   def perform
     (0..2).each do |i|
