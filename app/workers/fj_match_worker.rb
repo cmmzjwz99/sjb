@@ -5,7 +5,13 @@ class FjMatchWorker
   recurrence  { daily.hour_of_day(7).minute_of_hour(30) }
 
   def perform
-    doc = Nokogiri::HTML(open("http://interface.win007.com/zq/BF_XML.aspx?date=#{(Time.now+2.days).strftime('%Y-%m-%d')}"))
+    (0..2).each do |i|
+      get_data (Time.now+i.days).strftime('%Y-%m-%d')
+    end
+  end
+
+  def get_data date
+    doc = Nokogiri::HTML(open("http://interface.win007.com/zq/BF_XML.aspx?date=#{date}"))
     doc = doc.css('list match')
 
     doc.each do |match|
