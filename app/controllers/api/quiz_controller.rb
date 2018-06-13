@@ -18,6 +18,10 @@ class Api::QuizController < Api::BaseController
       render json:{code:1,msg:'金币不足'}
       return
     end
+    if @order.point<0
+      render json:{code:1,msg:'下注金额不能小于0'}
+      return
+    end
     case @order.team
       when 1
         odds=@order.game.odds1
