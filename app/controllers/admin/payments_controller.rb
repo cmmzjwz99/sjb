@@ -18,10 +18,13 @@ class Admin::PaymentsController < Admin::BaseController
     @payment = Payment.find(params[:id])
     if @payment.status==0
       @payment.status=2
-      if @payment.payment_type==false && @payment.category!='反点提现'
-        @payment.pay
+      if @payment.payment_type==false
+          if @payment.category!='反点提现'
+            @payment.pay
+          else
+            @payment.rebate_fail
+          end
       else
-        @payment.rebate_fail
       end
       @payment.save
     end
