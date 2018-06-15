@@ -3,13 +3,12 @@ class SettlementTask
 
   sidekiq_options queue: 'settlement'
 
-  def perform(order_id)
-    order=Order.find(order_id)
-
-    if order.status==1 && order.game.status==1
-      order.settlement
+  def perform(game_id)
+    game=Game.find(game_id)
+    game.orders.each do |ele|
+      if ele.status==1 && ele.game.status==1
+        ele.settlement
+      end
     end
-
   end
-
 end

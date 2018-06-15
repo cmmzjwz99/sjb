@@ -6,9 +6,7 @@ class Game < ActiveRecord::Base
 
   def settlement
     self.orders.update_all({status:1})
-    self.orders.each do |ele|
-      SettlementTask.perform_in(30.seconds,ele.id)
-    end
+    SettlementTask.perform_in(30.seconds,self.id)
   end
 
   def get_winer
