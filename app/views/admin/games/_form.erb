@@ -18,7 +18,7 @@
         <label class="form-control-label">比赛场次: </label>
         <select name="game[match_id]" id="game[match_id]" class="form-control">
           <% Match.where({status:[0,1]}).each do |ele| %>
-              <option value="<%= ele.id %>" <%= ele.id==@game.id ? 'selected' : '' %>><%= "#{ele.name} #{ele.team1}VS#{ele.team2}" %></option>
+              <option value="<%= ele.id %>" <%= (ele.id==@game.id || params[:type_id]==ele.id.to_s) ? 'selected' : '' %>><%= "#{ele.name} #{ele.team1}VS#{ele.team2}" %></option>
           <% end %>
         </select>
       </div>
