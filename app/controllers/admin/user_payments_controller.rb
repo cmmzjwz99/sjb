@@ -4,6 +4,7 @@ class Admin::UserPaymentsController < Admin::BaseController
     @title=Setting.where(category:'title')[0] || Setting.new(category:'title')
     @customer=Setting.where(category:'customer')[0] || Setting.new(category:'customer')
     @rebate=Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')
+    @url=Setting.where(category:'url')[0] || Setting.new(category:'url')
   end
 
   def update
@@ -49,6 +50,10 @@ class Admin::UserPaymentsController < Admin::BaseController
     #反点
     rebate=Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')
     rebate.val=params[:rebate]
+    rebate.save
+    #域名
+    rebate=Setting.where(category:'url')[0] || Setting.new(category:'url')
+    rebate.val=params[:url]
     rebate.save
     respond_to do |format|
       format.html {

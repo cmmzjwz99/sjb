@@ -43,6 +43,10 @@ class Order < ActiveRecord::Base
       #不输不赢
       user.points+=self.point
       self.income_point=self.point
+    elsif status==7
+      #全输
+      self.income_point=0
+      agent.effective_journal+=self.point
     end
     agent.save
     user.save

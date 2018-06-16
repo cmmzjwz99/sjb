@@ -50,6 +50,8 @@ class Game < ActiveRecord::Base
         return "#{self.name2} 赢半"
       when 6
         return '不输不赢'
+      when 7
+        return '全输'
     end
   end
 end
