@@ -27,6 +27,14 @@ module ApplicationHelper
     User.where(profile_id: 2).count
   end
 
+  def rebate_number
+    User.where({profile_id: 3}).sum('effective_journal')*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f)
+  end
+
+  def rebate_number_has_pay
+    User.where({profile_id: 3}).sum('rebate')
+  end
+
   def dl_chongzhi_total
     @payment=Payment.where(status: Payment::VERIFYPASS, payment_type: 1, user: User.where(father_id: current_user.id))
     @sum = 0
