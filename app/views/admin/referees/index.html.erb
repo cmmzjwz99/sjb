@@ -17,7 +17,9 @@
               <th>账号</th>
               <th>所属代理</th>
               <th>推荐人数</th>
-              <th>有效流水</th>
+              <th>一级流水</th>
+              <th>二级流水</th>
+              <th>三级流水</th>
               <th>可提现金额</th>
               <th>已提现金额</th>
             </tr>
@@ -30,8 +32,10 @@
                   <td><%= referee.login %></td>
                   <td><%= (User.where(id:referee.father_id)[0] || User.new()).login %></td>
                   <td><%= User.where(referee:referee.id,father_id:referee.father_id).count %></td>
-                  <td><%= referee.effective_journal %></td>
-                  <td><%= referee.effective_journal*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f) %></td>
+                  <td><%= referee.effective_journal1 %></td>
+                  <td><%= referee.effective_journal2 %></td>
+                  <td><%= referee.effective_journal3 %></td>
+                  <td><%= referee.sum_journal %></td>
                   <td><%= referee.rebate %></td>
                 </tr>
             <% end %>

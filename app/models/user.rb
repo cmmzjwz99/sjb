@@ -152,6 +152,33 @@ class User < ActiveRecord::Base
     articles.size
   end
 
+  def effective_journal1
+    #一级流水
+    self.effective_journal
+  end
+
+  def effective_journal2
+    #二级流水
+    User.where(referee:self.id).sum('effective_journal')
+  end
+
+  def effective_journal3
+    #三级流水
+    referee=[]
+    User.where(referee:self.id).each do |ele|
+      referee << ele.id
+    end
+    User.where(referee:referee).sum('effective_journal')
+  end
+
+  def sum_journal
+    #可提现金额
+    val=self.effective_journal1*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f)
+    val+=self.effective_journal2*(((Setting.where(category:'rebate2')[0] || Setting.new(category:'rebate2')).val).to_f)
+    val+=self.effective_journal3*(((Setting.where(category:'rebate3')[0] || Setting.new(category:'rebate3')).val).to_f)
+    return val.round(2)
+  end
+
   def display_name
     if !nickname.blank?
       nickname

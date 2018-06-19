@@ -4,6 +4,8 @@ class Admin::UserPaymentsController < Admin::BaseController
     @title=Setting.where(category:'title')[0] || Setting.new(category:'title')
     @customer=Setting.where(category:'customer')[0] || Setting.new(category:'customer')
     @rebate=Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')
+    @rebate2=Setting.where(category:'rebate2')[0] || Setting.new(category:'rebate2')
+    @rebate3=Setting.where(category:'rebate3')[0] || Setting.new(category:'rebate3')
     @url=Setting.where(category:'url')[0] || Setting.new(category:'url')
   end
 
@@ -47,9 +49,17 @@ class Admin::UserPaymentsController < Admin::BaseController
     customer=Setting.where(category:'customer')[0] || Setting.new(category:'customer')
     customer.val=params[:customer]
     customer.save
-    #反点
+    #一级反点
     rebate=Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')
     rebate.val=params[:rebate]
+    rebate.save
+    #二级反点
+    rebate=Setting.where(category:'rebate2')[0] || Setting.new(category:'rebate2')
+    rebate.val=params[:rebate2]
+    rebate.save
+    #三级反点
+    rebate=Setting.where(category:'rebate3')[0] || Setting.new(category:'rebate3')
+    rebate.val=params[:rebate3]
     rebate.save
     #域名
     rebate=Setting.where(category:'url')[0] || Setting.new(category:'url')

@@ -24,7 +24,12 @@ class Api::SettingsController < Api::BaseController
     coefficient=Setting.where(category:'rebate')[0] || Setting.new(val:'0')
 
     render json:{code:0,data:
-        {url:url,user:user.count,journal:journal,rebate:rebate,coefficient:coefficient.val.to_f}
+        {url:url, user:user.count,journal:journal,
+         rebate:rebate,coefficient:coefficient.val.to_f,
+         journal1:current_user.effective_journal1,journal2:current_user.effective_journal2,
+         journal3:current_user.effective_journal3,income:current_user.sum_journal,
+
+        }
     }
   end
 end
