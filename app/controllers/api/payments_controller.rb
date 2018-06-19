@@ -88,7 +88,7 @@ class Api::PaymentsController < Api::BaseController
 
   #反点提现
   def rebate
-    return(render json: {code: 1, msg: '代理系统升级中'})
+    #return(render json: {code: 1, msg: '代理系统升级中'})
 
     if Payment.find_by(user: current_user, payment_type: 0) != nil
       if Payment.find_by(user: current_user, payment_type: 0 ,status: Payment::UNVERIFIED)

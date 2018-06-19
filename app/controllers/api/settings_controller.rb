@@ -17,15 +17,19 @@ class Api::SettingsController < Api::BaseController
     end
     url+='referee='+current_user.id.to_s
 
-    user=User.where(referee:current_user.id,father_id:current_user.father_id)
+    user1=current_user.referee_user_1
+    user2=current_user.referee_user_2
+    user3=current_user.referee_user_3
 
     journal=current_user.effective_journal
     rebate=current_user.rebate
-    coefficient=Setting.where(category:'rebate')[0] || Setting.new(val:'0')
+    coefficient1=Setting.where(category:'rebate')[0] || Setting.new(val:'0')
+    coefficient2=Setting.where(category:'rebate2')[0] || Setting.new(val:'0')
+    coefficient3=Setting.where(category:'rebate3')[0] || Setting.new(val:'0')
 
     render json:{code:0,data:
-        {url:url, user:user.count,journal:journal,
-         rebate:rebate,coefficient:coefficient.val.to_f,
+        {url:url, user1:user1,user2:user2,user3:user3, rebate:rebate,
+         coefficient1:coefficient1.val.to_f,coefficient2:coefficient2.val.to_f,coefficient3:coefficient3.val.to_f,
          journal1:current_user.effective_journal1,journal2:current_user.effective_journal2,
          journal3:current_user.effective_journal3,income:current_user.sum_journal,
 
