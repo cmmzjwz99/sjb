@@ -28,7 +28,10 @@ module ApplicationHelper
   end
 
   def rebate_number
-    User.where({profile_id: 3}).sum('effective_journal')*(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f)
+    rebate=(((Setting.where(category:'rebate')[0] || Setting.new(category:'rebate')).val).to_f)
+    rebate+=(((Setting.where(category:'rebate2')[0] || Setting.new(category:'rebate2')).val).to_f)
+    rebate+=(((Setting.where(category:'rebate3')[0] || Setting.new(category:'rebate3')).val).to_f)
+    User.where({profile_id: 3}).sum('effective_journal')*rebate
   end
 
   def rebate_number_has_pay

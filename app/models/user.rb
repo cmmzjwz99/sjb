@@ -159,7 +159,7 @@ class User < ActiveRecord::Base
 
   def effective_journal2
     #二级流水
-    User.where(referee:self.id).sum('effective_journal')
+    User.where(referee:self.id).sum('effective_journal').round(2)
   end
 
   def effective_journal3
@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
     User.where(referee:self.id).each do |ele|
       referee << ele.id
     end
-    User.where(referee:referee).sum('effective_journal')
+    User.where(referee:referee).sum('effective_journal').round(2)
   end
 
   def sum_journal

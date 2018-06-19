@@ -42,15 +42,15 @@
                   </td>
                   <td>
                     <!--<%=ele.name1%>-->
-                    <%=Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:1}).sum(:get_point)%>
+                    <%=(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:1}).sum(:get_point)).round(2)%>
                   </td>
                   <td>
                     <!--<%=ele.name2%>-->
-                    <%=Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:2}).sum(:get_point)%>
+                    <%=(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:2}).sum(:get_point)).round(2)%>
                   </td>
                   <td>
                     <!--<%=ele.name3%>-->
-                    <%=ele.category==2?0:(Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point))%>
+                    <%=ele.category==2?0:((Order.where({game:ele}).sum(:point)-Order.where({game:ele,team:3}).sum(:get_point))).round(2)%>
                   </td>
                   <td>
                     <%=ele.get_winner%>
