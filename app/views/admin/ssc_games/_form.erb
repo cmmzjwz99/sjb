@@ -7,7 +7,7 @@
     <th>赔率</th>
     <th>金额</th>
     <th>状态</th>
-    <!--<th>时间</th>-->
+    <th>用户</th>
   </tr>
   </thead>
   <tbody>
@@ -25,8 +25,7 @@
               <a>已结算</a>
           <% end %>
         </td>
-        <!--<td><%=ele.status%></td>-->
-        <!--<td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>-->
+        <td><%= ele.user.login%></td>
       </tr>
   <%end%>
   </tbody>
