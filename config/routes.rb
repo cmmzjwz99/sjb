@@ -65,6 +65,8 @@ Rails.application.routes.draw do
       end
     end
     resources :referees
+
+    resources :ssc_games
   end
 
   namespace :agent do

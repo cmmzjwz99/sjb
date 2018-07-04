@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>类型</th>
+    <th>结果</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>状态</th>
+    <!--<th>时间</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <%@sscgame.ssc_orders.each do |ele|%>
+      <tr>
+        <td><%=ele.id%></td>
+        <td><%=ele.get_category%></td>
+        <td><%=ele.get_code %></td>
+        <td><%=ele.odds%></td>
+        <td><%=ele.point%></td>
+        <td>
+          <% if ele.status == 0 %>
+              <a>未结算</a>
+          <% elsif ele.status == 1 %>
+              <a>已结算</a>
+          <% end %>
+        </td>
+        <!--<td><%=ele.status%></td>-->
+        <!--<td><%=ele.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>-->
+      </tr>
+  <%end%>
+  </tbody>
+</table>

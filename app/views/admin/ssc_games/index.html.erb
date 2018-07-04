@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <h3 class="page-title">时时彩</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BORDERED TABLE -->
+      <div class="panel">
+
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>期数</th>
+              <th>结果</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%@sscgames.each do |ele|%>
+                <tr>
+                  <td><%=ele.id%></td>
+                  <td><%=ele.issue%></td>
+                  <td><%=ele.code%></td>
+                  <td><%=ele.time.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                  <td>
+                    <a href="<%=admin_ssc_game_path(ele) %>">操作</a>&nbsp;
+                  </td>
+                </tr>
+            <%end%>
+            </tbody>
+          </table>
+          <div class="dataTables_wrapper no-footer" style="text-align: right">
+            <%= paginate @sscgames %>
+          </div>
+        </div>
+      </div>
+      <!-- END BORDERED TABLE -->
+    </div>
+  </div>
+</div>
