@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :payments
   has_many :orders
+  has_many :ssc_orders
 
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true

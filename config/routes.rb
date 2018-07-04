@@ -144,5 +144,12 @@ Rails.application.routes.draw do
         get 'my_order'
       end
     end
+    resources :ssc do
+      collection do
+        get 'ssc'
+        post 'order'
+        get 'order_list'
+      end
+    end
   end
 end

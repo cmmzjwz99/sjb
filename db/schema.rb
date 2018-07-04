@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605015340) do
+ActiveRecord::Schema.define(version: 20180629030941) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -104,6 +104,30 @@ ActiveRecord::Schema.define(version: 20180605015340) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ssc_games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "issue"
+    t.string "code"
+    t.datetime "time"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ssc_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "category"
+    t.integer "code"
+    t.float "odds", limit: 24
+    t.bigint "user_id"
+    t.bigint "ssc_game_id"
+    t.float "point", limit: 24
+    t.float "get_point", limit: 24
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ssc_game_id"], name: "index_ssc_orders_on_ssc_game_id"
+    t.index ["user_id"], name: "index_ssc_orders_on_user_id"
   end
 
   create_table "user_banks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
