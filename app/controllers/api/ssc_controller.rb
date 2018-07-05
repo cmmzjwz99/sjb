@@ -5,6 +5,7 @@ class Api::SscController < Api::BaseController
     render json:{
         code:0,
         data:{
+            id:@next.id,
             next_issue:@next.issue,
             now_issue:@now.issue,
             next_time:@next.time.strftime('%Y-%m-%d %H:%M:%S'),
@@ -19,8 +20,8 @@ class Api::SscController < Api::BaseController
       render json:{code:1,msg:'期号错误'}
       return
     end
-    if Time.now>@order.ssc_game.time
-      render json:{code:2,msg:'本期已开奖，不可购买'}
+    if Time.now>(@order.ssc_game.time-1.minutes)
+      render json:{code:2,msg:'本期已结束投注，不可购买'}
       return
     end
     @order.user_id=current_user.id
