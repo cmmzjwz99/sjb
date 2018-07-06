@@ -19,6 +19,7 @@
               <th>#</th>
               <th>期数</th>
               <th>结果</th>
+              <th>投注</th>
               <th>时间</th>
               <th>操作</th>
             </tr>
@@ -29,6 +30,7 @@
                   <td><%=ele.id%></td>
                   <td><%=ele.issue%></td>
                   <td><%=ele.code%></td>
+                  <td><%= SscOrder.where(ssc_game_id: ele).count %></td>
                   <td><%=ele.time.strftime('%Y-%m-%d %H:%M:%S')%></td>
                   <td>
                     <a href="<%=admin_ssc_game_path(ele) %>">操作</a>&nbsp;

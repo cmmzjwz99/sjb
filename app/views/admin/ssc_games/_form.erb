@@ -6,6 +6,7 @@
     <th>结果</th>
     <th>赔率</th>
     <th>金额</th>
+    <th>收益</th>
     <th>状态</th>
     <th>用户</th>
   </tr>
@@ -18,6 +19,7 @@
         <td><%=ele.get_code %></td>
         <td><%=ele.odds%></td>
         <td><%=ele.point%></td>
+        <td><%=ele.get_point  %></td>
         <td>
           <% if ele.status == 0 %>
               <a>未结算</a>
