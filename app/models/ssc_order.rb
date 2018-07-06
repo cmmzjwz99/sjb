@@ -93,7 +93,7 @@ class SscOrder < ActiveRecord::Base
     return name[self.category]
   end
   def get_code
-    name=[['','单','双'],['','大','小'],['','龙','虎','和'],['','豹子','顺子','对子','半顺','其他']]
+    name=[['','单','双'],['','大','小'],['','龙','虎','和'],['','豹子','顺子','对子','半顺','杂六']]
     if self.category==1 || self.category==4 || self.category==7 || self.category==10 || self.category==13 || self.category==16
       #单双
       return name[0][self.code]
