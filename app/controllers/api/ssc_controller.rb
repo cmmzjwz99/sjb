@@ -10,6 +10,7 @@ class Api::SscController < Api::BaseController
             now_issue:@now.issue,
             next_time:@next.time.strftime('%Y-%m-%d %H:%M:%S'),
             now_code:@now.code,
+            now_time:Time.now.strftime('%Y-%m-%d %H:%M:%S')
         }
     }
   end

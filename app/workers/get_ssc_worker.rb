@@ -36,7 +36,7 @@ class GetSscWorker
       ssc.save
       GetSscWorker.perform_in((ssc.time-Time.now))
     else
-      GetSscWorker.perform_in(1.minutes)
+      GetSscWorker.perform_in(30.seconds)
     end
   end
 end
