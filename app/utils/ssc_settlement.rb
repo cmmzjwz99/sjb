@@ -175,7 +175,7 @@ class SscSettlement
     num=code.split('')
     num.sort!
     if (num[1].to_i-num[0].to_i)==1 || (num[2].to_i-num[1].to_i)==1 || (num[0].to_i+10-num[2].to_i)==1
-      return
+      return true
 
     end
     return false
