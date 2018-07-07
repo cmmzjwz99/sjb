@@ -1,0 +1,32 @@
+<h3 class="page-title">结算</h3>
+<div class="row">
+  <div class="col-md-12">
+    <!-- BORDERED TABLE -->
+    <div class="panel">
+      <div class="panel-heading"></div>
+      <div class="panel-body" style="padding-top: 0">
+        <%= form_tag('/admin/ssc_games/settlement', :html => {enctype: 'multipart/form-data', class: 'stdform'}) do%>
+            <div class="row">
+              <%=hidden_field_tag('id',@sscgame.id)%>
+              <div class="form-group col-xs-4">
+                <label class="form-control-label">期数: </label>
+                <input class="form-control" type="text" disabled="disabled" value="<%=@sscgame.issue%>">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <label class="form-control-label">结果: </label>
+                <%= text_field_tag('code', '', {class: 'form-control'}) %>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary">结算</button>
+            </div>
+        <% end %>
+
+      </div>
+      <div style="padding: 10px"></div>
+    </div>
+    <!-- END BORDERED TABLE -->
+  </div>
+</div>

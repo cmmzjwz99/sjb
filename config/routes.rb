@@ -66,7 +66,11 @@ Rails.application.routes.draw do
     end
     resources :referees
 
-    resources :ssc_games
+    resources :ssc_games do
+      collection do
+        post 'settlement'
+      end
+    end
   end
 
   namespace :agent do

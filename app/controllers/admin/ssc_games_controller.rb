@@ -1,5 +1,5 @@
 class Admin::SscGamesController <  Admin::BaseController
-  before_action :set_ssc_game,only: [:show]
+  before_action :set_ssc_game,only: [:show,:settlement]
   def index
     conditions={}
     params[:issue].present? &&
@@ -13,6 +13,21 @@ class Admin::SscGamesController <  Admin::BaseController
   end
 
   def show
+  end
+
+  def settlement
+    if params[:code].length==5 && @sscgame.status==0
+      SscGame.transaction do
+        @sscgame.code=params[:code]
+        @sscgame.status=1
+        @sscgame.save
+        SscSettlementTask.perform_async(@sscgame.id)
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: admin_fj_matches_path)}
+    end
+
   end
 
   private
