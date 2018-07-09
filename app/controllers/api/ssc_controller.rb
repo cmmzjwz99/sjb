@@ -51,6 +51,10 @@ class Api::SscController < Api::BaseController
     @orders=SscOrder.where(user:current_user).order(created_at: :desc)
   end
 
+  def ssc_list
+    @sscs=SscGame.where(status:1,time:[(Time.now-1.days).beginning_of_day..Time.now.end_of_day]).order(created_at: :desc)
+  end
+
 
   private
   def order_params

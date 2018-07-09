@@ -155,6 +155,7 @@ Rails.application.routes.draw do
         get 'ssc'
         post 'order'
         get 'order_list'
+        get 'ssc_list'
       end
     end
   end
