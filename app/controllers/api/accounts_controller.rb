@@ -12,6 +12,7 @@ class Api::AccountsController < Api::BaseController
 
     respond_to do |format|
         if @user.save
+          SignupRefereeWorker.perform_async(@user.id)
           format.json { render "user" }
         else
           format.json { render json:{code:-1,msg:{error:"#{@user.errors.full_message[0]}"}}}
@@ -70,6 +71,7 @@ class Api::AccountsController < Api::BaseController
   def signup
     @user = User.new((params[:user].permit! if params[:user]))
 
+    @user.referee=(@user.referee.to_i== 0 ? nil : @user.referee.to_i)
     @user.name = @user.login
     if @user.save
       self.current_user = @user

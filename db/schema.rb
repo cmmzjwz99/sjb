@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180629030941) do
+ActiveRecord::Schema.define(version: 20180709081438) do
 
   create_table "fj_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "match_id"
@@ -115,6 +115,26 @@ ActiveRecord::Schema.define(version: 20180629030941) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ssc_journal_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "time"
+    t.float "journal", limit: 24
+    t.float "income", limit: 24
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ssc_journal_logs_on_user_id"
+  end
+
+  create_table "ssc_journals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float "point", limit: 24, default: 0.0
+    t.float "journal", limit: 24, default: 0.0
+    t.float "rebate", limit: 24, default: 0.0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ssc_journals_on_user_id"
+  end
+
   create_table "ssc_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "category"
     t.integer "code"
@@ -156,6 +176,14 @@ ActiveRecord::Schema.define(version: 20180629030941) do
     t.datetime "updated_at", null: false
     t.string "bank_address"
     t.index ["user_id"], name: "index_user_payments_on_user_id"
+  end
+
+  create_table "user_referees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user"
+    t.integer "referee"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

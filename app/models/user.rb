@@ -6,10 +6,12 @@ class User < ActiveRecord::Base
   has_one :resource , as: :file, dependent: :destroy
   has_one :user_payment,dependent: :destroy
   has_one :user_bank,dependent: :destroy
+  has_one :ssc_journal,dependent: :destroy
 
   has_many :payments
   has_many :orders
   has_many :ssc_orders
+  has_many :ssc_journal_log,dependent: :destroy
 
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true
