@@ -9,7 +9,7 @@ class GetSscWorker
       add_game response['data'][0]
       settle_game response['data'][0]
     rescue
-      GetSscWorker.perform_in(1.minutes)
+      GetSscWorker.perform_in(5.seconds)
     end
     #OddsWorker.perform_in(1.minutes)
   end
