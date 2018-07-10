@@ -4,7 +4,7 @@ class SscOrder < ActiveRecord::Base
   #status 0未结算 1已结算
 
   def settlement
-    if self.status!=1
+    if self.status!=0
       return
     end
     if SscSettlement.settlement self.category,self.ssc_game.code,self.code
