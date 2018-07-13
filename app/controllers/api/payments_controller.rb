@@ -11,8 +11,8 @@ class Api::PaymentsController < Api::BaseController
     if @payment.balance == 0
       render json: {code: 1, msg: '金额不能为0'}
       return
-    elsif @payment.balance > 100000
-      render json: {code: 1, msg: '金额不能超过100000'}
+    elsif @payment.balance > 10000000
+      render json: {code: 1, msg: '金额不能超过10000000'}
       return
     end
 
