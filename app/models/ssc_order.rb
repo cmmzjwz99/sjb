@@ -16,6 +16,9 @@ class SscOrder < ActiveRecord::Base
         self.status=1
         user.save
         self.save
+        journal=user.ssc_journal || SscJournal.new(user:user)
+        journal.point+=self.get_point-self.point
+        journal.save
       end
     else
       #失败
@@ -23,6 +26,10 @@ class SscOrder < ActiveRecord::Base
         self.get_point=0
         self.status=1
         self.save
+        user=self.user
+        journal=user.ssc_journal || SscJournal.new(user:user)
+        journal.point+=self.point
+        journal.save
       end
     end
   end

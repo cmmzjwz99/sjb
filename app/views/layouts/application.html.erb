@@ -62,18 +62,38 @@
         <ul class="nav">
           <li><a href="/admin" class=""><i class="lnr lnr-home"></i> <span>首页</span></a></li>
           <li><a href="/admin/users" class=""><i class="lnr lnr-code"></i> <span>用户</span></a></li>
-          <li><a href="/admin/agents" class=""><i class="lnr lnr-chart-bars"></i> <span>代理</span></a></li>
+          <!--li><a href="/admin/agents" class=""><i class="lnr lnr-chart-bars"></i> <span>代理</span></a></li-->
           <li><a href="/admin/referees" class=""><i class="lnr lnr-chart-bars"></i> <span>推荐人</span></a></li>
-          <li><a href="/admin/games" class=""><i class="lnr lnr-cog"></i> <span>盘口</span></a></li>
+          <!--li><a href="/admin/games" class=""><i class="lnr lnr-cog"></i> <span>盘口</span></a></li>
           <li><a href="/admin/matches" class=""><i class="lnr lnr-cog"></i> <span>比赛</span></a></li>
-          <li><a href="/admin/user_payments" class=""><i class="lnr lnr-alarm"></i> <span>系统配置</span></a></li>
+          <li><a href="<%=recover_password_admin_accounts_path%>" class=""><i class="lnr lnr-linearicons"></i> <span>修改密码</span></a></li>
+          <li><a href="/admin/user_payments" class=""><i class="lnr lnr-alarm"></i> <span>系统配置</span></a></li-->
           <li><a href="/admin/payments"  class=""><i class="lnr lnr-cog"></i> <span>
             充值(<%=Payment.where({status: 0,payment_type: true}).count%>)/
             提现(<%=Payment.where({status: 0,payment_type: false}).count%>)
           </span></a></li>
-          <li><a href="/admin/fj_matches" class=""><i class="lnr lnr-text-format"></i> <span>飞鲸比赛</span></a></li>
-          <li><a href="<%=recover_password_admin_accounts_path%>" class=""><i class="lnr lnr-linearicons"></i> <span>修改密码</span></a></li>
+          <!--li><a href="/admin/fj_matches" class=""><i class="lnr lnr-text-format"></i> <span>飞鲸比赛</span></a></li-->
           <li><a href="/admin/ssc_games" class=""><i class="lnr lnr-cog"></i> <span>时时彩</span></a></li>
+          <li><a href="/admin/referees/ssc" class=""><i class="lnr lnr-cog"></i> <span>时时彩推荐人</span></a></li>
+          <li>
+            <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>世界杯</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+            <div id="subPages" class="collapse ">
+              <ul class="nav">
+                <li><a href="/admin/games" class="">盘口</a></li>
+                <li><a href="/admin/matches" class="">比赛</a></li>
+                <li><a href="/admin/fj_matches" class="">飞鲸比赛</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#subPages1" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>设置</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+            <div id="subPages1" class="collapse ">
+              <ul class="nav">
+                <li><a href="<%=recover_password_admin_accounts_path%>" class="">修改密码</a></li>
+                <li><a href="/admin/user_payments" class="">系统配置</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
     </div>

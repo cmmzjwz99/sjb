@@ -36,4 +36,17 @@ class Api::SettingsController < Api::BaseController
         }
     }
   end
+
+  def get_ssc_referee
+    url_val=Setting.where(category:'url')[0] || Setting.new()
+    url="http://#{url_val.val}/login.html?"
+    if current_user.father_id.present?
+      url+='ag='+current_user.father_id.to_s+'&'
+    end
+    url+='referee='+current_user.id.to_s
+    @url=url
+
+    @journal=current_user.ssc_journal || SscJournal.new(user:current_user)
+    @journal_log=current_user.ssc_journal_logs
+  end
 end

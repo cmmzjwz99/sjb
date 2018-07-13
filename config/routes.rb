@@ -64,7 +64,11 @@ Rails.application.routes.draw do
         post "sh_fail/:id",action:"sh_fail",id:/\d{1,}/,as: :sh_fail;
       end
     end
-    resources :referees
+    resources :referees do
+      collection do
+        get 'ssc'
+      end
+    end
 
     resources :ssc_games do
       collection do
@@ -127,6 +131,7 @@ Rails.application.routes.draw do
         get 'title'
         get 'customer'
         get 'get_referee'
+        get 'get_ssc_referee'
       end
     end
     resources :payments do
@@ -140,6 +145,7 @@ Rails.application.routes.draw do
         get 'history'
         post 'cancel'
         post 'rebate'
+        post 'ssc_rebate'
       end
     end
     resources :quiz do

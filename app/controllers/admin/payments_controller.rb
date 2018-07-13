@@ -19,10 +19,12 @@ class Admin::PaymentsController < Admin::BaseController
     if @payment.status==0
       @payment.status=2
       if @payment.payment_type==false
-          if @payment.category!='反点提现'
-            @payment.pay
-          else
+          if @payment.category=='反点提现'
             @payment.rebate_fail
+          elsif @payment.category=='时时彩反点'
+            @payment.ssc_rebate_fail
+          else
+            @payment.pay
           end
       else
       end

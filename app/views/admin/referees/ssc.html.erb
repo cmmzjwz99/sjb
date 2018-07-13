@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <h3 class="page-title">推荐人列表</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div style="padding: 20px 25px">
+          <form>
+            <input type="text" placeholder="账号" class="form-control index-form-control" name="login" value="<%= params[:login] %>">
+            <button class="btn btn-primary" style="margin-left: 3px">查询</button>
+          </form>
+        </div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>账号</th>
+              <th>推荐人数</th>
+              <th>流水</th>
+              <th>可提现金额</th>
+              <th>已提现金额</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @journals.each do |ele| %>
+                <tr>
+                  <td><%= ele.user.id %></td>
+                  <td><%= ele.user.login %></td>
+                  <td><%= UserReferee.where(referee:ele.user_id,level: 1).count %></td>
+                  <td><%= SscJournalLog.where(user:ele.user).sum('journal') %></td>
+                  <td><%= SscJournalLog.where(user:ele.user).sum('income') %></td>
+                  <td><%= ele.rebate %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <div class="dataTables_wrapper no-footer" style="text-align: right">
+            <%= paginate @journals %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

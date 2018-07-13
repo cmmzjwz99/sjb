@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :payments
   has_many :orders
   has_many :ssc_orders
-  has_many :ssc_journal_log,dependent: :destroy
+  has_many :ssc_journal_logs,dependent: :destroy
 
   #delegate :name, to: :text_filter, prefix: true
   delegate :label, to: :profile, prefix: true

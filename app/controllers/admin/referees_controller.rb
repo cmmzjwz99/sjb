@@ -20,6 +20,10 @@ class Admin::RefereesController < Admin::BaseController
 
   end
 
+  def ssc
+    sql='user_id in(select referee from user_referees group by referee)'
+    @journals=SscJournal.where(sql).page(params[:page]).per(10)
+  end
 
   private
   def set_user

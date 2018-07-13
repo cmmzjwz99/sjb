@@ -100,6 +100,7 @@ class Api::PaymentsController < Api::BaseController
     @payment.payment_type=0
     @payment.user=current_user
     @payment.status=0
+    @payment.category='反点提现'
 
     if @payment.balance<50
       render json: {code: 1, msg: '单次提现金额不能少于50'}
@@ -120,6 +121,46 @@ class Api::PaymentsController < Api::BaseController
     else
       render json:{code:1,msg:'错误'}
       return
+    end
+  end
+
+  def ssc_rebate
+    if Payment.find_by(user: current_user, payment_type: 0) != nil
+      if Payment.find_by(user: current_user, payment_type: 0 ,status: Payment::UNVERIFIED)
+        return(render json: {code: 1, msg: '您已经有一笔待审核'})
+      end
+    end
+
+    @payment = Payment.new(payment_params)
+    @payment.payment_type=0
+    @payment.user=current_user
+    @payment.status=0
+    @payment.category='时时彩反点'
+
+
+    user=current_user
+    ssc_journal=user.ssc_journal || SscJournal.new(user:current_user)
+    if @payment.balance<50
+      render json: {code: 1, msg: '单次提现金额不能少于50'}
+      return
+    elsif @payment.balance > 100000
+      render json: {code: 1, msg: '金额不能超过100000'}
+      return
+    elsif @payment.balance > (SscJournalLog.where(user:current_user).sum('income')-ssc_journal.rebate)
+      render json: {code: 1, msg: '提现金额不能大于反点'}
+      return
+    end
+
+    ssc_journal.rebate+=@payment.balance
+    Payment.transaction do
+      if @payment.save
+        ssc_journal.save
+        render json: {code: 0, msg: '成功'}
+        return
+      else
+        render json:{code:1,msg:'错误'}
+        return
+      end
     end
   end
 

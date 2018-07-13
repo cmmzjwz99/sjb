@@ -19,4 +19,11 @@ class Payment < ActiveRecord::Base
     user.rebate-=self.balance
     user.save
   end
+
+  def ssc_rebate_fail
+    user=self.user
+    journal=user.ssc_journal || SscJournal.new(user:user)
+    journal.rebate-=self.balance
+    journal.save
+  end
 end
