@@ -27,8 +27,8 @@
                   <td><%= ele.user.id %></td>
                   <td><%= ele.user.login %></td>
                   <td><%= UserReferee.where(referee:ele.user_id,level: 1).count %></td>
-                  <td><%= SscJournalLog.where(user:ele.user).sum('journal') %></td>
-                  <td><%= SscJournalLog.where(user:ele.user).sum('income') %></td>
+                  <td><%= SscJournalLog.where(user:ele.user).sum('journal')+ele.journal %></td>
+                  <td><%= SscJournalLog.where(user:ele.user).sum('income')+ele.income %></td>
                   <td><%= ele.rebate %></td>
                 </tr>
             <% end %>
