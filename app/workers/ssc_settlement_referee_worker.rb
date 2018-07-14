@@ -57,16 +57,15 @@ class SscSettlementRefereeWorker
 
   #获取对应金额的系数
   def get_factor num
-    return 0 if(num<10000)
-    return 0.007 if(num<100000)
-    return 0.008 if(num<300000)
-    return 0.009 if(num<600000)
-    return 0.010 if(num<1000000)
-    return 0.012 if(num<2000000)
-    return 0.014 if(num<4000000)
-    return 0.016 if(num<6000000)
-    return 0.018 if(num<8000000)
-    return 0.020 if(num<10000000)
+    return 0.007 if(num<100001)
+    return 0.008 if(num<300001)
+    return 0.009 if(num<600001)
+    return 0.010 if(num<1000001)
+    return 0.012 if(num<2000001)
+    return 0.014 if(num<4000001)
+    return 0.016 if(num<6000001)
+    return 0.018 if(num<8000001)
+    return 0.020 if(num<10000001)
     return 0.022
   end
 end
