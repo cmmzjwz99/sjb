@@ -21,7 +21,7 @@ class Admin::RefereesController < Admin::BaseController
   end
 
   def ssc
-    sql='user_id in(select referee from user_referees group by referee)'
+    sql='user_id in(select user_id from ssc_journal_logs group by user_id) or journal>0'
     @journals=SscJournal.where(sql).page(params[:page]).per(10)
   end
 

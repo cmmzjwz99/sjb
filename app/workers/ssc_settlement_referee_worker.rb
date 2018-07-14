@@ -33,7 +33,9 @@ class SscSettlementRefereeWorker
           "#{(Time.now-8.days).strftime('%Y.%m.%d')}-#{(Time.now-1.days).strftime('%Y.%m.%d')}"})
       ssc_journal.journal=ele.ssc_journal.journal
       ssc_journal.income=ele.ssc_journal.income
-      ssc_journal.save
+      if ssc_journal.journal>0
+        ssc_journal.save
+      end
     end
     SscJournal.update(point:0,journal:0,income:0)
   end
