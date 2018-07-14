@@ -12,7 +12,6 @@ class Api::AccountsController < Api::BaseController
 
     respond_to do |format|
         if @user.save
-          SignupRefereeWorker.perform_async(@user.id)
           format.json { render "user" }
         else
           format.json { render json:{code:-1,msg:{error:"#{@user.errors.full_message[0]}"}}}
@@ -76,6 +75,7 @@ class Api::AccountsController < Api::BaseController
     if @user.save
       self.current_user = @user
       session[:user_id] = @user.id
+      SignupRefereeWorker.perform_async(@user.id)
       respond_to do |format|
         format.json {render 'user'}
       end
