@@ -47,6 +47,6 @@ class Api::SettingsController < Api::BaseController
     @url=url
 
     @journal=current_user.ssc_journal || SscJournal.new(user:current_user)
-    @journal_log=current_user.ssc_journal_logs
+    @journal_log=current_user.ssc_journal_logs.order(created_at: :desc)
   end
 end
