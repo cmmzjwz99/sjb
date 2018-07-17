@@ -16,7 +16,6 @@ class Order < ActiveRecord::Base
   def settlement
     user=self.user
     game=self.game
-    agent=User.where(id:user.referee.to_i)[0] || User.find(1)
     journal=user.ssc_journal || SscJournal.new(user:user)
     status=game.win_team
     if status==1 || status==2 || status==3
@@ -24,11 +23,9 @@ class Order < ActiveRecord::Base
       if self.team==status
         user.points+=self.get_point
         self.income_point=self.get_point
-        agent.effective_journal+=self.get_point-self.point
         journal.point+=self.get_point-self.point
       else
         self.income_point=0
-        agent.effective_journal+=self.point
         journal.point+=self.point
       end
     elsif status ==4 || status ==5
@@ -36,12 +33,10 @@ class Order < ActiveRecord::Base
       if (self.team+3)==status
         user.points+=((self.get_point-self.point)/2)+self.point
         self.income_point=((self.get_point-self.point)/2)+self.point
-        agent.effective_journal+=((self.get_point-self.point)/2)
         journal.point+=((self.get_point-self.point)/2)
       else
         user.points+=(self.point/2)
         self.income_point=(self.point/2)
-        agent.effective_journal+=(self.point/2)
         journal.point+=(self.point/2)
       end
     elsif status==6
@@ -51,10 +46,8 @@ class Order < ActiveRecord::Base
     elsif status==7
       #全输
       self.income_point=0
-      agent.effective_journal+=self.point
       journal.point+=self.point
     end
-    agent.save
     journal.save
     user.save
     self.status=2

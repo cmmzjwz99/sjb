@@ -3,7 +3,7 @@ class GetSscWorker
   #获取时时彩
   def perform
     begin
-      url='http://api.apiex2.com:17818/Infor_Server/api/?token=SjtLo0UPMqCPCUd9OpMiCJ5w7kUU4YcNtO57kUMlG4YcNtOv&id=20007'
+      url='http://api.apiex2.com:17818/Infor_Server/api/?token=k0hYOqRz2kUU4Y2t7kdXjtcNtOEPMqCPCUnbpGnpkUMlG4YN&id=20007'
       response = HTTParty.get(url, {})
       response=JSON.parse(response.to_s)
       add_game response['data'][0]
